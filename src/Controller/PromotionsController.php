@@ -51,6 +51,7 @@ class PromotionsController extends AppController
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
+            $promotion->user_id = $this->Auth->user('id');
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
 
@@ -75,7 +76,7 @@ class PromotionsController extends AppController
             'contain' => ['Categories']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
+            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData(), ['accesibleFields' => ['user_id' => false]]);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
 
@@ -105,5 +106,25 @@ class PromotionsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        // The add and tags actions are always allowed to logged in users.
+        if (in_array($action, ['add', 'tags'])) {
+            return true;
+        }
+
+        // All other actions require a slug.
+        $slug = $this->request->getParam('pass.0');
+        if (!$slug) {
+            return false;
+        }
+
+        // Check that the article belongs to the current user.
+        $article = $this->Promotions->findBySlug($slug)->first();
+
+        return $article->user_id === $user['id'];
     }
 }

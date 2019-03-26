@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Users Controller
@@ -53,7 +52,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             if ((strlen($data['password1']) > 0) && ($data['password1'] === $data['password2'])) {
-                $data['password'] = (new DefaultPasswordHasher)->hash($data['password1']);
+                $data['password'] = $data['password1'];
                 $data['role'] = 'client';
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
@@ -63,7 +62,7 @@ class UsersController extends AppController
                 $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
             } else {
                 $this->Flash->error(__('Las contraseñas no coinciden'));
-            }                         
+            }
         }
         $this->set(compact('user'));
     }
@@ -83,7 +82,7 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             if ((strlen($data['newPass1']) > 0) && ($data['newPass1'] === $data['newPass2'])) {
-                $data['password'] = (new DefaultPasswordHasher)->hash($data['newPass1']);
+                $data['password'] = $data['newPass1'];
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('La información ha sido actualizada.'));
@@ -116,5 +115,38 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Login method
+     */
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('Your username or password is incorrect.');
+        }
+    }
+
+    /**
+     * Initialize method
+     */
+    public function initialize()
+    {
+        parent::initialize();        
+        $this->Auth->allow(['logout', 'add']);
+    }
+
+    /**
+     * Logout method
+     */
+    public function logout()
+    {
+        $this->Flash->success('Has salido de tu cuenta.');
+        return $this->redirect($this->Auth->logout());
     }
 }
