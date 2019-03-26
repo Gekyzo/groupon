@@ -50,6 +50,7 @@ class AppController extends Controller
          * User Auth
          */
         $this->loadComponent('Auth', [
+            'authorize'=> 'Controller',
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -75,5 +76,14 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+    }
+
+    /**
+     * Restringir a los usuarios crear Promociones
+     */
+    public function isAuthorized($user)
+    {
+        // By default deny access.
+        return false;
     }
 }
