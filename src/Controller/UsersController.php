@@ -60,7 +60,7 @@ class UsersController extends AppController
                     $this->Flash->success(__('Tu cuenta ha sido creada.'));
                     return $this->redirect(['controller' => 'pages', 'action' => 'index']);
                 }
-                $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, compruebe los errores.'));
+                $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
             } else {
                 $this->Flash->error(__('Las contraseñas no coinciden'));
             }                         
@@ -84,14 +84,16 @@ class UsersController extends AppController
             $data = $this->request->getData();
             if ((strlen($data['newPass1']) > 0) && ($data['newPass1'] === $data['newPass2'])) {
                 $data['password'] = (new DefaultPasswordHasher)->hash($data['newPass1']);
-            }
-            $user = $this->Users->patchEntity($user, $data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $user = $this->Users->patchEntity($user, $data);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('La información ha sido actualizada.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+                }
+                $this->Flash->error(__('No ha sido posible actualizar la información. Por favor, comprueba los errores.'));
+            } else {
+                $this->Flash->error(__('Las contraseñas no coinciden'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
     }
