@@ -21,6 +21,7 @@
         <?= $this->Form->control('password2', ['type' => 'password', 'label' => false, 'placeholder' => __('Repetir contraseña'), 'class' => 'form-control']); ?>
         </div>
     </fieldset>
-    <?= $this->Form->button(__('Registrar')) ?>
+    <?= $this->Form->button(__('Registrar'), ['class' => 'btn btn-primary btn-lg btn-block']) ?>
     <?= $this->Form->end() ?>
+    
 </div>

@@ -66,8 +66,7 @@ class UsersTable extends Table
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
-            ->add('email', 'custom', ['message' => 'Ya existe un usuario con este email.'])
+            ->requirePresence('email', 'create')            
             ->allowEmptyString('email', false);            
 
         $validator
@@ -98,8 +97,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
-
+        $rules->add($rules->isUnique(['email'], __('Ya existe un usuario con este email.')));
         return $rules;
     }
 }
