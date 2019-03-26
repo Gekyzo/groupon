@@ -26,12 +26,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('bootstrap') ?>
+    
+    <?= $this->Html->css('bootstrap/bootstrap') ?>
     <?= $this->Html->css('bootstrap.extended') ?>
+    <?= $this->Html->css('fontawesome/fontawesome') ?>
+    <?= $this->Html->css('fontawesome/solid') ?>
     <?= $this->Html->css('main') ?>
 
-    <?= $this->Html->script('bootstrap') ?>
+    <?= $this->Html->script('bootstrap/bootstrap') ?>
+    <?= $this->Html->script('fontawesome/fontawesome') ?>
+    <?= $this->Html->script('jquery/jquery-3.3.1.min') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -55,7 +59,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="fas fa-user"></span><i class="fas fa-user"></i> Sign Up</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
         </nav>

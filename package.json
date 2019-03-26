@@ -7,12 +7,13 @@
     "test": "tests"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1",
     "bootstrap-scss": "^4.3.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bootstrap": "sass --watch node_modules/bootstrap-scss/:webroot/css/",
+    "twbs": "sass --watch node_modules/bootstrap-scss/:webroot/css/",
     "sass": "sass --watch webroot/scss:webroot/css/"
   },
   "repository": {
