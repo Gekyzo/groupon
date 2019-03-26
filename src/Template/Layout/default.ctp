@@ -25,9 +25,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
+    
+    <?= $this->Html->css('bootstrap') ?>
+    <?= $this->Html->script('bootstrap') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
