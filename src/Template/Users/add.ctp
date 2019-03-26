@@ -4,26 +4,24 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($user, ['class' => 'form-signin']) ?>
     <fieldset>
-        <legend><?= __('Add User') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('email');
-            echo $this->Form->control('password');
-            echo $this->Form->control('role');
-            echo $this->Form->control('deleted', ['empty' => true]);
-        ?>
+        <legend><?= __('Nuevo usuario') ?></legend>
+        <div class="form-group">
+        <?= $this->Form->control('name', ['label' => false, 'placeholder' => __('Nombre'), 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+        <?= $this->Form->control('email', ['label' => false, 'placeholder' => __('Email'), 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+        <?= $this->Form->control('password1', ['type' => 'password', 'label' => false, 'placeholder' => __('Contraseña'), 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+        <?= $this->Form->control('password2', ['type' => 'password', 'label' => false, 'placeholder' => __('Repetir contraseña'), 'class' => 'form-control']); ?>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Registrar'), ['class' => 'btn btn-primary btn-lg btn-block']) ?>
     <?= $this->Form->end() ?>
+    
 </div>
