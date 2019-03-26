@@ -62,7 +62,7 @@ class UsersController extends AppController
                 $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
             } else {
                 $this->Flash->error(__('Las contraseñas no coinciden'));
-            }                         
+            }
         }
         $this->set(compact('user'));
     }
@@ -130,5 +130,23 @@ class UsersController extends AppController
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
+    }
+
+    /**
+     * Initialize method
+     */
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['logout']);
+    }
+
+    /**
+     * Logout method
+     */
+    public function logout()
+    {
+        $this->Flash->success('Has salido de tu cuenta.');
+        return $this->redirect($this->Auth->logout());
     }
 }

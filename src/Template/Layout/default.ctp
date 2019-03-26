@@ -54,7 +54,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <?= $this->Html->link(__('Categorías'), ['controller' => 'categories', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                 </div>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
         </nav>
+        
 
         <?= $this->Flash->render() ?>
 
