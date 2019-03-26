@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "C:\\xampp\\htdocs\\md_lib"
 		}
 	],
 	"settings": {}
