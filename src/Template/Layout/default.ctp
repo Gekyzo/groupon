@@ -29,6 +29,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('bootstrap') ?>
     <?= $this->Html->css('bootstrap.extended') ?>
+    <?= $this->Html->css('main') ?>
+
     <?= $this->Html->script('bootstrap') ?>
 
     <?= $this->fetch('meta') ?>
