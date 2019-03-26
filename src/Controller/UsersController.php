@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Users Controller
@@ -50,13 +51,19 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $data = $this->request->getData();
+            if ((strlen($data['password1']) > 0) && ($data['password1'] === $data['password2'])) {
+                $data['password'] = (new DefaultPasswordHasher)->hash($data['password1']);
+                $data['role'] = 'client';
+                $user = $this->Users->patchEntity($user, $data);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('Tu cuenta ha sido creada.'));
+                    return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+                }
+                $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, compruebe los errores.'));
+            } else {
+                $this->Flash->error(__('Las contraseñas no coinciden'));
+            }                         
         }
         $this->set(compact('user'));
     }

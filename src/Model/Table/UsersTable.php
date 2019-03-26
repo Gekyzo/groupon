@@ -67,7 +67,8 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->allowEmptyString('email', false);
+            ->add('email', 'custom', ['message' => 'Ya existe un usuario con este email.'])
+            ->allowEmptyString('email', false);            
 
         $validator
             ->scalar('password')

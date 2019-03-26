@@ -5,17 +5,22 @@
  */
 ?>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($user, ['class' => 'form-signin']) ?>
     <fieldset>
         <legend><?= __('Nuevo usuario') ?></legend>
-        <?php
-            echo $this->Form->control('name', ['label' => 'Nombre']);
-            echo $this->Form->control('email');
-            echo $this->Form->control('password');
-            echo $this->Form->control('role');
-            echo $this->Form->control('deleted', ['empty' => true]);
-        ?>
+        <div class="form-group">
+        <?= $this->Form->control('name', ['label' => false, 'placeholder' => __('Nombre'), 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+        <?= $this->Form->control('email', ['label' => false, 'placeholder' => __('Email'), 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+        <?= $this->Form->control('password1', ['type' => 'password', 'label' => false, 'placeholder' => __('Contraseña'), 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+        <?= $this->Form->control('password2', ['type' => 'password', 'label' => false, 'placeholder' => __('Repetir contraseña'), 'class' => 'form-control']); ?>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Registrar')) ?>
     <?= $this->Form->end() ?>
 </div>
