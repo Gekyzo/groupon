@@ -46,9 +46,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/">Inicio <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/promotions">Promociones</a>
-                    <a class="nav-item nav-link" href="/categories">Categorías</a>
+                    <?= $this->Html->link(__('Inicio'), ['action' => 'index'], ['class' => 'nav-item nav-link']) ?>
+                    <?= $this->Html->link(__('Promociones'), ['controller' => 'promotions', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
+                    <?= $this->Html->link(__('Categorías'), ['controller' => 'categories', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                 </div>
             </div>
         </nav>
