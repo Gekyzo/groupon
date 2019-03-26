@@ -59,8 +59,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="fas fa-user"></span><i class="fas fa-user"></i> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/users/add">Sign Up</a></li>
+      <li><a href="/users/login">Login</a></li>
     </ul>
         </nav>
         
