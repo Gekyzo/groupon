@@ -82,12 +82,15 @@ class AppController extends Controller
      * Restringir a los usuarios crear Promociones
      */
     public function isAuthorized($user)
-    {
-        // By default deny access.
+    {        
+        // Sólo los usuarios administrador tienen todos los permisos
+        if ($user['role'] == 'admin') {
+            return true;
+        }        
         return false;
     }
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(\Cake\Event\Event $event)
     {
         $user = $this->Auth->user();
         $this->set('currentUser', $user);

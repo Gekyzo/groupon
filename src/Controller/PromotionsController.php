@@ -108,25 +108,15 @@ class PromotionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Defino espacios autorizados para los usuarios
+     */
     public function isAuthorized($user)
     {
-        $action = $this->request->getParam('action');
-        // The add and tags actions are always allowed to logged in users.
+        $action = $this->request->getParam('action');                
         if (in_array($action, ['add', 'tags'])) {
             return true;
         }
-
-        // All other actions require a slug.
-        $slug = $this->request->getParam('pass.0');
-        if (!$slug) {
-            return false;
-        }
-
-        // Check that the article belongs to the current user.
-        $promotions = $this->Promotions->findBySlug($slug)->first();
-        return $promotions->user_id === $user['id'];
-
         return parent::isAuthorized($user);
-
     }
 }
