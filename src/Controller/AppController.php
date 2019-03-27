@@ -50,7 +50,7 @@ class AppController extends Controller
          * User Auth
          */
         $this->loadComponent('Auth', [
-            'authorize'=> 'Controller',
+            'authorize' => 'Controller',
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -63,7 +63,7 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login'
             ],
-             // If unauthorized, return them to page they were just on
+            // If unauthorized, return them to page they were just on
             'unauthorizedRedirect' => $this->referer()
         ]);
 
@@ -82,11 +82,11 @@ class AppController extends Controller
      * Restringir a los usuarios crear Promociones
      */
     public function isAuthorized($user)
-    {    
+    {
         // Sólo los usuarios administrador tienen todos los permisos
         if ($user['role'] == 'admin') {
             return true;
-        }        
+        }
         return false;
     }
 

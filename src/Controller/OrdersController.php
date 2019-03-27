@@ -111,4 +111,15 @@ class OrdersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Defino los permisos para  usuarios
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['index', 'view'])) {
+            return true;
+        }
+    }
 }

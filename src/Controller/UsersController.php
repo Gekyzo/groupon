@@ -19,7 +19,7 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|void
      */
     public function index()
-    {        
+    {
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
@@ -51,10 +51,10 @@ class UsersController extends AppController
         /**
          * Si el usuario ya está logeado, no le permite crear otra cuenta
          */
-        if ($this->Auth->user()) {            
+        if ($this->Auth->user()) {
             $this->redirect(['controller' => 'users', 'action' => 'view', $this->Auth->user('id')]);
         }
-        
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
@@ -67,9 +67,9 @@ class UsersController extends AppController
                     /**
                      * Login after register y redirect a Home
                      */
-                    if($result = $this->Users->save($user)){
-                        $authUser = $this->Users->get($result->id)->toArray(); 
-                        $this->Auth->setUser($authUser);  
+                    if ($result = $this->Users->save($user)) {
+                        $authUser = $this->Users->get($result->id)->toArray();
+                        $this->Auth->setUser($authUser);
                         $this->redirect(['controller' => 'pages', 'action' => 'index']);
                     }
                 }
@@ -89,10 +89,10 @@ class UsersController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
-    {        
+    {
         $user = $this->Users->get($id, [
             'contain' => []
-        ]);        
+        ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             if ((!empty($data['newPass1'])) && ($data['newPass1'] === $data['newPass2'])) {
@@ -167,5 +167,16 @@ class UsersController extends AppController
         $this->Flash->success('Has salido de tu cuenta.');
         $this->Auth->logout();
         return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+    }
+
+    /**
+     * Defino los permisos para  usuarios
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['login', 'logout', 'view', 'edit'])) {
+            return true;
+        }
     }
 }
