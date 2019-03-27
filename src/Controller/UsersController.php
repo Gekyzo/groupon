@@ -19,7 +19,7 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|void
      */
     public function index()
-    {
+    {        
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
@@ -48,6 +48,13 @@ class UsersController extends AppController
      */
     public function add()
     {
+        /**
+         * Si el usuario ya está logeado, no le permite crear otra cuenta
+         */
+        if ($this->Auth->user()) {            
+            $this->redirect(['controller' => 'users', 'action' => 'view', $this->Auth->user('id')]);
+        }
+        
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
@@ -82,10 +89,10 @@ class UsersController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
-    {
+    {        
         $user = $this->Users->get($id, [
             'contain' => []
-        ]);
+        ]);        
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             if ((!empty($data['newPass1'])) && ($data['newPass1'] === $data['newPass2'])) {
@@ -166,9 +173,9 @@ class UsersController extends AppController
      * Defino espacios autorizados para los usuarios
      */
     public function isAuthorized($user)
-    {
+    {        
         $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'edit'])) {
+        if (in_array($action, ['edit'])) {
             return true;
         }
         return parent::isAuthorized($user);
