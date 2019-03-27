@@ -48,6 +48,7 @@ class PromotionsController extends AppController
      */
     public function add()
     {
+        $this->Log('Promotion ADD', 'info');
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
@@ -109,7 +110,7 @@ class PromotionsController extends AppController
     }
 
     /**
-     * Defino los permisos para  usuarios
+     * Permisos para usarios CON SESIÓN INICIADA
      */
     public function isAuthorized($user)
     {
@@ -117,5 +118,15 @@ class PromotionsController extends AppController
         if (in_array($action, ['index', 'view'])) {
             return true;
         }
+        return parent::isAuthorized($user);
+    }
+
+    /**
+     * Permisos para usuarios SIN SESIÓN INICIADA
+     */
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow('index');
+        parent::beforeFilter($event);
     }
 }

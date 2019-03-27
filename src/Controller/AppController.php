@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Log\Log;
 
 /**
  * Application Controller
@@ -69,7 +70,7 @@ class AppController extends Controller
 
         // Allow the display action so our PagesController
         // continues to work. Also enable the read only actions.
-        $this->Auth->allow(['display', 'view', 'index']);
+        //$this->Auth->allow(['display', 'view', 'index']);
 
         /*
          * Enable the following component for recommended CakePHP security settings.
@@ -84,7 +85,7 @@ class AppController extends Controller
     public function isAuthorized($user)
     {
         // Sólo los usuarios administrador tienen todos los permisos
-        if ($user['role'] == 'admin') {
+        if ($user['role'] === 'admin') {
             return true;
         }
         return false;
@@ -98,4 +99,4 @@ class AppController extends Controller
         $user = $this->Auth->user();
         $this->set('currentUser', $user);
     }
-}
+} 
