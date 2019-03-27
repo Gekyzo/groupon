@@ -86,4 +86,10 @@ class AppController extends Controller
         // By default deny access.
         return false;
     }
+
+    public function beforeFilter(Event $event)
+    {
+        $user = $this->Auth->user();
+        $this->set('currentUser', $user);
+    }
 }

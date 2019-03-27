@@ -123,8 +123,10 @@ class PromotionsController extends AppController
         }
 
         // Check that the article belongs to the current user.
-        $article = $this->Promotions->findBySlug($slug)->first();
+        $promotions = $this->Promotions->findBySlug($slug)->first();
+        return $promotions->user_id === $user['id'];
 
-        return $article->user_id === $user['id'];
+        return parent::isAuthorized($user);
+
     }
 }
