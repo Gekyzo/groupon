@@ -82,9 +82,9 @@ class AppController extends Controller
      * Restringir a los usuarios crear Promociones
      */
     public function isAuthorized($user)
-    {
+    {        
         // Sólo los usuarios administrador tienen todos los permisos
-        if ($user['role'] == 'admin') {
+        if ($user['role'] === 'admin') {
             return true;
         }
         return false;

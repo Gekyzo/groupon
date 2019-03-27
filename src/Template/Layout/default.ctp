@@ -56,10 +56,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <?= $this->Html->link(__('Inicio'), ['controller' => 'pages', 'action' => 'display'], ['class' => 'nav-item nav-link']) ?>
                     <?= $this->Html->link(__('Promociones'), ['controller' => 'promotions', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?= $this->Html->link(__('Categorías'), ['controller' => 'categories', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
-                    <?php if (isset($currentUser) && $currentUser['role'] === 'admin') {
-                        echo 'admin';
-                    };
-                    ?>
+                    <?php if (isset($currentUser) && $currentUser['role'] === 'admin') : ?>
+                    <?= $this->Html->link(__('Usuarios'), ['controller' => 'users', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
+                    <?= $this->Html->link(__('Pedidos'), ['controller' => 'orders', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
+                    <?php endif; ?>
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">

@@ -68,18 +68,23 @@ class PagesController extends AppController
     }
 
     /**
-     * Defino los permisos para  usuarios
+     * Permisos para usarios CON SESIÓN INICIADA
      */
     public function isAuthorized($user)
     {
+        parent::isAuthorized($user);
         $action = $this->request->getParam('action');
         if (in_array($action, ['display'])) {
             return true;
         }
     }
 
+    /**
+     * Permisos para usuarios SIN SESIÓN INICIADA
+     */
     public function beforeFilter(\Cake\Event\Event $event)
     {
+        parent::beforeFilter($event);
         $this->Auth->allow('display');
     }
 }
