@@ -4,28 +4,25 @@
  * @var \App\Model\Entity\Category[]|\Cake\Collection\CollectionInterface $categories
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Promotions'), ['controller' => 'Promotions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Promotion'), ['controller' => 'Promotions', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="categories index large-9 medium-8 columns content">
-    <h3><?= __('Categories') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+
+<?= $this->element('sub-nav') ?>
+
+<div class="container mt-3">
+
+    <h3><?= __('Categorías actuales') ?></h3>
+
+    <table class="table">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('slug') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('image') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('id', ['label' => __('ID')]) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name', ['label' => __('Nombre')]) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('slug', ['label' => __('Slug')]) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('image', ['label' => __('Imagen')]) ?></th>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($categories as $category): ?>
+            <?php foreach ($categories as $category) : ?>
             <tr>
                 <td><?= $this->Number->format($category->id) ?></td>
                 <td><?= h($category->name) ?></td>
@@ -40,14 +37,30 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <?php
+            $this->Paginator->templates([
+                'prevActive' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>'
+            ]);
+            $this->Paginator->templates([
+                'prevDisabled' => '<li class="page-item disabled"><a class="page-link" href="{{url}}">{{text}}</a></li>'
+            ]);
+            $this->Paginator->templates([
+                'number' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>'
+            ]);
+            $this->Paginator->templates([
+                'nextActive' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>'
+            ]);
+            $this->Paginator->templates([
+                'nextDisabled' => '<li class="page-item disabled"><a class="page-link" href="{{url}}">{{text}}</a></li>'
+            ]);
+            ?>
+            <?= $this->Paginator->prev(__('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Siguiente')) ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-</div>
+    </nav>
+
+</div> 
