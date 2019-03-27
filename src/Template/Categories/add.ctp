@@ -4,25 +4,18 @@
  * @var \App\Model\Entity\Category $category
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Promotions'), ['controller' => 'Promotions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Promotion'), ['controller' => 'Promotions', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="categories form large-9 medium-8 columns content">
-    <?= $this->Form->create($category) ?>
-    <fieldset>
-        <legend><?= __('Add Category') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('slug');
-            echo $this->Form->control('image');
-            echo $this->Form->control('promotions._ids', ['options' => $promotions]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<?= $this->Form->create($category, ['class' => 'form-signin']) ?>
+<fieldset>
+    <legend><?= __('Crear categoría') ?></legend>
+    <div class="form-group">
+        <?= $this->Form->control('name', ['label' => false, 'placeholder' => __('Nombre'), 'class' => 'form-control']) ?>
+    </div>
+    <div class="form-group">
+        <?= $this->Form->control('image', ['label' => false, 'placeholder' => __('Imagen'), 'class' => 'form-control']) ?>
+    </div>
+    <?php
+    // echo $this->Form->control('promotions._ids', ['options' => $promotions]);
+    ?>
+</fieldset>
+<?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary btn-block']) ?>
+<?= $this->Form->end() ?> 
