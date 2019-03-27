@@ -118,4 +118,8 @@ class PromotionsController extends AppController
             return true;
         }
     }
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow('index');
+    }
 }

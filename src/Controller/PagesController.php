@@ -72,7 +72,14 @@ class PagesController extends AppController
      */
     public function isAuthorized($user)
     {
-        // Los permisos para 'display' están definidos en AppController.php
-        // en la línea $this->Auth->allow(['display', 'view', 'index']);
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['display'])) {
+            return true;
+        }
+    }
+
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow('display');
     }
 }
