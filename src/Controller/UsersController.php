@@ -168,16 +168,4 @@ class UsersController extends AppController
         $this->Auth->logout();
         return $this->redirect(['controller' => 'pages', 'action' => 'index']);
     }
-
-    /**
-     * Defino espacios autorizados para los usuarios
-     */
-    public function isAuthorized($user)
-    {        
-        $action = $this->request->getParam('action');
-        if (in_array($action, ['edit'])) {
-            return true;
-        }
-        return parent::isAuthorized($user);
-    }
 }

@@ -82,7 +82,7 @@ class AppController extends Controller
      * Restringir a los usuarios crear Promociones
      */
     public function isAuthorized($user)
-    {        
+    {    
         // Sólo los usuarios administrador tienen todos los permisos
         if ($user['role'] == 'admin') {
             return true;
@@ -90,6 +90,9 @@ class AppController extends Controller
         return false;
     }
 
+    /**
+     * Creo la variable $currentUser y la paso a las vistas para trabajar con las Layout
+     */
     public function beforeFilter(\Cake\Event\Event $event)
     {
         $user = $this->Auth->user();

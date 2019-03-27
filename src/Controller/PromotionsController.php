@@ -107,16 +107,4 @@ class PromotionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-
-    /**
-     * Defino espacios autorizados para los usuarios
-     */
-    public function isAuthorized($user)
-    {
-        $action = $this->request->getParam('action');                
-        if (in_array($action, ['add', 'tags'])) {
-            return true;
-        }
-        return parent::isAuthorized($user);
-    }
 }
