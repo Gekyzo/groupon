@@ -88,7 +88,7 @@ class UsersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
-            if ((strlen($data['newPass1']) > 0) && ($data['newPass1'] === $data['newPass2'])) {
+            if ((!empty($data['newPass1'])) && ($data['newPass1'] === $data['newPass2'])) {
                 $data['password'] = $data['newPass1'];
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
@@ -98,7 +98,11 @@ class UsersController extends AppController
                 }
                 $this->Flash->error(__('No ha sido posible actualizar la información. Por favor, comprueba los errores.'));
             } else {
-                $this->Flash->error(__('Las contraseñas no coinciden'));
+                if (empty($data['newPass1']) || empty($data['newPass2'])) {
+                    $this->Flash->error(__('Las contraseñas no pueden estar vacías.'));
+                } else {
+                    $this->Flash->error(__('Las contraseñas no coinciden'));
+                }
             }
         }
         $this->set(compact('user'));
@@ -156,5 +160,17 @@ class UsersController extends AppController
         $this->Flash->success('Has salido de tu cuenta.');
         $this->Auth->logout();
         return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+    }
+
+    /**
+     * Defino espacios autorizados para los usuarios
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['index', 'edit'])) {
+            return true;
+        }
+        return parent::isAuthorized($user);
     }
 }
