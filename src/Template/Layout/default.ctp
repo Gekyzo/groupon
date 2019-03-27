@@ -26,7 +26,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    
+
     <?= $this->Html->css('bootstrap/bootstrap') ?>
     <?= $this->Html->css('bootstrap.extended') ?>
     <?= $this->Html->css('fontawesome/fontawesome') ?>
@@ -59,11 +59,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
-      <li><a href="/users/add">Sign Up</a></li>
-      <li><a href="/users/login">Login</a></li>
-    </ul>
+                <?php if ($currentUser) : ?>
+                <li class="nav-item nav-link">Hola! <?= $currentUser['name'] ?></li>
+                <li class="nav-item nav-link"><?= $this->Html->link(__('Salir'), ['controller' => 'users', 'action' => 'logout']) ?></li>
+                <?php else : ?>
+                <li class="nav-item nav-link"><?= $this->Html->link(__('Registro'), ['controller' => 'users', 'action' => 'add']) ?></li>
+                <li class="nav-item nav-link"><?= $this->Html->link(__('Entrar'), ['controller' => 'users', 'action' => 'login']) ?></li>
+                <?php endif; ?>
+            </ul>
         </nav>
-        
+
 
         <?= $this->Flash->render() ?>
 

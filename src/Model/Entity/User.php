@@ -3,6 +3,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\Utility\Inflector;
 
 /**
  * User Entity
@@ -57,5 +58,13 @@ class User extends Entity
             $hasher = new DefaultPasswordHasher();
             return $hasher->hash($value);
         }
+    }
+
+    /**
+     * User register Inflector
+     */
+    protected function _setName($string)
+    {
+        return Inflector::humanize(strtolower($string));
     }
 }

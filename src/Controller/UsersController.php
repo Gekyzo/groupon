@@ -57,6 +57,14 @@ class UsersController extends AppController
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('Tu cuenta ha sido creada.'));
+                    if($result = $this->Users->save($user)){
+                        // Retrieve user from DB
+                        $authUser = $this->Users->get($result->id)->toArray();                
+                        // Log user in using Auth
+                        $this->Auth->setUser($authUser);                
+                        // Redirect user
+                        $this->redirect(['controller' => 'pages', 'action' => 'index']);
+                    }
                     return $this->redirect(['controller' => 'pages', 'action' => 'index']);
                 }
                 $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
@@ -137,7 +145,7 @@ class UsersController extends AppController
      */
     public function initialize()
     {
-        parent::initialize();        
+        parent::initialize();
         $this->Auth->allow(['logout', 'add']);
     }
 
@@ -147,6 +155,7 @@ class UsersController extends AppController
     public function logout()
     {
         $this->Flash->success('Has salido de tu cuenta.');
-        return $this->redirect($this->Auth->logout());
+        $this->Auth->logout();
+        return $this->redirect(['action' => 'index']);
     }
 }
