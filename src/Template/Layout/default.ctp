@@ -13,7 +13,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Ciropon';
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,9 +75,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
         <?= $this->Flash->render() ?>
 
-        <div class="container clearfix">
-            <?= $this->fetch('content') ?>
-        </div>
+        <?= $this->fetch('content') ?>
 
     </div>
 
