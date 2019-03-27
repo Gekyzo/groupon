@@ -50,13 +50,15 @@ class CategoriesController extends AppController
     {
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
-            $category = $this->Categories->patchEntity($category, $this->request->getData());
+            $data = $this->request->getData();
+            debug($data);
+            $category = $this->Categories->patchEntity($category, $data);
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
+                $this->Flash->success(__('Categoría creada correctamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The category could not be saved. Please, try again.'));
+            $this->Flash->error(__('No ha sido posible guardar la categoría.'));
         }
         $promotions = $this->Categories->Promotions->find('list', ['limit' => 200]);
         $this->set(compact('category', 'promotions'));

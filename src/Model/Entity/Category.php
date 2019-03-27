@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Utility\Inflector;
 
 /**
  * Category Entity
@@ -27,8 +28,16 @@ class Category extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'slug' => true,
         'image' => true,
         'promotions' => true
     ];
+
+    /**
+     * Creo campo virtual 'slug' con Inflector para que sea el enlace a las categorías
+     */
+    protected $_virtual = ['slug'];
+    protected function _getSlug()
+    {
+        return strtolower(Inflector::slug($this->name));
+    }
 }
