@@ -1,9 +1,12 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Category $category
+ * @var \App\Model\Entity\Category $category 
  */
 ?>
+
+<?= $this->element('sub-nav') ?>
+
 <?= $this->Form->create($category, ['class' => 'form-signin']) ?>
 <fieldset>
     <legend><?= __('Crear categoría') ?></legend>
