@@ -57,15 +57,14 @@ class UsersController extends AppController
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('Tu cuenta ha sido creada.'));
+                    /**
+                     * Login after register y redirect a Home
+                     */
                     if($result = $this->Users->save($user)){
-                        // Retrieve user from DB
-                        $authUser = $this->Users->get($result->id)->toArray();                
-                        // Log user in using Auth
-                        $this->Auth->setUser($authUser);                
-                        // Redirect user
+                        $authUser = $this->Users->get($result->id)->toArray(); 
+                        $this->Auth->setUser($authUser);  
                         $this->redirect(['controller' => 'pages', 'action' => 'index']);
                     }
-                    return $this->redirect(['controller' => 'pages', 'action' => 'index']);
                 }
                 $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
             } else {
