@@ -155,6 +155,6 @@ class UsersController extends AppController
     {
         $this->Flash->success('Has salido de tu cuenta.');
         $this->Auth->logout();
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'pages', 'action' => 'index']);
     }
 }
