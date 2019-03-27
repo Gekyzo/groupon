@@ -108,7 +108,7 @@ class CategoriesController extends AppController
     }
 
     /**
-     * Defino los permisos para  usuarios
+     * Permisos para usarios CON SESIÓN INICIADA
      */
     public function isAuthorized($user)
     {
@@ -116,5 +116,15 @@ class CategoriesController extends AppController
         if (in_array($action, ['index', 'view'])) {
             return true;
         }
+        return parent::isAuthorized($user);
+    }
+
+    /**
+     * Permisos para usuarios SIN SESIÓN INICIADA
+     */
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow('index');
+        parent::beforeFilter($event);
     }
 }

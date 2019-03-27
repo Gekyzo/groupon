@@ -48,6 +48,7 @@ class PromotionsController extends AppController
      */
     public function add()
     {
+        $this->Log('Promotion ADD', 'info');
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
@@ -113,11 +114,11 @@ class PromotionsController extends AppController
      */
     public function isAuthorized($user)
     {
-        parent::isAuthorized($user);
         $action = $this->request->getParam('action');
         if (in_array($action, ['index', 'view'])) {
             return true;
         }
+        return parent::isAuthorized($user);
     }
 
     /**
@@ -125,7 +126,7 @@ class PromotionsController extends AppController
      */
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        parent::beforeFilter($event);
         $this->Auth->allow('index');
+        parent::beforeFilter($event);
     }
 }
