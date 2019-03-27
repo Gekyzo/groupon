@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Category[]|\Cake\Collection\CollectionInterface $categories
+ * @var \App\Model\Entity\Category[]|\Cake\Collection\CollectionInterface $categories 
  */
 ?>
 
@@ -25,13 +25,12 @@
             <?php foreach ($categories as $category) : ?>
             <tr>
                 <td><?= $this->Number->format($category->id) ?></td>
-                <td><?= h($category->name) ?></td>
+                <td><?= $this->Html->link(h($category->name), ['action' => 'view', $category->id]) ?></td>
                 <td><?= h($category->slug) ?></td>
                 <td><?= h($category->image) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $category->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
+                <td>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $category->id]) ?>
+                    <?= $this->Form->postLink(__('Borrar'), ['action' => 'delete', $category->id], ['confirm' => __('¿Seguro que quieres eliminar la categoría {0}?', $category->name)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
