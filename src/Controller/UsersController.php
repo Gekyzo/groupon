@@ -48,6 +48,13 @@ class UsersController extends AppController
      */
     public function add()
     {
+        /**
+         * Si el usuario ya está logeado, no le permite crear otra cuenta
+         */
+        if ($this->Auth->user()) {
+            $this->redirect(['controller' => 'users', 'action' => 'view', $this->Auth->user('id')]);
+        }
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
@@ -57,7 +64,14 @@ class UsersController extends AppController
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('Tu cuenta ha sido creada.'));
-                    return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+                    /**
+                     * Login after register y redirect a Home
+                     */
+                    if ($result = $this->Users->save($user)) {
+                        $authUser = $this->Users->get($result->id)->toArray();
+                        $this->Auth->setUser($authUser);
+                        $this->redirect(['controller' => 'pages', 'action' => 'index']);
+                    }
                 }
                 $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
             } else {
@@ -81,7 +95,7 @@ class UsersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
-            if ((strlen($data['newPass1']) > 0) && ($data['newPass1'] === $data['newPass2'])) {
+            if ((!empty($data['newPass1'])) && ($data['newPass1'] === $data['newPass2'])) {
                 $data['password'] = $data['newPass1'];
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
@@ -91,7 +105,11 @@ class UsersController extends AppController
                 }
                 $this->Flash->error(__('No ha sido posible actualizar la información. Por favor, comprueba los errores.'));
             } else {
-                $this->Flash->error(__('Las contraseñas no coinciden'));
+                if (empty($data['newPass1']) || empty($data['newPass2'])) {
+                    $this->Flash->error(__('Las contraseñas no pueden estar vacías.'));
+                } else {
+                    $this->Flash->error(__('Las contraseñas no coinciden'));
+                }
             }
         }
         $this->set(compact('user'));
@@ -137,7 +155,7 @@ class UsersController extends AppController
      */
     public function initialize()
     {
-        parent::initialize();        
+        parent::initialize();
         $this->Auth->allow(['logout', 'add']);
     }
 
@@ -147,6 +165,18 @@ class UsersController extends AppController
     public function logout()
     {
         $this->Flash->success('Has salido de tu cuenta.');
-        return $this->redirect($this->Auth->logout());
+        $this->Auth->logout();
+        return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+    }
+
+    /**
+     * Defino los permisos para  usuarios
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['login', 'logout', 'view', 'edit'])) {
+            return true;
+        }
     }
 }

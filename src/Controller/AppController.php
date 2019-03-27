@@ -50,7 +50,7 @@ class AppController extends Controller
          * User Auth
          */
         $this->loadComponent('Auth', [
-            'authorize'=> 'Controller',
+            'authorize' => 'Controller',
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -63,7 +63,7 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login'
             ],
-             // If unauthorized, return them to page they were just on
+            // If unauthorized, return them to page they were just on
             'unauthorizedRedirect' => $this->referer()
         ]);
 
@@ -83,7 +83,19 @@ class AppController extends Controller
      */
     public function isAuthorized($user)
     {
-        // By default deny access.
+        // Sólo los usuarios administrador tienen todos los permisos
+        if ($user['role'] == 'admin') {
+            return true;
+        }
         return false;
+    }
+
+    /**
+     * Creo la variable $currentUser y la paso a las vistas para trabajar con las Layout
+     */
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $user = $this->Auth->user();
+        $this->set('currentUser', $user);
     }
 }

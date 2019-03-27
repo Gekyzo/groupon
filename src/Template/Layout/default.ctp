@@ -26,7 +26,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    
+
     <?= $this->Html->css('bootstrap/bootstrap') ?>
     <?= $this->Html->css('bootstrap.extended') ?>
     <?= $this->Html->css('fontawesome/fontawesome') ?>
@@ -53,17 +53,22 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <?= $this->Html->link(__('Inicio'), ['action' => 'index'], ['class' => 'nav-item nav-link']) ?>
+                    <?= $this->Html->link(__('Inicio'), ['controller' => 'pages', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?= $this->Html->link(__('Promociones'), ['controller' => 'promotions', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?= $this->Html->link(__('Categorías'), ['controller' => 'categories', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
-      <li><a href="/users/add">Sign Up</a></li>
-      <li><a href="/users/login">Login</a></li>
-    </ul>
+                <?php if ($currentUser) : ?>
+                <li class="nav-item nav-link">Hola <?= $currentUser['name'] ?></li>
+                <li class="nav-item nav-link"><?= $this->Html->link(__('Salir'), ['controller' => 'users', 'action' => 'logout'], ['confirm'=>'¿Estás seguro de que quieres salir?']) ?></li>
+                <?php else : ?>
+                <li class="nav-item nav-link"><?= $this->Html->link(__('Registro'), ['controller' => 'users', 'action' => 'add']) ?></li>
+                <li class="nav-item nav-link"><?= $this->Html->link(__('Entrar'), ['controller' => 'users', 'action' => 'login']) ?></li>
+                <?php endif; ?>
+            </ul>
         </nav>
-        
+
 
         <?= $this->Flash->render() ?>
 

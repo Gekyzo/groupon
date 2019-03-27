@@ -66,4 +66,13 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    /**
+     * Defino los permisos para  usuarios
+     */
+    public function isAuthorized($user)
+    {
+        // Los permisos para 'display' están definidos en AppController.php
+        // en la línea $this->Auth->allow(['display', 'view', 'index']);
+    }
 }
