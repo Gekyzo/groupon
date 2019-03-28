@@ -59,8 +59,12 @@ class UploadimageComponent extends Component
             $newFolderDir = Configure::read('Fol.images') . $folder . '\\';
             $folderDir = new Folder($newFolderDir);
             if (!self::checkFolderExists($folderDir)) {
-                Log::info('Creación de la carpeta ' . $newFolderDir, ['dirCreation']);
-                $folderDir->create($newFolderDir);
+                try {
+                    $folderDir->create($newFolderDir);
+                    Log::info('Creación de la carpeta ' . $newFolderDir, ['dirCreation']);
+                } catch (Exception $e) {
+                    Log::info('No ha sido posible crear la carpeta' . $newFolderDir . '. Error: ' . $e, ['dirCreation']);
+                }
             }
         }
     }
