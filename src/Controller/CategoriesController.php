@@ -13,6 +13,11 @@ use App\Controller\AppController;
 class CategoriesController extends AppController
 {
 
+    public function initialize()
+    {
+        $this->loadComponent('UploadImage');
+    }
+
     /**
      * Index method
      *

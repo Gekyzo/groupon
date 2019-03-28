@@ -16,11 +16,8 @@
             <?= $this->Form->control('name', ['label' => false, 'placeholder' => __('Nombre'), 'class' => 'form-control']) ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->control('image', ['label' => false, 'placeholder' => __('Imagen'), 'class' => 'form-control']) ?>
+            <?= $this->Form->control('image', ['label' => false, 'placeholder' => __('Imagen'), 'class' => 'form-control', 'type' => 'file']) ?>
         </div>
-        <?php
-    // echo $this->Form->control('promotions._ids', ['options' => $promotions]);
-        ?>
     </fieldset>
     <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary btn-block']) ?>
     <?= $this->Form->end() ?>
