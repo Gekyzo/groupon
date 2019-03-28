@@ -42,7 +42,7 @@ class UploadimageComponent extends Component
     /**
      * Comprobar si existe una determinada carpeta a través del atributo 'path' de * la clase de Cake 'Folder'
      */
-    private function checkFoldersExists($folder)
+    private function checkFolderExists($folder)
     {
         if ($folder->path) {
             return true;
@@ -64,9 +64,9 @@ class UploadimageComponent extends Component
             if (!self::checkFolderExists($folderDir)) {
                 try {
                     $folderDir->create($newFolderDir);
-                    Log::info('Creación de la carpeta ' . $newFolderDir, ['dirCreation']);
+                    Log::info('Creación de la carpeta ' . $newFolderDir, ['folder']);
                 } catch (Exception $e) {
-                    Log::error('No ha sido posible crear la carpeta' . $newFolderDir . '. Error: ' . $e, ['dirCreation']);
+                    Log::error('No ha sido posible crear la carpeta' . $newFolderDir . '. Error: ' . $e, ['folder']);
                 }
             }
         }
