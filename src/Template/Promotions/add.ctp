@@ -22,21 +22,16 @@
                 <div class="form-group">
                     <?= $this->Form->control('slug', ['label' =>  false, 'placeholder' => 'Slug', 'class' => 'form-control']) ?>
                 </div>
-            </div>            
-        </div>
-        <div class="form-group">     
-            <div class="form-check form-check-inline">
-            <?= $this->Form->control('categories._ids', ['type' => 'select', 'multiple' => 'checkbox', 'label' => 'Categorías', 'options' => $categories, 'class' => 'form-check-input']) ?>            
-            <?php // $this->Form->control('categories._ids', ['type' => 'select', 'multiple' => 'checkbox', 'label' => 'Categorías', 'options' => $categories, 'class' => 'form-check-input']) ?>
             </div>
         </div>
         <div class="form-group">
-        <?php foreach ($categories as $catVal=>$catName): ?>            
-            <div class="form-check form-check-inline">                
-                <input type="checkbox" name="categories[_ids][]" class="form-check-input" value="<?= $catVal ?>">
-                <label class="form-check-label"><?= $catName ?></label>
-            </div>
-        <?php endforeach; ?>
+            <p>Incluir en categorías:<p>
+                    <?php foreach ($categories as $catVal => $catName) : ?>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="categories[_ids][]" class="form-check-input" value="<?= $catVal ?>">
+                        <label class="form-check-label"><?= $catName ?></label>
+                    </div>
+                    <?php endforeach; ?>
         </div>
         <div class="form-group">
             <?= $this->Form->control('body', ['label' => false, 'placeholder' => 'Descripción', 'class'  =>  'form-control']) ?>
