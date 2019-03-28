@@ -48,10 +48,10 @@ class PromotionsController extends AppController
      */
     public function add()
     {
-        $this->Log('Promotion ADD', 'info');
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
-            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
+            $data = $this->request->getData();
+            $promotion = $this->Promotions->patchEntity($promotion, $data);
             $promotion->user_id = $this->Auth->user('id');
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));

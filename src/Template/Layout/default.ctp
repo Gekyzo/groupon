@@ -32,14 +32,14 @@ $cakeDescription = 'Ciropon';
     <?= $this->Html->css('fontawesome/fontawesome') ?>
     <?= $this->Html->css('fontawesome/solid') ?>
     <?= $this->Html->css('main') ?>
+    <?= $this->fetch('css') ?>
 
     <?= $this->Html->script('bootstrap/bootstrap') ?>
     <?= $this->Html->script('fontawesome/fontawesome') ?>
     <?= $this->Html->script('jquery/jquery-3.3.1.min') ?>
+    <?= $this->fetch('script') ?>
 
     <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
 </head>
 
 <body>

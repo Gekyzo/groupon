@@ -4,31 +4,67 @@
  * @var \App\Model\Entity\Promotion $promotion
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Promotions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="promotions form large-9 medium-8 columns content">
+
+<?= $this->element('sub-nav') ?>
+
+<div class="container mt-3">
+
     <?= $this->Form->create($promotion) ?>
     <fieldset>
-        <legend><?= __('Add Promotion') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('slug');
-            echo $this->Form->control('price_old');
-            echo $this->Form->control('price_new');
-            echo $this->Form->control('body');
-            echo $this->Form->control('available_since', ['empty' => true]);
-            echo $this->Form->control('available_until', ['empty' => true]);
-            echo $this->Form->control('categories._ids', ['options' => $categories]);
-        ?>
+        <legend><?= __('Crear promoción') ?></legend>
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <?= $this->Form->control('name', ['label' => false, 'placeholder' => 'Nombre', 'class' => 'form-control']) ?>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <?= $this->Form->control('slug', ['label' =>  false, 'placeholder' => 'Slug', 'class' => 'form-control']) ?>
+                </div>
+            </div>            
+        </div>
+        <div class="form-group">     
+            <div class="form-check form-check-inline">
+            <?= $this->Form->control('categories._ids', ['type' => 'select', 'multiple' => 'checkbox', 'label' => 'Categorías', 'options' => $categories, 'class' => 'form-check-input']) ?>            
+            <?php // $this->Form->control('categories._ids', ['type' => 'select', 'multiple' => 'checkbox', 'label' => 'Categorías', 'options' => $categories, 'class' => 'form-check-input']) ?>
+            </div>
+        </div>
+        <div class="form-group">
+        <?php foreach ($categories as $catVal=>$catName): ?>            
+            <div class="form-check form-check-inline">                
+                <input type="checkbox" name="categories[_ids][]" class="form-check-input" value="<?= $catVal ?>">
+                <label class="form-check-label"><?= $catName ?></label>
+            </div>
+        <?php endforeach; ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('body', ['label' => false, 'placeholder' => 'Descripción', 'class'  =>  'form-control']) ?>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <?= $this->Form->control('price_old', ['label' => false, 'placeholder' => 'Precio original', 'class' => 'form-control']) ?>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <?= $this->Form->control('price_new', ['label' => false, 'placeholder' => 'Precio con oferta', 'class' => 'form-control']) ?>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <?= $this->Form->control('Disponible desde', ['name' => 'available_since', 'type' => 'datetime-local'], ['empty' => true, 'class' => 'form-control']) ?>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <?= $this->Form->control('available_until', ['label' => __('... hasta'), 'type' => 'datetime-local'], ['empty' => true, 'class' => 'form-control']) ?>
+                </div>
+            </div>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary btn-block']) ?>
     <?= $this->Form->end() ?>
-</div>
+
+</div> 
