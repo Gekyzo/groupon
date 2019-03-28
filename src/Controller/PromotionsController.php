@@ -48,10 +48,16 @@ class PromotionsController extends AppController
      */
     public function add()
     {
-        $this->Log('Promotion ADD', 'info');
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
-            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
+            $data = $this->request->getData();
+            /**
+             * CakePHP todavía no soporta el formato de datos que genera datetime-local
+             * Para que pueda insertar en BD, debemos eliminar la 'T' que precede a la hora
+             */
+            $data['available_since'] = str_replace('T', ' ', $data['available_since']);
+            $data['available_until'] = str_replace('T', ' ', $data['available_until']);
+            $promotion = $this->Promotions->patchEntity($promotion, $data);
             $promotion->user_id = $this->Auth->user('id');
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
