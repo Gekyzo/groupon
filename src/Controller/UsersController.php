@@ -72,8 +72,9 @@ class UsersController extends AppController
                         $this->Auth->setUser($authUser);
                         $this->redirect(['controller' => 'pages', 'action' => 'index']);
                     }
+                } else {
+                    $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
                 }
-                $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
             } else {
                 $this->Flash->error(__('Las contraseñas no coinciden'));
             }
