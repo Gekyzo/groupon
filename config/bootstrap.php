@@ -201,3 +201,9 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+/**
+ * Custom images routes
+ */
+Configure::write('Fol.images', WWW_ROOT . 'img\\');
+ 

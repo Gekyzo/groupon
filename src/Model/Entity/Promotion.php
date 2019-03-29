@@ -40,6 +40,7 @@ class Promotion extends Entity
         'available_since' => true,
         'available_until' => true,
         'created' => true,
+        'deleted' => true,
         'orders' => true,
         'categories' => true
     ];

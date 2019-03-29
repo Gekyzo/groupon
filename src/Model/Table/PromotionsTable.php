@@ -99,6 +99,14 @@ class PromotionsTable extends Table
             ->dateTime('available_until')
             ->allowEmptyDateTime('available_until');
 
+        $validator
+            ->dateTime('created')
+            ->allowEmptyDateTime('available_until');
+
+        $validator
+            ->dateTime('deleted')
+            ->allowEmptyDateTime(true);
+
         return $validator;
     }
 }
