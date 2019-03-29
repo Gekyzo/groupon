@@ -25,14 +25,22 @@ class UploadimageComponent extends Component
      * Listado de carpetas necesarias para almacenar imágenes de la aplicación
      * @var array
      */
-    private $requiredFolders = ['categories'];
+    private $requiredFolders = ['categories', 'promotions'];
 
     /**
      * Método principal
      */
     public function mainUpload()
     {
-        self::createFolders($this->requiredFolders);
+        foreach ($this->requiredFolders as $folder) {
+            debug($folder);
+            die;
+            if (self::checkFolderExists($folder)) {
+                echo $folder . ' SÍ Existe';
+            } else {
+                echo $folder . ' NO Existe';
+            }
+        }
     }
 
     /**
@@ -42,12 +50,16 @@ class UploadimageComponent extends Component
     /**
      * Comprobar si existe una determinada carpeta a través del atributo 'path' de * la clase de Cake 'Folder'
      */
-    private function checkFolderExists($folder)
+    private function checkFolderExists(...$folders)
     {
-        if ($folder->path) {
-            return true;
+        foreach ($folders[0] as $folder) {
+            $newFolderDir = Configure::read('Fol.images') . $folder . '\\';
+            $folderDir = new Folder($newFolderDir);
+            if ($folderDir->path) {
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 
     /**
