@@ -12,6 +12,7 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+
     /**
      * Index method
      *
@@ -47,15 +48,36 @@ class UsersController extends AppController
      */
     public function add()
     {
+        /**
+         * Si el usuario ya está logeado, no le permite crear otra cuenta
+         */
+        if ($this->Auth->user()) {
+            $this->redirect(['controller' => 'users', 'action' => 'view', $this->Auth->user('id')]);
+        }
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            $data = $this->request->getData();
+            if ((strlen($data['password1']) > 0) && ($data['password1'] === $data['password2'])) {
+                $data['password'] = $data['password1'];
+                $data['role'] = 'client';
+                $user = $this->Users->patchEntity($user, $data);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('Tu cuenta ha sido creada.'));
+                    /**
+                     * Login after register y redirect a Home
+                     */
+                    if ($result = $this->Users->save($user)) {
+                        $authUser = $this->Users->get($result->id)->toArray();
+                        $this->Auth->setUser($authUser);
+                        $this->redirect(['controller' => 'pages', 'action' => 'index']);
+                    }
+                } else {
+                    $this->Flash->error(__('No ha sido posible crear el usuario. Por favor, comprueba los errores.'));
+                }
+            } else {
+                $this->Flash->error(__('Las contraseñas no coinciden'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
     }
@@ -117,6 +139,36 @@ class UsersController extends AppController
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
+        }
+    }
+
+    /**
+     * Initialize method
+     */
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['logout', 'add']);
+    }
+
+    /**
+     * Logout method
+     */
+    public function logout()
+    {
+        $this->Flash->success('Has salido de tu cuenta.');
+        $this->Auth->logout();
+        return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+    }
+
+    /**
+     * Defino los permisos para  usuarios
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['login', 'logout', 'view', 'edit'])) {
+            return true;
         }
     }
 }

@@ -105,4 +105,25 @@ class CategoriesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Permisos para usarios CON SESIÓN INICIADA
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['index', 'view'])) {
+            return true;
+        }
+        return parent::isAuthorized($user);
+    }
+
+    /**
+     * Permisos para usuarios SIN SESIÓN INICIADA
+     */
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow('index');
+        parent::beforeFilter($event);
+    }
 }

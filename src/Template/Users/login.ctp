@@ -3,14 +3,17 @@
  * @var \App\View\AppView $this
  */
 ?>
-<div class="users form">
+
 <?= $this->Flash->render('auth') ?>
-    <?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __('Please enter your username and password') ?></legend>
-        <?= $this->Form->control('username') ?>
-        <?= $this->Form->control('password') ?>
-    </fieldset>
-    <?= $this->Form->button(__('Login')); ?>
-    <?= $this->Form->end() ?>
-</div>
+<?= $this->Form->create('', ['class' => 'form-signin']) ?>
+<fieldset>
+    <legend><?= __('Login') ?></legend>
+    <div class="form-group">
+        <?= $this->Form->control('email', ['label' => false, 'placeholder' => 'Email', 'class' => 'form-control']) ?>
+    </div>
+    <div class="form-group">
+        <?= $this->Form->control('password', ['label' => false, 'placeholder' => 'Contraseña', 'class' => 'form-control']) ?>
+    </div>
+</fieldset>
+<?= $this->Form->button(__('Entrar'), ['class' => 'btn btn-primary']); ?>
+<?= $this->Form->end() ?> 
