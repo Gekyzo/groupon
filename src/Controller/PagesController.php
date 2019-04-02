@@ -59,8 +59,8 @@ class PagesController extends AppController
         /**
          * Cargamos la lista de categorías y promociones
          */
-        $categories = TableRegistry::getTableLocator()->get('Categories')->find('all');
-        $promotions = TableRegistry::getTableLocator()->get('Promotions')->find('all');
+        $categories = TableRegistry::getTableLocator()->get('Categories')->find('all')->toArray();
+        $promotions = TableRegistry::getTableLocator()->get('Promotions')->find('all')->toArray();
         /**
          * Mandamos datos a la vista
          */
