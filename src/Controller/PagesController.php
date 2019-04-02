@@ -18,6 +18,7 @@ use Cake\Core\Configure;
 use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
+use Cake\ORM\TableRegistry;
 
 /**
  * Static content controller
@@ -55,7 +56,15 @@ class PagesController extends AppController
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
-        $this->set(compact('page', 'subpage'));
+        /**
+         * Cargamos la lista de categorías y promociones
+         */
+        $categories = TableRegistry::getTableLocator()->get('Categories')->find('all');
+        $promotions = TableRegistry::getTableLocator()->get('Promotions')->find('all');
+        /**
+         * Mandamos datos a la vista
+         */
+        $this->set(compact('page', 'subpage', 'categories', 'promotions'));
 
         try {
             $this->render(implode('/', $path));
