@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 
 /**
  * Users Controller
@@ -95,23 +97,12 @@ class UsersController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $data = $this->request->getData();
-            if ((!empty($data['newPass1'])) && ($data['newPass1'] === $data['newPass2'])) {
-                $data['password'] = $data['newPass1'];
-                $user = $this->Users->patchEntity($user, $data);
-                if ($this->Users->save($user)) {
-                    $this->Flash->success(__('La información ha sido actualizada.'));
-
-                    return $this->redirect(['controller' => 'pages', 'action' => 'index']);
-                }
-                $this->Flash->error(__('No ha sido posible actualizar la información. Por favor, comprueba los errores.'));
-            } else {
-                if (empty($data['newPass1']) || empty($data['newPass2'])) {
-                    $this->Flash->error(__('Las contraseñas no pueden estar vacías.'));
-                } else {
-                    $this->Flash->error(__('Las contraseñas no coinciden'));
-                }
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'index']);
             }
+            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
     }
@@ -144,7 +135,20 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
+                /**
+                 * Comprobamos Auth y logueamos
+                 */
                 $this->Auth->setUser($user);
+                /**
+                 * Actualizamos BD con timestamp en last-active
+                 */
+                $usersTable = TableRegistry::get('Users');
+                $logingUser = $usersTable->get($user['id']);
+                $logingUser->last_active = Time::now();
+                $usersTable->save($logingUser);
+                /**
+                 * Redirect a Home y mostramos mensaje bienvenida
+                 */
                 $this->Flash->success(__('Bienvenido ') . $user['name']);
                 return $this->redirect($this->Auth->redirectUrl());
             }

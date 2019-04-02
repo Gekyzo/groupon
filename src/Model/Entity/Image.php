@@ -4,15 +4,17 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * CategoriesPromotion Entity
+ * Image Entity
  *
- * @property int $category_id
- * @property int $promotion_id
+ * @property int $id
+ * @property string $name
+ * @property string $url
+ * @property \Cake\I18n\FrozenTime|null $created
+ * @property \Cake\I18n\FrozenTime $deleted
  *
- * @property \App\Model\Entity\Category $category
- * @property \App\Model\Entity\Promotion $promotion
+ * @property \App\Model\Entity\Promotion[] $promotions
  */
-class CategoriesPromotion extends Entity
+class Image extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -24,7 +26,10 @@ class CategoriesPromotion extends Entity
      * @var array
      */
     protected $_accessible = [
-        'category' => true,
-        'promotion' => true
+        'name' => true,
+        'url' => true,
+        'created' => true,
+        'deleted' => true,
+        'promotions' => true
     ];
 }

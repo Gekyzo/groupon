@@ -10,7 +10,6 @@ use Cake\TestSuite\TestCase;
  */
 class PromotionsTableTest extends TestCase
 {
-
     /**
      * Test subject
      *
@@ -26,7 +25,8 @@ class PromotionsTableTest extends TestCase
     public $fixtures = [
         'app.Promotions',
         'app.Orders',
-        'app.Categories'
+        'app.Categories',
+        'app.Images'
     ];
 
     /**

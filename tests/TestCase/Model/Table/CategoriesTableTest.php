@@ -10,7 +10,6 @@ use Cake\TestSuite\TestCase;
  */
 class CategoriesTableTest extends TestCase
 {
-
     /**
      * Test subject
      *
@@ -68,6 +67,16 @@ class CategoriesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

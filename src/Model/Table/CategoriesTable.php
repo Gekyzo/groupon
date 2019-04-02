@@ -15,14 +15,13 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Category newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Category[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\Category|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Category|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Category saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Category patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Category[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Category findOrCreate($search, callable $callback = null, $options = [])
  */
 class CategoriesTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -60,13 +59,44 @@ class CategoriesTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
+            ->allowEmptyString('name', false)
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->scalar('slug')
+            ->maxLength('slug', 255)
+            ->requirePresence('slug', 'create')
+            ->allowEmptyString('slug', false);
+
+        $validator
+            ->scalar('state')
+            ->maxLength('state', 24)
+            ->allowEmptyString('state');
+
+        $validator
+            ->scalar('body')
+            ->allowEmptyString('body');
 
         $validator
             ->scalar('image')
             ->maxLength('image', 512)
-            ->allowEmptyFile('image');
+            ->requirePresence('image', 'create')
+            ->allowEmptyFile('image', false);
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['name']));
+
+        return $rules;
     }
 }

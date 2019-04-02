@@ -1,14 +1,19 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
+
+<?= $this->Flash->render('auth') ?>
 <?= $this->Form->create('', ['class' => 'form-signin']) ?>
-<?php // $this->Form->create() ?>
 <fieldset>
-    <legend>Login</legend>
+    <legend><?= __('Login') ?></legend>
     <div class="form-group">
-    <?= $this->Form->control('email', ['label' => false, 'placeholder' => 'Email', 'class' => 'form-control']) ?>
+        <?= $this->Form->control('email', ['label' => false, 'placeholder' => 'Email', 'class' => 'form-control']) ?>
     </div>
     <div class="form-group">
-    <?= $this->Form->control('password', ['label' => false, 'placeholder' => 'Contraseña', 'class' => 'form-control']) ?>
+        <?= $this->Form->control('password', ['label' => false, 'placeholder' => 'Contraseña', 'class' => 'form-control']) ?>
     </div>
-    <?= $this->Form->button(__('Login'), ['class' => 'btn btn-primary btn-lg 
-    btn-block']) ?>
 </fieldset>
+<?= $this->Form->button(__('Entrar'), ['class' => 'btn btn-primary']); ?>
 <?= $this->Form->end() ?> 

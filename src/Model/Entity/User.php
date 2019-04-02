@@ -13,6 +13,8 @@ use Cake\Utility\Inflector;
  * @property string $email
  * @property string $password
  * @property string $role
+ * @property string|null $state
+ * @property \Cake\I18n\FrozenTime|null $last_active
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime|null $deleted
  *
@@ -20,7 +22,6 @@ use Cake\Utility\Inflector;
  */
 class User extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -35,6 +36,8 @@ class User extends Entity
         'email' => true,
         'password' => true,
         'role' => true,
+        'state' => true,
+        'last_active' => true,
         'created' => true,
         'deleted' => true,
         'orders' => true

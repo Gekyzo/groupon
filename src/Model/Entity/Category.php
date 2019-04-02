@@ -2,7 +2,6 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\Utility\Inflector;
 
 /**
  * Category Entity
@@ -10,13 +9,14 @@ use Cake\Utility\Inflector;
  * @property int $id
  * @property string $name
  * @property string $slug
- * @property string|null $image
+ * @property string|null $state
+ * @property string|null $body
+ * @property string $image
  *
  * @property \App\Model\Entity\Promotion[] $promotions
  */
 class Category extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -28,16 +28,10 @@ class Category extends Entity
      */
     protected $_accessible = [
         'name' => true,
+        'slug' => true,
+        'state' => true,
+        'body' => true,
         'image' => true,
         'promotions' => true
     ];
-
-    /**
-     * Creo campo virtual 'slug' con Inflector para que sea el enlace a las categorías
-     */
-    protected $_virtual = ['slug'];
-    protected function _getSlug()
-    {
-        return strtolower(Inflector::slug($this->name));
-    }
 }

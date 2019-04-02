@@ -35,8 +35,16 @@
             <td><?= h($user->role) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('State') ?></th>
+            <td><?= h($user->state) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Last Active') ?></th>
+            <td><?= h($user->last_active) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -55,6 +63,7 @@
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Promotion Id') ?></th>
                 <th scope="col"><?= __('User Id') ?></th>
+                <th scope="col"><?= __('State') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -63,6 +72,7 @@
                 <td><?= h($orders->id) ?></td>
                 <td><?= h($orders->promotion_id) ?></td>
                 <td><?= h($orders->user_id) ?></td>
+                <td><?= h($orders->state) ?></td>
                 <td><?= h($orders->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Orders', 'action' => 'view', $orders->id]) ?>
