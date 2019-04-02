@@ -10,7 +10,6 @@ use Cake\TestSuite\TestCase;
  */
 class OrdersTableTest extends TestCase
 {
-
     /**
      * Test subject
      *

@@ -1,51 +1,47 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Category $category
+ * @var \App\Model\Entity\Image $image
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Category'), ['action' => 'edit', $category->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Category'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Categories'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Edit Image'), ['action' => 'edit', $image->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Image'), ['action' => 'delete', $image->id], ['confirm' => __('Are you sure you want to delete # {0}?', $image->id)]) ?> </li>
+        <li><?= $this->Html->link(__('List Images'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Image'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Promotions'), ['controller' => 'Promotions', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Promotion'), ['controller' => 'Promotions', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
-<div class="categories view large-9 medium-8 columns content">
-    <h3><?= h($category->name) ?></h3>
+<div class="images view large-9 medium-8 columns content">
+    <h3><?= h($image->name) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($category->name) ?></td>
+            <td><?= h($image->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Slug') ?></th>
-            <td><?= h($category->slug) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('State') ?></th>
-            <td><?= h($category->state) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Image') ?></th>
-            <td><?= h($category->image) ?></td>
+            <th scope="row"><?= __('Url') ?></th>
+            <td><?= h($image->url) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($category->id) ?></td>
+            <td><?= $this->Number->format($image->id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Created') ?></th>
+            <td><?= h($image->created) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Deleted') ?></th>
+            <td><?= h($image->deleted) ?></td>
         </tr>
     </table>
-    <div class="row">
-        <h4><?= __('Body') ?></h4>
-        <?= $this->Text->autoParagraph(h($category->body)); ?>
-    </div>
     <div class="related">
         <h4><?= __('Related Promotions') ?></h4>
-        <?php if (!empty($category->promotions)): ?>
+        <?php if (!empty($image->promotions)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -61,7 +57,7 @@
                 <th scope="col"><?= __('Deleted') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($category->promotions as $promotions): ?>
+            <?php foreach ($image->promotions as $promotions): ?>
             <tr>
                 <td><?= h($promotions->id) ?></td>
                 <td><?= h($promotions->name) ?></td>

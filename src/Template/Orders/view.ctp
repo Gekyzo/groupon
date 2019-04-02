@@ -29,6 +29,10 @@
             <td><?= $order->has('user') ? $this->Html->link($order->user->name, ['controller' => 'Users', 'action' => 'view', $order->user->id]) : '' ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('State') ?></th>
+            <td><?= h($order->state) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($order->id) ?></td>
         </tr>

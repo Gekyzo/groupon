@@ -16,7 +16,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Order newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Order[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\Order|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Order|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Order saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Order patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Order[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Order findOrCreate($search, callable $callback = null, $options = [])
@@ -25,7 +25,6 @@ use Cake\Validation\Validator;
  */
 class OrdersTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -63,6 +62,11 @@ class OrdersTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', 'create');
+
+        $validator
+            ->scalar('state')
+            ->maxLength('state', 24)
+            ->allowEmptyString('state');
 
         return $validator;
     }

@@ -1,14 +1,16 @@
-<?= $this->Form->create('', ['class' => 'form-signin']) ?>
-<?php // $this->Form->create() ?>
-<fieldset>
-    <legend>Login</legend>
-    <div class="form-group">
-    <?= $this->Form->control('email', ['label' => false, 'placeholder' => 'Email', 'class' => 'form-control']) ?>
-    </div>
-    <div class="form-group">
-    <?= $this->Form->control('password', ['label' => false, 'placeholder' => 'Contraseña', 'class' => 'form-control']) ?>
-    </div>
-    <?= $this->Form->button(__('Login'), ['class' => 'btn btn-primary btn-lg 
-    btn-block']) ?>
-</fieldset>
-<?= $this->Form->end() ?> 
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
+<div class="users form">
+<?= $this->Flash->render('auth') ?>
+    <?= $this->Form->create() ?>
+    <fieldset>
+        <legend><?= __('Please enter your username and password') ?></legend>
+        <?= $this->Form->control('username') ?>
+        <?= $this->Form->control('password') ?>
+    </fieldset>
+    <?= $this->Form->button(__('Login')); ?>
+    <?= $this->Form->end() ?>
+</div>

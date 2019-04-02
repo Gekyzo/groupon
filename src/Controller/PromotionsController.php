@@ -12,7 +12,6 @@ use App\Controller\AppController;
  */
 class PromotionsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -35,7 +34,7 @@ class PromotionsController extends AppController
     public function view($id = null)
     {
         $promotion = $this->Promotions->get($id, [
-            'contain' => ['Categories', 'Orders']
+            'contain' => ['Categories', 'Images', 'Orders']
         ]);
 
         $this->set('promotion', $promotion);
@@ -50,15 +49,7 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            /**
-             * CakePHP todavía no soporta el formato de datos que genera datetime-local
-             * Para que pueda insertar en BD, debemos eliminar la 'T' que precede a la hora
-             */
-            $data['available_since'] = str_replace('T', ' ', $data['available_since']);
-            $data['available_until'] = str_replace('T', ' ', $data['available_until']);
-            $promotion = $this->Promotions->patchEntity($promotion, $data);
-            $promotion->user_id = $this->Auth->user('id');
+            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
 
@@ -67,7 +58,8 @@ class PromotionsController extends AppController
             $this->Flash->error(__('The promotion could not be saved. Please, try again.'));
         }
         $categories = $this->Promotions->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('promotion', 'categories'));
+        $images = $this->Promotions->Images->find('list', ['limit' => 200]);
+        $this->set(compact('promotion', 'categories', 'images'));
     }
 
     /**
@@ -80,10 +72,10 @@ class PromotionsController extends AppController
     public function edit($id = null)
     {
         $promotion = $this->Promotions->get($id, [
-            'contain' => ['Categories']
+            'contain' => ['Categories', 'Images']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData(), ['accesibleFields' => ['user_id' => false]]);
+            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
 
@@ -92,7 +84,8 @@ class PromotionsController extends AppController
             $this->Flash->error(__('The promotion could not be saved. Please, try again.'));
         }
         $categories = $this->Promotions->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('promotion', 'categories'));
+        $images = $this->Promotions->Images->find('list', ['limit' => 200]);
+        $this->set(compact('promotion', 'categories', 'images'));
     }
 
     /**
@@ -113,26 +106,5 @@ class PromotionsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    /**
-     * Permisos para usarios CON SESIÓN INICIADA
-     */
-    public function isAuthorized($user)
-    {
-        $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'view'])) {
-            return true;
-        }
-        return parent::isAuthorized($user);
-    }
-
-    /**
-     * Permisos para usuarios SIN SESIÓN INICIADA
-     */
-    public function beforeFilter(\Cake\Event\Event $event)
-    {
-        $this->Auth->allow('index');
-        parent::beforeFilter($event);
     }
 }
