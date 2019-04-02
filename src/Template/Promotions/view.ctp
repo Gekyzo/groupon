@@ -43,7 +43,7 @@
         </div>
 
         <div class="col">
-            <?= $this->Html->link(__('Comprar'), ['controller' => 'promotions', 'action' => 'addCart'], ['class' => 'btn btn-primary btn-block']) ?>
+            <?= $this->Html->link(__('Comprar'), ['controller' => 'orders', 'action' => 'add', $promotion->id], ['class' => 'btn btn-primary btn-block']) ?>
             <h2><?= __('Detalles') ?></h2>
             <p>
                 <?= __('Disponible hasta') . ' ' . h($promotion->available_until) ?>

@@ -110,4 +110,16 @@ class OrdersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Permisos para usarios CON SESIÓN INICIADA
+     */
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['add'])) {
+            return true;
+        }
+        return parent::isAuthorized($user);
+    }
 }
