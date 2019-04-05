@@ -99,4 +99,20 @@ class AppController extends Controller
         $user = $this->Auth->user();
         $this->set('currentUser', $user);
     }
-} 
+
+    /**
+     * Depura un objeto para que devuelva únicamente los campos que queramos
+     * @param $object | Object El objeto que vamos a depurar
+     * @param $fields | Array Los campos que queremos mantener
+     * @return $res | Array El array resultante con los campos indicados
+     */
+    public function depure(Object $object, array $fields)
+    {
+        $object = $object->toArray();
+        $res = [];
+        foreach ($fields as $field) {
+            $res[$field] = $object[$field];
+        }
+        return $res;
+    }
+}
