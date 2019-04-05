@@ -55,6 +55,8 @@ class PromotionsTable extends Table
             'targetForeignKey' => 'image_id',
             'joinTable' => 'images_promotions'
         ]);
+
+        $this->addBehavior('Muffin/Trash.Trash');
     }
 
     /**
