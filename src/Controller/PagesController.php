@@ -18,7 +18,6 @@ use Cake\Core\Configure;
 use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
-use Cake\ORM\TableRegistry;
 
 /**
  * Static content controller
@@ -59,12 +58,32 @@ class PagesController extends AppController
         /**
          * Cargamos la lista de categorías y promociones
          */
-        $categories = TableRegistry::getTableLocator()->get('Categories')->find('all')->toArray();
-        $promotions = TableRegistry::getTableLocator()->get('Promotions')->find('all')->toArray();
+        $this->loadModel('Categories');
+        $this->loadModel('Promotions');
+        $categories = $this->Categories->find('all')->toArray();
+        /**
+         * Opciones comunes para la query de promociones
+         */
+        $commonOptions = [
+            'conditions' => ['Promotions.state' => 'active'],
+            'order' => ['Promotions.id' => 'DESC', 'Promotions.available_since' => 'DESC'],
+            'limit' => 5
+        ];
+        /**
+         * Query de Últimas promociones
+         */
+        $customOptions = [];
+        $lastPromotions = $this->Promotions->find('all', $this->tempOptions($commonOptions, $customOptions))->toArray();
+        /**
+         * Query de Promociones destacadas
+         */
+        $customOptions = ['order' => ['rand()']];
+        $bestPromotions = $this->Promotions->find('all', $this->tempOptions($commonOptions, $customOptions))->toArray();
+
         /**
          * Mandamos datos a la vista
          */
-        $this->set(compact('page', 'subpage', 'categories', 'promotions'));
+        $this->set(compact('page', 'subpage', 'categories', 'lastPromotions', 'bestPromotions'));
 
         try {
             $this->render(implode('/', $path));
@@ -95,5 +114,21 @@ class PagesController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow('display');
+    }
+
+    /**
+     * Genera un array temporal de opciones para aplicar en una consulta find().
+     * Permite concatenar nuevos valores a una opción que ya existe, pero no sobreescribirlos.
+     * (en caso de querer sobreescribir, no sería una opción común)
+     * @param array ...$options Los arrays que vamos a mergear para crear las opciones
+     * @return array $tempOptions El array temporal con las opciones para la consulta
+     */
+    public function tempOptions(array ...$options): array
+    {
+        $tempOptions = [];
+        foreach ($options as $option) {
+            $tempOptions = array_merge_recursive($tempOptions, $option);
+        }
+        return $tempOptions;
     }
 }
