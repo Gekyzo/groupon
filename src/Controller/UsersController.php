@@ -118,6 +118,7 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+        $user['state'] = 'deleted';
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
@@ -157,7 +158,8 @@ class UsersController extends AppController
     }
 
     /**
-     * Initialize method
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
      */
     public function initialize()
     {
@@ -176,7 +178,7 @@ class UsersController extends AppController
     }
 
     /**
-     * Defino los permisos para  usuarios
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
      */
     public function isAuthorized($user)
     {
@@ -184,5 +186,6 @@ class UsersController extends AppController
         if (in_array($action, ['login', 'logout', 'view', 'edit'])) {
             return true;
         }
+        return parent::isAuthorized($user);
     }
 }

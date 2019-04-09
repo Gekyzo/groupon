@@ -13,9 +13,15 @@
     <h4><?= __('Todas las ofertas') ?></h4>
     <?php if (!empty($category->promotions)) : ?>
 
-    <?php foreach ($category->promotions as $promotions) : ?>
-    <?= $this->Element('promo', ['promo' => $promotions->toArray()]) ?>
+        <div class="row">
+            <?php foreach ($category->promotions as $promotion) : ?>
 
-    <?php endforeach; ?>
+                <div class="col-md-auto">
+                    <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
+                </div>
+
+
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
-</div> 
+</div>

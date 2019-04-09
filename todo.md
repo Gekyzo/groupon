@@ -3,7 +3,7 @@
 
 # GENERAL
 - [x] Implementar Auth usuarios (registro / login / proteger acciones) - 27/03/2019
-- [ ] Comprobar permisos en todas las acciones
+- [x] Comprobar permisos en todas las acciones - 09/04/2019
 - [ ] Implementar Markdown en la descripción de Categorías y Promociones
 
 # ESTILOS

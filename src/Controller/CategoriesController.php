@@ -36,8 +36,7 @@ class CategoriesController extends AppController
         $category = $this->Categories->get($id, [
             'contain' => ['Promotions']
         ]);
-
-        $this->set('category', $category);
+        $this->set(compact('category'));
     }
 
     /**
@@ -107,23 +106,20 @@ class CategoriesController extends AppController
     }
 
     /**
-     * Permisos para usarios CON SESIÓN INICIADA
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
      */
-    public function isAuthorized($user)
+    public function initialize()
     {
-        $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'view'])) {
-            return true;
-        }
-        return parent::isAuthorized($user);
+        parent::initialize();
+        $this->Auth->allow(['index', 'view']);
     }
 
     /**
-     * Permisos para usuarios SIN SESIÓN INICIADA
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
      */
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function isAuthorized($user)
     {
-        $this->Auth->allow('index');
-        parent::beforeFilter($event);
+        return parent::isAuthorized($user);
     }
 }

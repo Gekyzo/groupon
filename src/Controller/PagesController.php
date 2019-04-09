@@ -108,11 +108,12 @@ class PagesController extends AppController
     }
 
     /**
-     * Permisos para usuarios SIN SESIÓN INICIADA
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
      */
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function initialize()
     {
-        parent::beforeFilter($event);
+        parent::initialize();
         $this->Auth->allow('display');
     }
 
