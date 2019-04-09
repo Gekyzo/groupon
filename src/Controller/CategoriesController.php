@@ -107,23 +107,28 @@ class CategoriesController extends AppController
     }
 
     /**
-     * Permisos para usarios CON SESIÓN INICIADA
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
      */
-    public function isAuthorized($user)
+    public function beforeFilter($event)
     {
-        $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'view'])) {
-            return true;
-        }
-        return parent::isAuthorized($user);
+        debug('beforeFilter 2 START');
+        parent::beforeFilter($event);
+        $this->Auth->allow(['index', 'view']);
+        debug('beforeFilter 2 END');
     }
 
     /**
-     * Permisos para usuarios SIN SESIÓN INICIADA
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
      */
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function isAuthorized($user)
     {
-        $this->Auth->allow('index');
-        parent::beforeFilter($event);
+        debug('isAuthorized 2 START');
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['view'])) {
+            return true;
+        }
+        return parent::isAuthorized($user);
+        debug('isAuthorized 2 END');
     }
 }
