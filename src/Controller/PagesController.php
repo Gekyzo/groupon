@@ -110,7 +110,7 @@ class PagesController extends AppController
     /**
      * Permisos para usuarios SIN SESIÓN INICIADA
      */
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function beforeFilter($event)
     {
         parent::beforeFilter($event);
         $this->Auth->allow('display');
