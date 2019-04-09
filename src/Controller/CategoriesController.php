@@ -36,8 +36,7 @@ class CategoriesController extends AppController
         $category = $this->Categories->get($id, [
             'contain' => ['Promotions']
         ]);
-
-        $this->set('category', $category);
+        $this->set(compact('category'));
     }
 
     /**
