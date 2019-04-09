@@ -131,7 +131,7 @@ class OrdersController extends AppController
     }
 
     /**
-     * Permisos para usarios CON SESIÓN INICIADA
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
      */
     public function isAuthorized($user)
     {
