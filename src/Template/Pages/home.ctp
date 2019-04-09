@@ -5,7 +5,7 @@
  */
 ?>
 <h1>Proyecto Groupon</h1>
-<p>versión 0.3.0</p>
+<p>versión 0.4.0</p>
 
 <h2><?= __('Categorías') ?></h2>
 <div class="row justify-content-md-center">
