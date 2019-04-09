@@ -65,7 +65,8 @@ class AppController extends Controller
                 'action' => 'login'
             ],
             // If unauthorized, return them to page they were just on
-            'unauthorizedRedirect' => $this->referer()
+            'unauthorizedRedirect' => $this->referer(),
+
         ]);
 
         // Allow the display action so our PagesController
@@ -80,24 +81,24 @@ class AppController extends Controller
     }
 
     /**
-     * Restringir a los usuarios crear Promociones
+     * Creo la variable $currentUser para enviar a las vistas.
+     */
+    public function beforeFilter($event)
+    {
+        $user = $this->Auth->user();
+        $this->set('currentUser', $user);
+    }
+
+    /**
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
+     * Los usuarios con rol 'admin' tienen todos los permisos.
      */
     public function isAuthorized($user)
     {
-        // Sólo los usuarios administrador tienen todos los permisos
         if ($user['role'] === 'admin') {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Creo la variable $currentUser y la paso a las vistas para trabajar con las Layout
-     */
-    public function beforeFilter(\Cake\Event\Event $event)
-    {
-        $user = $this->Auth->user();
-        $this->set('currentUser', $user);
     }
 
     /**
