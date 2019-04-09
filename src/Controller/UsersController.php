@@ -158,7 +158,8 @@ class UsersController extends AppController
     }
 
     /**
-     * Initialize method
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
      */
     public function initialize()
     {

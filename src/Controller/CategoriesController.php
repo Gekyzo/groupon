@@ -109,9 +109,9 @@ class CategoriesController extends AppController
      * Defino permisos para cualquier visitante.
      * Incluye los UNLOGGED.
      */
-    public function beforeFilter($event)
+    public function initialize()
     {
-        parent::beforeFilter($event);
+        parent::initialize();
         $this->Auth->allow(['index', 'view']);
     }
 
