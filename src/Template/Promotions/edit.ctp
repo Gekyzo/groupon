@@ -18,6 +18,8 @@
         <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Images'), ['controller' => 'Images', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Image'), ['controller' => 'Images', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="promotions form large-9 medium-8 columns content">
@@ -29,10 +31,13 @@
             echo $this->Form->control('slug');
             echo $this->Form->control('price_old');
             echo $this->Form->control('price_new');
+            echo $this->Form->control('state');
             echo $this->Form->control('body');
-            echo $this->Form->control('available_since', ['empty' => true]);
-            echo $this->Form->control('available_until', ['empty' => true]);
+            echo $this->Form->control('available_since');
+            echo $this->Form->control('available_until');
+            echo $this->Form->control('deleted', ['empty' => true]);
             echo $this->Form->control('categories._ids', ['options' => $categories]);
+            echo $this->Form->control('images._ids', ['options' => $images]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -12,13 +12,6 @@ use App\Controller\AppController;
  */
 class CategoriesController extends AppController
 {
-
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('UploadImage');
-    }
-
     /**
      * Index method
      *
@@ -26,7 +19,8 @@ class CategoriesController extends AppController
      */
     public function index()
     {
-        $categories = $this->paginate($this->Categories, ['order' => ['name' => 'asc']]);
+        $categories = $this->paginate($this->Categories);
+
         $this->set(compact('categories'));
     }
 
@@ -42,8 +36,7 @@ class CategoriesController extends AppController
         $category = $this->Categories->get($id, [
             'contain' => ['Promotions']
         ]);
-
-        $this->set('category', $category);
+        $this->set(compact('category'));
     }
 
     /**
@@ -55,17 +48,13 @@ class CategoriesController extends AppController
     {
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            debug($data);
-            $this->UploadImage->mainUpload($data);
-            die;
-            $category = $this->Categories->patchEntity($category, $data);
+            $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('Categoría creada correctamente.'));
+                $this->Flash->success(__('The category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('No ha sido posible guardar la categoría.'));
+            $this->Flash->error(__('The category could not be saved. Please, try again.'));
         }
         $promotions = $this->Categories->Promotions->find('list', ['limit' => 200]);
         $this->set(compact('category', 'promotions'));
@@ -117,23 +106,20 @@ class CategoriesController extends AppController
     }
 
     /**
-     * Permisos para usarios CON SESIÓN INICIADA
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
      */
-    public function isAuthorized($user)
+    public function initialize()
     {
-        $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'view'])) {
-            return true;
-        }
-        return parent::isAuthorized($user);
+        parent::initialize();
+        $this->Auth->allow(['index', 'view']);
     }
 
     /**
-     * Permisos para usuarios SIN SESIÓN INICIADA
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
      */
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function isAuthorized($user)
     {
-        $this->Auth->allow('index');
-        parent::beforeFilter($event);
+        return parent::isAuthorized($user);
     }
 }

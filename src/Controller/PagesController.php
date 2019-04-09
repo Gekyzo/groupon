@@ -55,7 +55,35 @@ class PagesController extends AppController
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
-        $this->set(compact('page', 'subpage'));
+        /**
+         * Cargamos la lista de categorías y promociones
+         */
+        $this->loadModel('Categories');
+        $this->loadModel('Promotions');
+        $categories = $this->Categories->find('all')->toArray();
+        /**
+         * Opciones comunes para la query de promociones
+         */
+        $commonOptions = [
+            'conditions' => ['Promotions.state' => 'active'],
+            'order' => ['Promotions.id' => 'DESC', 'Promotions.available_since' => 'DESC'],
+            'limit' => 5
+        ];
+        /**
+         * Query de Últimas promociones
+         */
+        $customOptions = [];
+        $lastPromotions = $this->Promotions->find('all', $this->tempOptions($commonOptions, $customOptions))->toArray();
+        /**
+         * Query de Promociones destacadas
+         */
+        $customOptions = ['order' => ['rand()']];
+        $bestPromotions = $this->Promotions->find('all', $this->tempOptions($commonOptions, $customOptions))->toArray();
+
+        /**
+         * Mandamos datos a la vista
+         */
+        $this->set(compact('page', 'subpage', 'categories', 'lastPromotions', 'bestPromotions'));
 
         try {
             $this->render(implode('/', $path));
@@ -80,11 +108,28 @@ class PagesController extends AppController
     }
 
     /**
-     * Permisos para usuarios SIN SESIÓN INICIADA
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
      */
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function initialize()
     {
-        parent::beforeFilter($event);
+        parent::initialize();
         $this->Auth->allow('display');
+    }
+
+    /**
+     * Genera un array temporal de opciones para aplicar en una consulta find().
+     * Permite concatenar nuevos valores a una opción que ya existe, pero no sobreescribirlos.
+     * (en caso de querer sobreescribir, no sería una opción común)
+     * @param array ...$options Los arrays que vamos a mergear para crear las opciones
+     * @return array $tempOptions El array temporal con las opciones para la consulta
+     */
+    public function tempOptions(array ...$options): array
+    {
+        $tempOptions = [];
+        foreach ($options as $option) {
+            $tempOptions = array_merge_recursive($tempOptions, $option);
+        }
+        return $tempOptions;
     }
 }

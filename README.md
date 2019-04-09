@@ -2,6 +2,9 @@
 
 Proyecto tercera evaluación de la asignatura Programación para DAW.
 
-## PENDIENTE
+## Versiones
+[Listado de actualizaciones y cambios](changelog.md)
 
-[Tareas pendientes de realizar](todo.md)
+## Pendiente
+
+[Listado de tareas pendientes](todo.md)

@@ -5,95 +5,95 @@
  */
 ?>
 
-<?= $this->element('sub-nav') ?>
+<div class="container">
 
-<div class="container mt-3">
+    <div class="row">
 
-    <h3><?= h($promotion->name) ?></h3>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('Nombre') ?></dt>
-        <dd class="col-sm-9"><?= h($promotion->name) ?></dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('Slug') ?></dt>
-        <dd class="col-sm-9"><?= h($promotion->slug) ?></dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('ID') ?></dt>
-        <dd class="col-sm-9"><?= $this->Number->format($promotion->id) ?></dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('Precio original') ?></dt>
-        <dd class="col-sm-9"><?= $this->Number->format($promotion->price_old) ?></dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('Price con oferta') ?></dt>
-        <dd class="col-sm-9"><?= $this->Number->format($promotion->price_new) ?></dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('Disponible desde...') ?></dt>
-        <dd class="col-sm-9"><?= h($promotion->available_since) ?></dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('... hasta') ?></dt>
-        <dd class="col-sm-9"><?= h($promotion->available_until) ?></dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-3"><?= __('Creada') ?></dt>
-        <dd class="col-sm-9"><?= h($promotion->created) ?></dd>
-    </dl>
+        <div class="col">
+            <h1><?= h($promotion->name) ?></h1>
+            <div class="promo-gallery">
+                <img src="https://via.placeholder.com/600x300">
+                <?php if (!empty($promotion->images)) : ?>
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th scope="col"><?= __('Id') ?></th>
+                            <th scope="col"><?= __('Name') ?></th>
+                            <th scope="col"><?= __('Url') ?></th>
+                            <th scope="col"><?= __('Created') ?></th>
+                            <th scope="col"><?= __('Deleted') ?></th>
+                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($promotion->images as $images) : ?>
+                            <tr>
+                                <td><?= h($images->id) ?></td>
+                                <td><?= h($images->name) ?></td>
+                                <td><?= h($images->url) ?></td>
+                                <td><?= h($images->created) ?></td>
+                                <td><?= h($images->deleted) ?></td>
+                                <td class="actions">
+                                    <?= $this->Html->link(__('View'), ['controller' => 'Images', 'action' => 'view', $images->id]) ?>
+                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Images', 'action' => 'edit', $images->id]) ?>
+                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Images', 'action' => 'delete', $images->id], ['confirm' => __('Are you sure you want to delete # {0}?', $images->id)]) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php endif; ?>
+            </div>
+        </div>
 
-    <h4><?= __('Contenido') ?></h4>
+        <div class="col">
+            <?= $this->Html->link(__('Comprar'), ['controller' => 'orders', 'action' => 'confirm', $promotion->id], ['class' => 'btn btn-primary btn-block']) ?>
+            <h2><?= __('Detalles') ?></h2>
+            <p>
+                <?= __('Disponible hasta') . ' ' . h($promotion->available_until) ?>
+            </p>
+            <p>
+                <b><?= __('Consíguelo por') . ' ' . h($promotion->price_new) . '€.' ?></b>
+                <?= __('Precio original') . ' ' . h($promotion->price_old) . '€.' ?>
+            </p>
+            <p><?= __('Categorías') ?>:
+                <?php
+                /**
+                 * Printeamos todas las categorías a las que pertenece la promo
+                 */
+                foreach ($promotion->categories as $categories) {
+                    echo h($categories->name) . ', ';
+                }
+                ?>
+            </p>
+        </div>
+
+    </div>
+
     <?= $this->Text->autoParagraph(h($promotion->body)); ?>
 
-    <h4><?= __('Asignada a las categorías') ?></h4>
-    <?php if (!empty($promotion->categories)) : ?>
-    <table class="table">
-        <tr>
-            <th scope="col"><?= __('ID') ?></th>
-            <th scope="col"><?= __('Nombre') ?></th>
-            <th scope="col"><?= __('Slug') ?></th>
-            <th scope="col"><?= __('Imagen') ?></th>
-            <th scope="col" class="actions"><?= __('Acciones') ?></th>
-        </tr>
-        <?php foreach ($promotion->categories as $categories) : ?>
-        <tr>
-            <td><?= h($categories->id) ?></td>
-            <td><?= $this->Html->link(h($categories->name), ['controller' => 'Categories', 'action' => 'view', $categories->id]) ?></td>
-            <td><?= h($categories->slug) ?></td>
-            <td><?= h($categories->image) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('Editar'), ['controller' => 'Categories', 'action' => 'edit', $categories->id]) ?>
-                <?= $this->Form->postLink(__('Borrar'), ['controller' => 'Categories', 'action' => 'delete', $categories->id], ['confirm' => __('Seguro que quieres eliminar la categoría {0}?', $categories->name)]) ?>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-    <?php endif; ?>
-
-    <h4><?= __('Pedidos sobre la promoción') ?></h4>
+    <h2><?= __('Ofertas relacionadas') ?></h2>
     <?php if (!empty($promotion->orders)) : ?>
-    <table class="table">
-        <tr>
-            <th scope="col"><?= __('Id') ?></th>
-            <th scope="col"><?= __('Promotion Id') ?></th>
-            <th scope="col"><?= __('User Id') ?></th>
-            <th scope="col"><?= __('Created') ?></th>
-            <th scope="col" class="actions"><?= __('Actions') ?></th>
-        </tr>
-        <?php foreach ($promotion->orders as $orders) : ?>
-        <tr>
-            <td><?= h($orders->id) ?></td>
-            <td><?= h($orders->promotion_id) ?></td>
-            <td><?= h($orders->user_id) ?></td>
-            <td><?= h($orders->created) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('Editar'), ['controller' => 'Orders', 'action' => 'edit', $orders->id]) ?>
-                <?= $this->Form->postLink(__('Borrar'), ['controller' => 'Orders', 'action' => 'delete', $orders->id], ['confirm' => __('¿Seguro que quieres eliminar el pedido {0}?', $orders->id)]) ?>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Promotion Id') ?></th>
+                <th scope="col"><?= __('User Id') ?></th>
+                <th scope="col"><?= __('State') ?></th>
+                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($promotion->orders as $orders) : ?>
+                <tr>
+                    <td><?= h($orders->id) ?></td>
+                    <td><?= h($orders->promotion_id) ?></td>
+                    <td><?= h($orders->user_id) ?></td>
+                    <td><?= h($orders->state) ?></td>
+                    <td><?= h($orders->created) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['controller' => 'Orders', 'action' => 'view', $orders->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['controller' => 'Orders', 'action' => 'edit', $orders->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Orders', 'action' => 'delete', $orders->id], ['confirm' => __('Are you sure you want to delete # {0}?', $orders->id)]) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     <?php endif; ?>
 
-</div> 
+</div>

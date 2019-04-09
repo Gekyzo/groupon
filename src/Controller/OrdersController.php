@@ -12,7 +12,6 @@ use App\Controller\AppController;
  */
 class OrdersController extends AppController
 {
-
     /**
      * Index method
      *
@@ -53,17 +52,36 @@ class OrdersController extends AppController
     {
         $order = $this->Orders->newEntity();
         if ($this->request->is('post')) {
-            $order = $this->Orders->patchEntity($order, $this->request->getData());
+            $data = $this->request->getData();
+            $order = $this->Orders->patchEntity($order, $data);
             if ($this->Orders->save($order)) {
-                $this->Flash->success(__('The order has been saved.'));
+                $this->Flash->success(__('Gracias por realizar tu pedido.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'pages', 'action' => 'index']);
             }
-            $this->Flash->error(__('The order could not be saved. Please, try again.'));
+            $this->Flash->error(__('No ha sido posible realizar el pedido.'));
         }
-        $promotions = $this->Orders->Promotions->find('list', ['limit' => 200]);
-        $users = $this->Orders->Users->find('list', ['limit' => 200]);
-        $this->set(compact('order', 'promotions', 'users'));
+    }
+
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
+    public function confirm($promotionId)
+    {
+        /**
+         * Cargo el modelo de Promociones y mando únicamente los campos
+         * que me interesa utilizar en la vista
+         */
+        $this->loadModel('Promotions');
+        $promotion = $this->Promotions->get($promotionId, [
+            'fields' => ['id', 'name', 'price_old', 'price_new']
+        ]);
+        $promotion['saving'] = $promotion['price_old'] - $promotion['price_new'];
+        $promotion = $this->depure($promotion, ['id', 'name', 'saving']);
+        $order = $this->Orders->newEntity();
+        $this->set(compact('order', 'promotion'));
     }
 
     /**
@@ -113,13 +131,14 @@ class OrdersController extends AppController
     }
 
     /**
-     * Defino los permisos para  usuarios
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
      */
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'view'])) {
+        if (in_array($action, ['confirm', 'add'])) {
             return true;
         }
+        return parent::isAuthorized($user);
     }
 }

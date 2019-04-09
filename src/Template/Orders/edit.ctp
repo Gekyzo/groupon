@@ -27,6 +27,7 @@
         <?php
             echo $this->Form->control('promotion_id', ['options' => $promotions]);
             echo $this->Form->control('user_id', ['options' => $users]);
+            echo $this->Form->control('state');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

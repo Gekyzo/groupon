@@ -21,7 +21,9 @@ class PromotionsControllerTest extends TestCase
         'app.Promotions',
         'app.Orders',
         'app.Categories',
-        'app.CategoriesPromotions'
+        'app.Images',
+        'app.CategoriesPromotions',
+        'app.ImagesPromotions'
     ];
 
     /**

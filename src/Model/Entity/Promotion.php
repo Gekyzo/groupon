@@ -11,17 +11,19 @@ use Cake\ORM\Entity;
  * @property string $slug
  * @property float $price_old
  * @property float $price_new
+ * @property string|null $state
  * @property string $body
- * @property \Cake\I18n\FrozenTime|null $available_since
- * @property \Cake\I18n\FrozenTime|null $available_until
+ * @property \Cake\I18n\FrozenTime $available_since
+ * @property \Cake\I18n\FrozenTime $available_until
  * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime|null $deleted
  *
  * @property \App\Model\Entity\Order[] $orders
  * @property \App\Model\Entity\Category[] $categories
+ * @property \App\Model\Entity\Image[] $images
  */
 class Promotion extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -36,12 +38,14 @@ class Promotion extends Entity
         'slug' => true,
         'price_old' => true,
         'price_new' => true,
+        'state' => true,
         'body' => true,
         'available_since' => true,
         'available_until' => true,
         'created' => true,
         'deleted' => true,
         'orders' => true,
-        'categories' => true
+        'categories' => true,
+        'images' => true
     ];
 }

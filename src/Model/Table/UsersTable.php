@@ -15,7 +15,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\User|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\User|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\User saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
@@ -24,7 +24,6 @@ use Cake\Validation\Validator;
  */
 class UsersTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -44,6 +43,8 @@ class UsersTable extends Table
         $this->hasMany('Orders', [
             'foreignKey' => 'user_id'
         ]);
+
+        $this->addBehavior('Muffin/Trash.Trash');
     }
 
     /**
@@ -66,8 +67,9 @@ class UsersTable extends Table
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')            
-            ->allowEmptyString('email', false);            
+            ->requirePresence('email', 'create')
+            ->allowEmptyString('email', false)
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('password')
@@ -80,6 +82,15 @@ class UsersTable extends Table
             ->maxLength('role', 64)
             ->requirePresence('role', 'create')
             ->allowEmptyString('role', false);
+
+        $validator
+            ->scalar('state')
+            ->maxLength('state', 24)
+            ->allowEmptyString('state');
+
+        $validator
+            ->dateTime('last_active')
+            ->allowEmptyDateTime('last_active');
 
         $validator
             ->dateTime('deleted')
@@ -97,7 +108,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email'], __('Ya existe un usuario con este email.')));
+        $rules->add($rules->isUnique(['email']));
+
         return $rules;
     }
 }

@@ -22,6 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('promotion_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('state') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -32,6 +33,7 @@
                 <td><?= $this->Number->format($order->id) ?></td>
                 <td><?= $order->has('promotion') ? $this->Html->link($order->promotion->name, ['controller' => 'Promotions', 'action' => 'view', $order->promotion->id]) : '' ?></td>
                 <td><?= $order->has('user') ? $this->Html->link($order->user->name, ['controller' => 'Users', 'action' => 'view', $order->user->id]) : '' ?></td>
+                <td><?= h($order->state) ?></td>
                 <td><?= h($order->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $order->id]) ?>

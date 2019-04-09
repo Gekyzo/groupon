@@ -11,12 +11,13 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\OrdersTable|\Cake\ORM\Association\HasMany $Orders
  * @property \App\Model\Table\CategoriesTable|\Cake\ORM\Association\BelongsToMany $Categories
+ * @property \App\Model\Table\ImagesTable|\Cake\ORM\Association\BelongsToMany $Images
  *
  * @method \App\Model\Entity\Promotion get($primaryKey, $options = [])
  * @method \App\Model\Entity\Promotion newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Promotion[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\Promotion|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Promotion|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Promotion saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Promotion patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Promotion[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Promotion findOrCreate($search, callable $callback = null, $options = [])
@@ -25,7 +26,6 @@ use Cake\Validation\Validator;
  */
 class PromotionsTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -50,6 +50,13 @@ class PromotionsTable extends Table
             'targetForeignKey' => 'category_id',
             'joinTable' => 'categories_promotions'
         ]);
+        $this->belongsToMany('Images', [
+            'foreignKey' => 'promotion_id',
+            'targetForeignKey' => 'image_id',
+            'joinTable' => 'images_promotions'
+        ]);
+
+        $this->addBehavior('Muffin/Trash.Trash');
     }
 
     /**
@@ -87,25 +94,28 @@ class PromotionsTable extends Table
             ->allowEmptyString('price_new', false);
 
         $validator
+            ->scalar('state')
+            ->maxLength('state', 24)
+            ->allowEmptyString('state');
+
+        $validator
             ->scalar('body')
             ->requirePresence('body', 'create')
             ->allowEmptyString('body', false);
 
         $validator
             ->dateTime('available_since')
-            ->allowEmptyDateTime('available_since');
+            ->requirePresence('available_since', 'create')
+            ->allowEmptyDateTime('available_since', false);
 
         $validator
             ->dateTime('available_until')
-            ->allowEmptyDateTime('available_until');
-
-        $validator
-            ->dateTime('created')
-            ->allowEmptyDateTime('available_until');
+            ->requirePresence('available_until', 'create')
+            ->allowEmptyDateTime('available_until', false);
 
         $validator
             ->dateTime('deleted')
-            ->allowEmptyDateTime(true);
+            ->allowEmptyDateTime('deleted');
 
         return $validator;
     }

@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $promotion_id
  * @property int $user_id
+ * @property string|null $state
  * @property \Cake\I18n\FrozenTime $created
  *
  * @property \App\Model\Entity\Promotion $promotion
@@ -16,7 +17,6 @@ use Cake\ORM\Entity;
  */
 class Order extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -29,6 +29,7 @@ class Order extends Entity
     protected $_accessible = [
         'promotion_id' => true,
         'user_id' => true,
+        'state' => true,
         'created' => true,
         'promotion' => true,
         'user' => true

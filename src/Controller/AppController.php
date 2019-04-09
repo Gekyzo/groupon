@@ -65,7 +65,8 @@ class AppController extends Controller
                 'action' => 'login'
             ],
             // If unauthorized, return them to page they were just on
-            'unauthorizedRedirect' => $this->referer()
+            'unauthorizedRedirect' => $this->referer(),
+
         ]);
 
         // Allow the display action so our PagesController
@@ -80,23 +81,41 @@ class AppController extends Controller
     }
 
     /**
-     * Restringir a los usuarios crear Promociones
+     * Creo la variable $currentUser para enviar a las vistas.
+     */
+    public function beforeFilter($event)
+    {
+        $user = $this->Auth->user();
+
+        $this->set('currentUser', $user);
+    }
+
+    /**
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
+     * Los usuarios con rol 'admin' tienen todos los permisos.
      */
     public function isAuthorized($user)
     {
-        // Sólo los usuarios administrador tienen todos los permisos
         if ($user['role'] === 'admin') {
             return true;
         }
+
         return false;
     }
 
     /**
-     * Creo la variable $currentUser y la paso a las vistas para trabajar con las Layout
+     * Depura un objeto para que devuelva únicamente los campos que queramos
+     * @param $object | Object El objeto que vamos a depurar
+     * @param $fields | Array Los campos que queremos mantener
+     * @return $res | Array El array resultante con los campos indicados
      */
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function depure(Object $object, array $fields)
     {
-        $user = $this->Auth->user();
-        $this->set('currentUser', $user);
+        $object = $object->toArray();
+        $res = [];
+        foreach ($fields as $field) {
+            $res[$field] = $object[$field];
+        }
+        return $res;
     }
-} 
+}
