@@ -86,6 +86,7 @@ class AppController extends Controller
     public function beforeFilter($event)
     {
         $user = $this->Auth->user();
+
         $this->set('currentUser', $user);
     }
 
@@ -98,6 +99,7 @@ class AppController extends Controller
         if ($user['role'] === 'admin') {
             return true;
         }
+
         return false;
     }
 

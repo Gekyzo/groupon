@@ -1,8 +1,10 @@
 <div class="container">
     <h2><?= __('Categorías') ?></h2>
-    <table>
+    <div class="row justify-content-md-center">
         <?php foreach ($categories as $category) : ?>
-            <?= $this->Element('category', ['category' => $category]) ?>
+            <div class="col-md-auto">
+                <?= $this->Element('category', ['category' => $category]) ?>
+            </div>
         <?php endforeach; ?>
-    </table>
+    </div>
 </div>

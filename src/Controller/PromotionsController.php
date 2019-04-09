@@ -114,8 +114,8 @@ class PromotionsController extends AppController
      */
     public function beforeFilter($event)
     {
-
         parent::beforeFilter($event);
+
         $this->Auth->allow(['index', 'view']);
     }
 
@@ -128,6 +128,7 @@ class PromotionsController extends AppController
         if (in_array($action, ['addToCart'])) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 }
