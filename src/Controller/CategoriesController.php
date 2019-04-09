@@ -112,10 +112,8 @@ class CategoriesController extends AppController
      */
     public function beforeFilter($event)
     {
-        debug('beforeFilter 2 START');
         parent::beforeFilter($event);
         $this->Auth->allow(['index', 'view']);
-        debug('beforeFilter 2 END');
     }
 
     /**
@@ -123,12 +121,10 @@ class CategoriesController extends AppController
      */
     public function isAuthorized($user)
     {
-        debug('isAuthorized 2 START');
         $action = $this->request->getParam('action');
         if (in_array($action, ['view'])) {
             return true;
         }
         return parent::isAuthorized($user);
-        debug('isAuthorized 2 END');
     }
 }
