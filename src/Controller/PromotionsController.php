@@ -109,23 +109,25 @@ class PromotionsController extends AppController
     }
 
     /**
-     * Permisos para usarios CON SESIÓN INICIADA
+     * Defino permisos para cualquier visitante.
+     * Incluye los UNLOGGED.
+     */
+    public function beforeFilter($event)
+    {
+
+        parent::beforeFilter($event);
+        $this->Auth->allow(['index', 'view']);
+    }
+
+    /**
+     * Defino permisos para visitantes CON SESIÓN INICIADA.
      */
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'view', 'addToCart'])) {
+        if (in_array($action, ['addToCart'])) {
             return true;
         }
         return parent::isAuthorized($user);
-    }
-
-    /**
-     * Permisos para usuarios SIN SESIÓN INICIADA
-     */
-    public function beforeFilter(\Cake\Event\Event $event)
-    {
-        $this->Auth->allow('index');
-        parent::beforeFilter($event);
     }
 }
