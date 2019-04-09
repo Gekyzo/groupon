@@ -7,10 +7,12 @@ Listado de tareas pendientes.
 - [ ] Implementar Markdown en la descripción de Categorías y Promociones
 
 ### Estilos
+
 - [ ] Corregir la clase .error-message para que extienda .alert.alert-danger
 - [ ] Enlazar Font-awesome
 
 ## Promociones
+
 - [ ] Corregir vista::ADD
 
 ## Categorías
@@ -18,6 +20,7 @@ Listado de tareas pendientes.
 - [ ] Corregir vista::ADD
 
 ## Usuarios
+
 - [ ] Corregir vista::INDEX
 - [ ] Corregir vista::VIEW
 
