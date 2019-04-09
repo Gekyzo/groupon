@@ -22,7 +22,7 @@ class OrdersController extends AppController
         $this->paginate = [
             'contain' => ['Promotions', 'Users']
         ];
-        $orders = $this->paginate($this->Orders);
+        $orders = $this->paginate($this->Orders, ['order' => ['Orders.id' => 'DESC']]);
 
         $this->set(compact('orders'));
     }
