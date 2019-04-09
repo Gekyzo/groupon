@@ -1,11 +1,27 @@
-# BASE DE DATOS
-- [x] Crear tablas - 21/03/2019
+# Todo
 
-# GENERAL
-- [x] Implementar Auth usuarios (registro / login / proteger acciones) - 27/03/2019
-- [x] Comprobar permisos en todas las acciones - 09/04/2019
+Listado de tareas pendientes.
+
+## General
+
 - [ ] Implementar Markdown en la descripción de Categorías y Promociones
 
-# ESTILOS
+### Estilos
 - [ ] Corregir la clase .error-message para que extienda .alert.alert-danger
 - [ ] Enlazar Font-awesome
+
+## Promociones
+- [ ] Corregir vista::ADD
+
+## Categorías
+
+- [ ] Corregir vista::ADD
+
+## Usuarios
+- [ ] Corregir vista::INDEX
+- [ ] Corregir vista::VIEW
+
+## Pedidos
+
+- [ ] Corregir vista::INDEX
+- [ ] Corregir vista::VIEW
