@@ -13,9 +13,9 @@
     <h4><?= __('Todas las ofertas') ?></h4>
     <?php if (!empty($category->promotions)) : ?>
 
-    <?php foreach ($category->promotions as $promotions) : ?>
-    <?= $this->Element('promo', ['promo' => $promotions->toArray()]) ?>
+        <?php foreach ($category->promotions as $promotions) : ?>
+            <?= $this->Element('promotion', ['promo' => $promotions->toArray()]) ?>
 
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     <?php endif; ?>
-</div> 
+</div>
