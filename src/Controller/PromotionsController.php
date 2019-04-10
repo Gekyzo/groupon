@@ -49,7 +49,13 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
-            $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
+            $data = $this->request->getData();
+            /**
+             * Fix datetime-local format
+             */
+            $data['available_since'] = parent::convertDatetime($data['available_since']);
+            $data['available_until'] = parent::convertDatetime($data['available_until']);
+            $promotion = $this->Promotions->patchEntity($promotion, $data);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
 

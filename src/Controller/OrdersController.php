@@ -22,13 +22,15 @@ class OrdersController extends AppController
         $this->paginate = [
             'contain' => ['Promotions', 'Users']
         ];
-        $orders = $this->paginate($this->Orders);
+        $orders = $this->paginate($this->Orders, ['order' => ['Orders.id' => 'DESC']]);
 
         $this->set(compact('orders'));
     }
 
     /**
-     * View method
+     * Muestra la información del pedido que recoja como parámetro por URL.
+     * Sólo permite ver la información de un pedido para el usuario que lo realiza.
+     * Los usuarios con rol 'admin' también pueden ver cualquier pedido.     
      *
      * @param string|null $id Order id.
      * @return \Cake\Http\Response|void
@@ -37,10 +39,21 @@ class OrdersController extends AppController
     public function view($id = null)
     {
         $order = $this->Orders->get($id, [
-            'contain' => ['Promotions', 'Users']
+            'contain' => [
+                'Promotions', 'Users'
+            ]
         ]);
 
-        $this->set('order', $order);
+        /**
+         * Sólo permito que un usuario pueda ver sus propios pedidos.
+         */
+        $loggedUser = $this->viewVars['currentUser'];
+        if ($loggedUser['role'] !== 'admin' && $loggedUser['id'] !== $order->user_id) {
+            $this->Flash->error(__('No tiene permisos.'));
+            $this->redirect(['controller' => 'users', 'action' => 'profile']);
+        }
+
+        $this->set(compact('order'));
     }
 
     /**
@@ -136,9 +149,11 @@ class OrdersController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        if (in_array($action, ['confirm', 'add'])) {
+
+        if (in_array($action, ['confirm', 'add', 'view'])) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 }
