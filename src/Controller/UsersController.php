@@ -183,7 +183,14 @@ class UsersController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        if (in_array($action, ['login', 'logout', 'view', 'edit'])) {
+        $pass = $this->request->getParam('pass');
+        if (in_array($action, ['login', 'logout', 'edit'])) {
+            return true;
+        }
+        /**
+         * Los usuarios sólo pueden ver su propia ficha
+         */
+        if ($action === 'view' && (int)$pass[0] === $user['id']) {
             return true;
         }
         return parent::isAuthorized($user);

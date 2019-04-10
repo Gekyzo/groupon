@@ -57,18 +57,18 @@ $cakeDescription = 'Ciropon';
                     <?= $this->Html->link(__('Promociones'), ['controller' => 'promotions', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?= $this->Html->link(__('Categorías'), ['controller' => 'categories', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?php if (isset($currentUser) && $currentUser['role'] === 'admin') : ?>
-                    <?= $this->Html->link(__('Usuarios'), ['controller' => 'users', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
-                    <?= $this->Html->link(__('Pedidos'), ['controller' => 'orders', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
+                        <?= $this->Html->link(__('Usuarios'), ['controller' => 'users', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
+                        <?= $this->Html->link(__('Pedidos'), ['controller' => 'orders', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?php endif; ?>
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <?php if (isset($currentUser)) : ?>
-                <li class="nav-item nav-link">Hola <?= $currentUser['name'] ?></li>
-                <li class="nav-item nav-link"><?= $this->Html->link(__('Salir'), ['controller' => 'users', 'action' => 'logout'], ['confirm' => '¿Estás seguro de que quieres salir?']) ?></li>
+                    <li class="nav-item nav-link">Hola <?= $this->Html->link(h($currentUser['name']), ['controller' => 'users', 'action' => 'view', $currentUser['id']]) ?></li>
+                    <li class="nav-item nav-link"><?= $this->Html->link(__('Salir'), ['controller' => 'users', 'action' => 'logout'], ['confirm' => '¿Estás seguro de que quieres salir?']) ?></li>
                 <?php else : ?>
-                <li class="nav-item nav-link"><?= $this->Html->link(__('Registro'), ['controller' => 'users', 'action' => 'add']) ?></li>
-                <li class="nav-item nav-link"><?= $this->Html->link(__('Entrar'), ['controller' => 'users', 'action' => 'login']) ?></li>
+                    <li class="nav-item nav-link"><?= $this->Html->link(__('Registro'), ['controller' => 'users', 'action' => 'add']) ?></li>
+                    <li class="nav-item nav-link"><?= $this->Html->link(__('Entrar'), ['controller' => 'users', 'action' => 'login']) ?></li>
                 <?php endif; ?>
             </ul>
         </nav>
@@ -81,4 +81,4 @@ $cakeDescription = 'Ciropon';
 
 </body>
 
-</html> 
+</html>
