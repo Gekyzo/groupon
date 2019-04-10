@@ -36,11 +36,20 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+        /**
+         * Incluyo en la query la 'información de la promoción asociada' a cada pedido para
+         * poder mostrar en la vista el 'nombre de la promoción' en lugar de la 'ID'.
+         */
         $user = $this->Users->get($id, [
-            'contain' => ['Orders']
+            'contain' => [
+                'Orders' => [
+                    'Promotions',
+                    'sort' => ['Orders.id' => 'DESC']
+                ]
+            ]
         ]);
 
-        $this->set('user', $user);
+        $this->set(compact(['user']));
     }
 
     /**

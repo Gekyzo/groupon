@@ -14,18 +14,13 @@ Listado de tareas pendientes.
 
 ## Promociones
 
-- [ ] Corregir vista::ADD
 
 ## Categorías
 
-- [ ] Corregir vista::ADD
 
 ## Usuarios
 
-- [ ] Corregir vista::INDEX
-- [ ] Corregir vista::VIEW
 
 ## Pedidos
 
-- [ ] Corregir vista::INDEX
 - [ ] Corregir vista::VIEW
