@@ -64,7 +64,11 @@ $cakeDescription = 'Ciropon';
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <?php if (isset($currentUser)) : ?>
-                    <li class="nav-item nav-link">Hola <?= $this->Html->link(h($currentUser['name']), ['controller' => 'users', 'action' => 'view', $currentUser['id']]) ?></li>
+                    <li class="nav-item nav-link">
+                        <?php if ($currentUser['role'] !== 'admin') : ?>
+                            Hola <?= $this->Html->link(h($currentUser['name']), ['controller' => 'users', 'action' => 'profile']) ?>
+                        <?php endif; ?>
+                    </li>
                     <li class="nav-item nav-link"><?= $this->Html->link(__('Salir'), ['controller' => 'users', 'action' => 'logout'], ['confirm' => '¿Estás seguro de que quieres salir?']) ?></li>
                 <?php else : ?>
                     <li class="nav-item nav-link"><?= $this->Html->link(__('Registro'), ['controller' => 'users', 'action' => 'add']) ?></li>

@@ -4,6 +4,9 @@ Listado de actualizaciones y cambios realizados en el proyecto.
 
 ## 0.5.0
 
+## General
+- [x] Muevo permisos para acciones específicas de usuario de la función isAuthorized a nivel de cada acción - 10/04/2019
+
 ## Usuarios
 
 - [x] Corregir vista::VIEW - 10/04/2019

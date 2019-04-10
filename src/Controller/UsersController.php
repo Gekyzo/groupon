@@ -28,7 +28,8 @@ class UsersController extends AppController
     }
 
     /**
-     * View method
+     * Muestra la información del usuario que recoja como parámetro por URL.
+     * Acción restringida para rol 'admin'
      *
      * @param string|null $id User id.
      * @return \Cake\Http\Response|void
@@ -41,6 +42,28 @@ class UsersController extends AppController
          * poder mostrar en la vista el 'nombre de la promoción' en lugar de la 'ID'.
          */
         $user = $this->Users->get($id, [
+            'contain' => [
+                'Orders' => [
+                    'Promotions',
+                    'sort' => ['Orders.id' => 'DESC']
+                ]
+            ]
+        ]);
+
+        $this->set(compact(['user']));
+    }
+
+    /**
+     * Muestra la información de perfil para el usuario conectado.     
+     */
+    public function profile()
+    {
+        /**
+         * Incluyo en la query la 'información de la promoción asociada' a cada pedido para
+         * poder mostrar en la vista el 'nombre de la promoción' en lugar de la 'ID'.
+         */
+        $profileUserID = $this->viewVars['currentUser']['id'];
+        $user = $this->Users->get($profileUserID, [
             'contain' => [
                 'Orders' => [
                     'Promotions',
@@ -192,14 +215,7 @@ class UsersController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        $pass = $this->request->getParam('pass');
-        if (in_array($action, ['login', 'logout', 'edit'])) {
-            return true;
-        }
-        /**
-         * Los usuarios sólo pueden ver su propia ficha
-         */
-        if ($action === 'view' && (int)$pass[0] === $user['id']) {
+        if (in_array($action, ['login', 'logout', 'edit', 'profile'])) {
             return true;
         }
         return parent::isAuthorized($user);
