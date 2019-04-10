@@ -47,13 +47,12 @@ $cakeDescription = 'Ciropon';
     <div class="container">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Ciropon</a>
+            <?= $this->Html->link('Ciropon', ['controller' => 'pages', 'action' => 'display'], ['class' => 'navbar-brand']) ?>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <?= $this->Html->link(__('Inicio'), ['controller' => 'pages', 'action' => 'display'], ['class' => 'nav-item nav-link']) ?>
                     <?= $this->Html->link(__('Promociones'), ['controller' => 'promotions', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?= $this->Html->link(__('Categorías'), ['controller' => 'categories', 'action' => 'index'], ['class' => 'nav-item nav-link']) ?>
                     <?php if (isset($currentUser) && $currentUser['role'] === 'admin') : ?>
