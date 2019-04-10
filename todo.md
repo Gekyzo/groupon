@@ -23,4 +23,3 @@ Listado de tareas pendientes.
 
 ## Pedidos
 
-- [ ] Corregir vista::VIEW
