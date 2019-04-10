@@ -37,10 +37,12 @@ class OrdersController extends AppController
     public function view($id = null)
     {
         $order = $this->Orders->get($id, [
-            'contain' => ['Promotions', 'Users']
+            'contain' => [
+                'Promotions', 'Users'
+            ]
         ]);
 
-        $this->set('order', $order);
+        $this->set(compact('order'));
     }
 
     /**
@@ -136,9 +138,24 @@ class OrdersController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
+        $pass = $this->request->getParam('pass');
+
         if (in_array($action, ['confirm', 'add'])) {
             return true;
         }
+
+        /**
+         * Los usuarios sólo pueden ver su propia ficha
+         */
+        $order = $this->Orders->get($pass, [
+            'contain' => [
+                'Promotions', 'Users'
+            ]
+        ]);
+        if (($action === 'view') && ($user['id'] === (int)$order->user_id)) {
+            return true;
+        }
+
         return parent::isAuthorized($user);
     }
 }
