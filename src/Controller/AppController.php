@@ -118,4 +118,12 @@ class AppController extends Controller
         }
         return $res;
     }
+
+    /**
+     * Fix formato de campos datetime-local para insertar en BD MySQL
+     */
+    public function convertDatetime(String $datetime): String
+    {
+        return str_replace('T', ' ', $datetime);
+    }
 }

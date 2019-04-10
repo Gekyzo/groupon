@@ -4,27 +4,30 @@
  * @var \App\Model\Entity\Category $category
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Promotions'), ['controller' => 'Promotions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Promotion'), ['controller' => 'Promotions', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="categories form large-9 medium-8 columns content">
+<div class="container">
     <?= $this->Form->create($category) ?>
     <fieldset>
-        <legend><?= __('Add Category') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('slug');
-            echo $this->Form->control('state');
-            echo $this->Form->control('body');
-            echo $this->Form->control('image');
-            echo $this->Form->control('promotions._ids', ['options' => $promotions]);
-        ?>
+        <legend><?= __('Añadir categoría') ?></legend>
+        <div class="form-group row">
+            <div class="col">
+                <?= $this->Form->control('name', ['label' => false, 'placeholder' => 'Nombre', 'class' => 'form-control']); ?>
+            </div>
+            <div class="col">
+                <?= $this->Form->control('slug', ['label' => false, 'placeholder' => 'Slug', 'class' => 'form-control']); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('state', ['label' => false, 'empty' => '- Estado', 'default' => 'active', 'options' => ['active' => 'Activo', 'inactive' => 'Inactivo'], 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('body', ['label' => false, 'placeholder' => 'Descripción', 'class' => 'form-control']); ?>
+        </div>
+        <?= $this->Form->control('image') ?>
+        <?= $this->Form->control('promotions._ids', ['label' => 'Incluir promociones', 'options' => $promotions, 'class' => 'form-control']) ?>
+        <div class="btn-group col-sm-12 mt-2" role="group">
+            <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary mr-2']) ?>
+            <?= $this->Form->button(__('Borrar'), ['type' => 'reset', 'class' => 'btn btn-secondary ml-2']) ?>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
