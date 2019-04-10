@@ -4,9 +4,6 @@ namespace App\Controller\Component;
 use Cake\Core\Configure;
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
-use Cake\Filesystem\Folder;
-use Cake\Filesystem\File;
-use Cake\Log\Log;
 
 /**
  * Uploadimage component
@@ -21,66 +18,43 @@ class UploadimageComponent extends Component
      */
     protected $_defaultConfig = [];
 
+
     /**
-     * Listado de carpetas necesarias para almacenar imágenes de la aplicación
-     * @var array
+     * Lista de componentes requeridos
      */
-    private $requiredFolders = ['categories', 'promotions'];
+    public $components = ['Files', 'Folders'];
+
 
     /**
      * Método principal
+     * @param string $folderName El nombre de la carpeta donde se va a incluir el archivo.
+     * @param string $data Los datos del archivo.     
      */
-    public function mainUpload()
+    public function mainUpload($folderName, $data)
     {
-        foreach ($this->requiredFolders as $folder) {
-            debug($folder);
-            die;
-            if (self::checkFolderExists($folder)) {
-                echo $folder . ' SÍ Existe';
-            } else {
-                echo $folder . ' NO Existe';
-            }
+        /**
+         * Switch relacional entre el slug de la carpeta y el nombre real del directorio.
+         */
+        switch ($folderName) {
+            case 'Category':
+                $folderName = 'categories';
+                break;
+            default:
+                return false;
+                break;
         }
-    }
+        $folderName = Configure::read('Fol.images') . $folderName . '\\';
 
-    /**
-     * Funciones privadas a ejecutar por mainUpload()
-     */
-
-    /**
-     * Comprobar si existe una determinada carpeta a través del atributo 'path' de * la clase de Cake 'Folder'
-     */
-    private function checkFolderExists(...$folders)
-    {
-        foreach ($folders[0] as $folder) {
-            $newFolderDir = Configure::read('Fol.images') . $folder . '\\';
-            $folderDir = new Folder($newFolderDir);
-            if ($folderDir->path) {
-                return true;
+        /**
+         * Creamos la carpeta en caso de que no exista
+         */
+        try {
+            if (!$this->Folders->checkFolderExists($folderName)) {
+                $this->Folders->createFolders($folderName);
             }
-            return false;
-        }
-    }
-
-    /**
-     *   
-     * Creo las carpetas que require la aplicación para su funcionamiento
-     * @param array $folders El nombre de una o múltiples carpetas
-     * @see https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list
-     */
-    private function createFolders(...$folders)
-    {
-        foreach ($folders[0] as $folder) {
-            $newFolderDir = Configure::read('Fol.images') . $folder . '\\';
-            $folderDir = new Folder($newFolderDir);
-            if (!self::checkFolderExists($folderDir)) {
-                try {
-                    $folderDir->create($newFolderDir);
-                    Log::info('Creación de la carpeta ' . $newFolderDir, ['folder']);
-                } catch (Exception $e) {
-                    Log::error('No ha sido posible crear la carpeta' . $newFolderDir . '. Error: ' . $e, ['folder']);
-                }
-            }
+            $this->Files->moveFile($folderName, $data);
+        } catch (Exception $e) {
+            debug($e);
         }
     }
 }

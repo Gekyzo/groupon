@@ -5,7 +5,7 @@
  */
 ?>
 <div class="container">
-    <?= $this->Form->create($category) ?>
+    <?= $this->Form->create($category, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Añadir categoría') ?></legend>
         <div class="form-group row">
@@ -22,7 +22,10 @@
         <div class="form-group">
             <?= $this->Form->control('body', ['label' => false, 'placeholder' => 'Descripción', 'class' => 'form-control']); ?>
         </div>
-        <?= $this->Form->control('image') ?>
+
+        <div class="form-group">
+            <?= $this->Form->control('image', ['type' => 'file', 'class' => 'form-control']) ?>
+        </div>
         <?= $this->Form->control('promotions._ids', ['label' => 'Incluir promociones', 'options' => $promotions, 'class' => 'form-control']) ?>
         <div class="btn-group col-sm-12 mt-2" role="group">
             <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary mr-2']) ?>

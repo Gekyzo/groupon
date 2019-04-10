@@ -81,7 +81,7 @@ class CategoriesTable extends Table
             ->scalar('image')
             ->maxLength('image', 512)
             ->requirePresence('image', 'create')
-            ->allowEmptyFile('image', false);
+            ->allowEmptyFile('image', true);
 
         return $validator;
     }
