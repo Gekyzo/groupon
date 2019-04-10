@@ -6,7 +6,7 @@
 ?>
 
 <div class="container">
-    <?= $this->Form->create($promotion) ?>
+    <?= $this->Form->create($promotion, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Añadir promoción') ?></legend>
         <div class="form-group row">
@@ -33,14 +33,18 @@
         </div>
         <div class="form-group row">
             <div class="col">
-                <?= $this->Form->input('available_since', ['type' => 'datetime-local', 'class' => 'form-control']); ?>
+                <?= $this->Form->input(__('Disponible desde'), ['type' => 'datetime-local', 'class' => 'form-control']); ?>
             </div>
             <div class="col">
-                <?= $this->Form->control('available_until', ['type' => 'datetime-local', 'class' => 'form-control']); ?>
+                <?= $this->Form->control(__('Disponible hasta'), ['type' => 'datetime-local', 'class' => 'form-control']); ?>
             </div>
         </div>
-        <?= $this->Form->control('categories._ids', ['options' => $categories, 'class' => 'form-control']); ?>
-        <?= $this->Form->control('images._ids', ['options' => $images]); ?>
+        <div class="form-group">
+            <?= $this->Form->control('categories._ids', ['options' => $categories, 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('images._ids[]', ['label' => __('Imágenes'), 'type' => 'file', 'multiple' => 'multiple', 'class' => 'form-control']) ?>
+        </div>
         <div class="btn-group col-sm-12" role="group">
             <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary mr-2']) ?>
             <?= $this->Form->button(__('Borrar'), ['class' => 'btn btn-secondary ml-2']) ?>

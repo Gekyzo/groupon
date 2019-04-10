@@ -50,6 +50,8 @@ class PromotionsController extends AppController
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
+            debug($data);
+            die;
             /**
              * Fix datetime-local format
              */

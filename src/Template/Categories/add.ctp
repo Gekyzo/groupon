@@ -22,7 +22,6 @@
         <div class="form-group">
             <?= $this->Form->control('body', ['label' => false, 'placeholder' => 'Descripción', 'class' => 'form-control']); ?>
         </div>
-
         <div class="form-group">
             <?= $this->Form->control('image', ['type' => 'file', 'class' => 'form-control']) ?>
         </div>
