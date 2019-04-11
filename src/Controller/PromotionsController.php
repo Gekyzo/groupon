@@ -20,7 +20,7 @@ class PromotionsController extends AppController
      */
     public function index()
     {
-        $promotions = $this->paginate($this->Promotions);
+        $promotions = $this->paginate($this->Promotions, ['contain' => ['Images']]);
 
         $this->set(compact('promotions'));
     }
@@ -67,7 +67,7 @@ class PromotionsController extends AppController
              * Paso la variable '$imagen' por referencia con el prefijo '&'
              */
             foreach ($data['images'] as &$imagen) {
-                $imagen['path'] = Configure::read('Fol.images') . 'promotions/' . $imagen['name'];
+                $imagen['path'] = '\\' . Configure::read('Fol.images') . 'promotions\\' . $imagen['name'];
             }
             $promotion = $this->Promotions->patchEntity($promotion, $data);
             if ($this->Promotions->save($promotion)) {
