@@ -68,6 +68,6 @@ class ImagesComponent extends Component
      */
     public function getAbsolutePath($folderName, $fileName)
     {
-        return $folderName . $fileName;
+        return WWW_ROOT . $folderName . $fileName;
     }
 }

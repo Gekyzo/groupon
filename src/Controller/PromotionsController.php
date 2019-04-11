@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\Core\Configure;
 use App\Controller\AppController;
 
 /**
@@ -66,7 +67,7 @@ class PromotionsController extends AppController
              * Paso la variable '$imagen' por referencia con el prefijo '&'
              */
             foreach ($data['images'] as &$imagen) {
-                $imagen['path'] = 'promotions/' . $imagen['name'];
+                $imagen['path'] = Configure::read('Fol.images') . 'promotions/' . $imagen['name'];
             }
             $promotion = $this->Promotions->patchEntity($promotion, $data);
             if ($this->Promotions->save($promotion)) {
