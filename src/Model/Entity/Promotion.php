@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Utility\Inflector;
 
 /**
  * Promotion Entity
@@ -35,7 +36,6 @@ class Promotion extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'slug' => true,
         'price_old' => true,
         'price_new' => true,
         'state' => true,
@@ -48,4 +48,13 @@ class Promotion extends Entity
         'categories' => true,
         'images' => true
     ];
+
+    /**
+     * Creo campo virtual 'slug', combinando la id y el nombre con Inflector
+     */
+    protected $_virtual = ['slug'];
+    protected function _getSlug()
+    {
+        return strtolower(Inflector::slug($this->id . '-' . $this->name));
+    }
 }

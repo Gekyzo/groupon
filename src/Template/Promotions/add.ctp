@@ -13,9 +13,6 @@
             <div class="col">
                 <?= $this->Form->control('name', ['label' => false, 'placeholder' => 'Nombre', 'class' => 'form-control']); ?>
             </div>
-            <div class="col">
-                <?= $this->Form->control('slug', ['label' => false, 'placeholder' => 'Slug', 'class' => 'form-control']); ?>
-            </div>
         </div>
         <div class="form-group row">
             <div class="col">

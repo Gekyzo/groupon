@@ -14,22 +14,6 @@ Listado de tareas pendientes.
 
 ## Promociones
 
-### Add
-
-- [ ] Slug automático
-
 ### Images
 
 - [ ] Poder definir imagen principal de la promo
-
-## Categorías
-
-### Add
-
-- [ ] Slug automático 
-
-## Usuarios
-
-
-## Pedidos
-

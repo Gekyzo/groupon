@@ -12,7 +12,7 @@
                 ['action' => 'delete', $category->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Categories'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Promotions'), ['controller' => 'Promotions', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Promotion'), ['controller' => 'Promotions', 'action' => 'add']) ?></li>
@@ -23,12 +23,11 @@
     <fieldset>
         <legend><?= __('Edit Category') ?></legend>
         <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('slug');
-            echo $this->Form->control('state');
-            echo $this->Form->control('body');
-            echo $this->Form->control('image');
-            echo $this->Form->control('promotions._ids', ['options' => $promotions]);
+        echo $this->Form->control('name');
+        echo $this->Form->control('state');
+        echo $this->Form->control('body');
+        echo $this->Form->control('image');
+        echo $this->Form->control('promotions._ids', ['options' => $promotions]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

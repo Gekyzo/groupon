@@ -6,12 +6,16 @@ Listado de actualizaciones y cambios realizados en el proyecto.
 
 ### Categorías
 
+- [x] Modifico campo Slug en la BD. Lo genero de forma virtual - 11/04/2019
+- [x] Incluir link en la imagen - 11/04/2019
 - [x] Corregir vista::INDEX para que muestre la imagen - 11/04/2019
 - [x] Implemento creación de carpetas - 10/04/2019
 - [x] Implemento subida de imágenes - 10/04/2019
 
 ### Promociones
 
+- [x] Modifico campo Slug en la BD. Lo genero de forma virtual - 11/04/2019
+- [x] Incluir link en la imagen - 11/04/2019
 - [x] Corregir vista::INDEX para que incluya la imagen de la promoción y la muestre - 11/04/2019
 - [x] Implemento subida de múltiples imágenes - 11/04/2019
 
