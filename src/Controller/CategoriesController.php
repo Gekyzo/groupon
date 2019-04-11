@@ -28,15 +28,19 @@ class CategoriesController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Category id.
+     * @param string|null $name Category name.
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($name)
     {
-        $category = $this->Categories->get($id, [
-            'contain' => ['Promotions']
-        ]);
+        $category = $this->Categories->find('all', [
+            'conditions' => [
+                'LOWER(Categories.name) LIKE' => $name,
+            ],
+            'contain' => ['Promotions' => ['Images']]
+        ])->first();
+
         $this->set(compact('category'));
     }
 

@@ -2,7 +2,7 @@
 /**
  * Enlace a la categoría
  */
-$catLink = ['controller' => 'categories', 'action' => 'view', $category->id];
+$catLink = ['controller' => 'categories', 'action' => 'view', $category->slug];
 ?>
 
 <div class="card text-center">

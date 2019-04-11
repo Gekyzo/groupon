@@ -16,30 +16,6 @@
             <th scope="row"><?= __('Email') ?></th>
             <td><?= h($user->email) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Rol') ?></th>
-            <td><?= h($user->role) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Estado') ?></th>
-            <td><?= h($user->state) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('ID') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Fecha última actividad') ?></th>
-            <td><?= h($user->last_active) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Fecha creación') ?></th>
-            <td><?= h($user->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Fecha borrado') ?></th>
-            <td><?= h($user->deleted) ?></td>
-        </tr>
     </table>
 
     <h2><?= __('Pedidos realizados') ?></h2>
@@ -61,7 +37,7 @@
                     <?php if ($currentUser['role'] === 'admin') : ?>
                         <td><?= h($orders->id) ?></td>
                     <?php endif; ?>
-                    <td><?= $this->Html->link(h($orders->promotion->name), ['controller' => 'Orders', 'action' => 'view', $orders->id]) ?></td>
+                    <td><?= $this->Html->link(h($orders->promotion->name), ['controller' => 'Promotions', 'action' => 'view', $orders->promotion->slug]) ?></td>
                     <td><?= h($orders->state) ?></td>
                     <td><?= h($orders->created) ?></td>
                     <?php if ($currentUser['role'] === 'admin') : ?>

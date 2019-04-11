@@ -70,6 +70,28 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     /**
+     * User friendly custom routes
+     */
+
+    /* Promociones */
+    $routes->connect('/promociones/', ['controller' => 'promotions', 'action' => 'index']);
+    $routes->connect('/promociones/crear', ['controller' => 'promotions', 'action' => 'add']);
+    $routes->connect('/promocion/*', ['controller' => 'promotions', 'action' => 'view']);
+
+    /* Categorías */
+    $routes->connect('/categorias/', ['controller' => 'categories', 'action' => 'index']);
+    $routes->connect('/categorias/crear', ['controller' => 'categories', 'action' => 'add']);
+    $routes->connect('/categoria/*', ['controller' => 'categories', 'action' => 'view']);
+
+    /* Usuarios */
+    $routes->connect('/usuarios/', ['controller' => 'users', 'action' => 'index']);
+    $routes->connect('/usuario/perfil', ['controller' => 'users', 'action' => 'profile']);
+
+    /* Pedidos */
+    $routes->connect('/pedidos/', ['controller' => 'orders', 'action' => 'index']);
+    $routes->connect('/pedidos/crear', ['controller' => 'orders', 'action' => 'add']);
+    $routes->connect('/pedidos/confirmar/*', ['controller' => 'orders', 'action' => 'confirm']);
+    /**
      * Connect catchall routes for all controllers.
      *
      * Using the argument `DashedRoute`, the `fallbacks` method is a shortcut for

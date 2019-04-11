@@ -28,15 +28,20 @@ class PromotionsController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Promotion id.
+     * @param string|null $slug Promotion slug.
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($slug)
     {
-        $promotion = $this->Promotions->get($id, [
-            'contain' => ['Categories', 'Images', 'Orders']
-        ]);
+        $id = $this->getIdFromUrl($slug);
+
+        $promotion = $this->Promotions->find('all', [
+            'conditions' => [
+                'Promotions.id =' => $id
+            ],
+            'contain' => ['Categories']
+        ])->first();
 
         $this->set('promotion', $promotion);
     }
@@ -148,5 +153,17 @@ class PromotionsController extends AppController
         }
 
         return parent::isAuthorized($user);
+    }
+
+    /**
+     * Devuelve la id para cargar la vista de una carpeta/documento
+     * e.g. $url = 1-primer-documento; devuelve 1
+     * @param string $url La ruta de la página actual.
+     * @return id
+     */
+    public function getIdFromUrl($url)
+    {
+        $length = strpos($url, '-') ? strpos($url, '-') : strlen($url);
+        return substr($url, 0, $length);
     }
 }

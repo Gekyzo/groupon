@@ -2,7 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\Utility\Inflector;
+use Cake\Utility\Text;
 
 /**
  * Promotion Entity
@@ -55,6 +55,6 @@ class Promotion extends Entity
     protected $_virtual = ['slug'];
     protected function _getSlug()
     {
-        return strtolower(Inflector::slug($this->id . '-' . $this->name));
+        return strtolower(Text::slug($this->id . '-' . $this->name));
     }
 }

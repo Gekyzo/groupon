@@ -2,7 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\Utility\Inflector;
+use Cake\Utility\Text;
 
 /**
  * Category Entity
@@ -41,6 +41,6 @@ class Category extends Entity
     protected $_virtual = ['slug'];
     protected function _getSlug()
     {
-        return strtolower(Inflector::slug($this->id . '-' . $this->name));
+        return strtolower(Text::slug($this->name));
     }
 }

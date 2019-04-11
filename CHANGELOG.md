@@ -2,6 +2,12 @@
 
 Listado de actualizaciones y cambios realizados en el proyecto.
 
+## 0.7.3
+
+### General
+
+- [x] Rutas user-friendly - 11/04/2019
+
 ## 0.6.0
 
 ### Categorías
