@@ -1,8 +1,22 @@
+<?php
+/**
+ * Enlace a la promoción
+ */
+$promoLink = ['controller' => 'promotions', 'action' => 'view', $promotion->id];
+?>
+
 <div class="card text-center">
-    <img class="card-img-top" src="<?= $promotion->images[0]->path ?>" alt="Card image cap">
+    <?= $this->Html->link(
+        $this->Html->image(
+            'promotions/' . $promotion->images[0]->name,
+            ['alt' => __('Imagen promoción'), 'class' => 'card-img-top']
+        ),
+        $promoLink,
+        ['escape' => false]
+    ) ?>
     <div class="card-body">
-        <h5 class="card-title"><?= $promotion->name ?></h5>
+        <h5 class="card-title"><?= $this->Html->link($promotion->name, $promoLink) ?></h5>
         <p class="card-text"><?= $promotion->body ?></p>
-        <?= $this->Html->link(__('Comprar ya'), ['controller' => 'promotions', 'action' => 'view', $promotion->id], ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Comprar ya'), $promoLink, ['class' => 'btn btn-primary']) ?>
     </div>
 </div>
