@@ -49,9 +49,13 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
+            /**
+             * Intentamos subir las imágenes de la promoción
+             */
+            $this->loadComponent('UploadImage');
             $data = $this->request->getData();
-            debug($data);
-            die;
+            $files = $data['images'];
+            $this->UploadImage->mainUpload('Promotion', $files);
             /**
              * Fix datetime-local format
              */
@@ -60,7 +64,6 @@ class PromotionsController extends AppController
             $promotion = $this->Promotions->patchEntity($promotion, $data);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The promotion could not be saved. Please, try again.'));

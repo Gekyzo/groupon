@@ -27,7 +27,7 @@ class Image extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'url' => true,
+        'path' => true,
         'created' => true,
         'deleted' => true,
         'promotions' => true

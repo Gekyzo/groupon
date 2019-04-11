@@ -33,17 +33,17 @@
         </div>
         <div class="form-group row">
             <div class="col">
-                <?= $this->Form->input(__('Disponible desde'), ['type' => 'datetime-local', 'class' => 'form-control']); ?>
+                <?= $this->Form->input('available_since', ['label' => __('Disponible desde'), 'type' => 'datetime-local', 'class' => 'form-control']); ?>
             </div>
             <div class="col">
-                <?= $this->Form->control(__('Disponible hasta'), ['type' => 'datetime-local', 'class' => 'form-control']); ?>
+                <?= $this->Form->control('available_until', ['label' => __('Disponible hasta'), 'type' => 'datetime-local', 'class' => 'form-control']); ?>
             </div>
         </div>
         <div class="form-group">
             <?= $this->Form->control('categories._ids', ['options' => $categories, 'class' => 'form-control']); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->control('images._ids[]', ['label' => __('Imágenes'), 'type' => 'file', 'multiple' => 'multiple', 'class' => 'form-control']) ?>
+            <?= $this->Form->control('images[]', ['label' => __('Imágenes'), 'type' => 'file', 'multiple' => 'multiple', 'class' => 'form-control']) ?>
         </div>
         <div class="btn-group col-sm-12" role="group">
             <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary mr-2']) ?>

@@ -22,12 +22,13 @@ class FilesComponent extends Component
      *   
      * Crea la carpeta o carpetas que reciba como parámetro.
      * @param string $folder El nombre de la carpeta donde mover el archivo.
-     * @param string $files Nombre del archivo o archivos a mover.
+     * @param array $files Array de archivo o archivos a mover.
      */
-    public function moveFile($folder, ...$files)
+    public function moveFile($folder, $files)
     {
         foreach ($files as $file) {
             $fileAbsolutePath = $folder . $file['name'];
+            $file['path'] = $fileAbsolutePath;
             $tempFile = new File($file['tmp_name']);
             try {
                 $tempFile->copy($fileAbsolutePath);

@@ -54,8 +54,9 @@ class CategoriesController extends AppController
              */
             $this->loadComponent('UploadImage');
             $data = $this->request->getData();
-            $file = $data['image'];
-            $this->UploadImage->mainUpload('Category', $file);
+            $files = [];
+            array_push($files, $data['image']);
+            $this->UploadImage->mainUpload('Category', $files);
             /**
              * Guardamos la entidad en la BD
              */

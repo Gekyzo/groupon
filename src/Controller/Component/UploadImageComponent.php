@@ -4,6 +4,7 @@ namespace App\Controller\Component;
 use Cake\Core\Configure;
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
+use Cake\ORM\TableRegistry;
 
 /**
  * Uploadimage component
@@ -39,6 +40,9 @@ class UploadimageComponent extends Component
             case 'Category':
                 $folderName = 'categories';
                 break;
+            case 'Promotion';
+                $folderName = 'promotions';
+                break;
             default:
                 return false;
                 break;
@@ -56,5 +60,25 @@ class UploadimageComponent extends Component
         } catch (Exception $e) {
             debug($e);
         }
+
+        /**
+         * Guardamos la imagen en la BD
+         */
+        self::saveToDatabase($data);
+    }
+
+    /**
+     * Almacena la imagen en la base de datos.
+     * @param array $data Datos de la imagen.
+     */
+    public function saveToDatabase($data)
+    {
+        $this->Images = TableRegistry::get('Images');
+        $image = $this->Images->newEntity();
+        $image = $this->Images->patchEntity($image, $data);
+        debug($data);
+        debug($image);
+        die;
+        $this->Images->save($image);
     }
 }
