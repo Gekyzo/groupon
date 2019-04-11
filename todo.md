@@ -18,11 +18,15 @@ Listado de tareas pendientes.
 
 - [ ] Slug automático
 
+### Images
+
+- [ ] Poder definir imagen principal de la promo
+
 ## Categorías
 
 ### Add
 
-- [ ] Slug automático
+- [ ] Slug automático 
 
 ## Usuarios
 
