@@ -2,7 +2,7 @@
 /**
  * Enlace a la promoción
  */
-$promoLink = ['controller' => 'promotions', 'action' => 'view', $promotion->id];
+$promoLink = ['controller' => 'promotions', 'action' => 'view', $promotion->slug];
 ?>
 
 <div class="card text-center">
