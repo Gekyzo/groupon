@@ -175,10 +175,9 @@ class UsersController extends AppController
                 /**
                  * Actualizamos BD con timestamp en last-active
                  */
-                $usersTable = TableRegistry::get('Users');
-                $logingUser = $usersTable->get($user['id']);
+                $logingUser = $this->Users->get($user['id']);
                 $logingUser->last_active = Time::now();
-                $usersTable->save($logingUser);
+                $this->Users->save($logingUser);
                 /**
                  * Redirect a Home y mostramos mensaje bienvenida
                  */

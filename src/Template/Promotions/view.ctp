@@ -12,33 +12,29 @@
         <div class="col">
             <h1><?= h($promotion->name) ?></h1>
             <div class="promo-gallery">
-                <img src="https://via.placeholder.com/600x300">
-                <?php if (!empty($promotion->images)) : ?>
-                    <table cellpadding="0" cellspacing="0">
-                        <tr>
-                            <th scope="col"><?= __('Id') ?></th>
-                            <th scope="col"><?= __('Name') ?></th>
-                            <th scope="col"><?= __('Url') ?></th>
-                            <th scope="col"><?= __('Created') ?></th>
-                            <th scope="col"><?= __('Deleted') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($promotion->images as $images) : ?>
-                            <tr>
-                                <td><?= h($images->id) ?></td>
-                                <td><?= h($images->name) ?></td>
-                                <td><?= h($images->url) ?></td>
-                                <td><?= h($images->created) ?></td>
-                                <td><?= h($images->deleted) ?></td>
-                                <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['controller' => 'Images', 'action' => 'view', $images->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Images', 'action' => 'edit', $images->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Images', 'action' => 'delete', $images->id], ['confirm' => __('Are you sure you want to delete # {0}?', $images->id)]) ?>
-                                </td>
-                            </tr>
+                <div class="col">
+                    <?= $this->Html->image(
+                        'promotions/' . $promotion->images[0]->name,
+                        ['alt' => __('Imagen promoción'), 'class' => 'promotion-image-main', 'style' => 'width: 100%']
+                    ) ?>
+                </div>
+                <div class="col">
+                    <?php
+                    /**
+                     * Elimino la primera imagen del array para mostrar una galería con todas las demás.
+                     */
+                    unset($promotion->images[0]);
+
+                    /* Galería */
+                    if (!empty($promotion->images)) : ?>
+                        <?php foreach ($promotion->images as $image) : ?>
+                            <?= $this->Html->image(
+                                'promotions/' . $image->name,
+                                ['alt' => __('Imagen promoción')]
+                            ) ?>
                         <?php endforeach; ?>
-                    </table>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 

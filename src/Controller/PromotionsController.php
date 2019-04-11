@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\Utility\Text;
 use App\Controller\AppController;
 
 /**
@@ -28,15 +29,20 @@ class PromotionsController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Promotion id.
+     * @param string|null $slug Promotion slug.
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($slug)
     {
-        $promotion = $this->Promotions->get($id, [
-            'contain' => ['Categories', 'Images', 'Orders']
-        ]);
+        $id = $this->getIdFromUrl($slug);
+
+        $promotion = $this->Promotions->find('all', [
+            'conditions' => [
+                'Promotions.id =' => $id
+            ],
+            'contain' => ['Categories', 'Images']
+        ])->first();
 
         $this->set('promotion', $promotion);
     }
@@ -50,13 +56,21 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
-            /**
-             * Intentamos subir las imágenes de la promoción
-             */
+
+            /* Recojo los datos */
             $this->loadComponent('Images');
             $data = $this->request->getData();
+
+            /* Cambio el nombre de las imagenes para que sea el mismo que el de la promoción + identificador */
+            foreach ($data['images'] as $key => &$promotionImage) {
+                $fileExtension = substr($promotionImage['type'], (strpos($promotionImage['type'], '/') + 1));
+                $promotionImage['name'] = $key . '-' . strtolower(Text::slug($data['name'])) . '.' . $fileExtension;
+            }
             $files = $data['images'];
+
+            /* Guardo las imagenes de la promoción */
             $this->Images->mainUpload('Promotion', $files);
+
             /**
              * Fix datetime-local format
              */
@@ -148,5 +162,17 @@ class PromotionsController extends AppController
         }
 
         return parent::isAuthorized($user);
+    }
+
+    /**
+     * Devuelve la id para cargar la vista de una carpeta/documento
+     * e.g. $url = 1-primer-documento; devuelve 1
+     * @param string $url La ruta de la página actual.
+     * @return id
+     */
+    public function getIdFromUrl($url)
+    {
+        $length = strpos($url, '-') ? strpos($url, '-') : strlen($url);
+        return substr($url, 0, $length);
     }
 }
