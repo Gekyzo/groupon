@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\Utility\Text;
 use App\Controller\AppController;
 
 /**
@@ -55,13 +56,21 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
-            /**
-             * Intentamos subir las imágenes de la promoción
-             */
+
+            /* Recojo los datos */
             $this->loadComponent('Images');
             $data = $this->request->getData();
+
+            /* Cambio el nombre de las imagenes para que sea el mismo que el de la promoción + identificador */
+            foreach ($data['images'] as $key => &$promotionImage) {
+                $fileExtension = substr($promotionImage['type'], (strpos($promotionImage['type'], '/') + 1));
+                $promotionImage['name'] = $key . '-' . strtolower(Text::slug($data['name'])) . '.' . $fileExtension;
+            }
             $files = $data['images'];
+
+            /* Guardo las imagenes de la promoción */
             $this->Images->mainUpload('Promotion', $files);
+
             /**
              * Fix datetime-local format
              */
