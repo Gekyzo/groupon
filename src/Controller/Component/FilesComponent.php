@@ -32,7 +32,7 @@ class FilesComponent extends Component
     public function moveFile($folder, $files)
     {
         foreach ($files as $file) {
-            $fileAbsolutePath = $this->Images->getAbsolutePath($folder, $file['name']);
+            $fileAbsolutePath = $folder . $file['name'];
             $file['path'] = $fileAbsolutePath;
             $tempFile = new File($file['tmp_name']);
             try {

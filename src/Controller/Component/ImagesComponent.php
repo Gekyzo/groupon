@@ -47,7 +47,7 @@ class ImagesComponent extends Component
                 return false;
                 break;
         }
-        $folderName = Configure::read('Fol.images') . $folderName . '\\';
+        $folderName = WWW_ROOT . Configure::read('Fol.images') . $folderName . '\\';
 
         /**
          * Creamos la carpeta en caso de que no exista

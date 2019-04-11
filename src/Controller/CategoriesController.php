@@ -52,15 +52,15 @@ class CategoriesController extends AppController
             /**
              * Intentamos subir la imagen de la categoría
              */
-            $this->loadComponent('UploadImage');
+            $this->loadComponent('Images');
             $data = $this->request->getData();
             $files = [];
             array_push($files, $data['image']);
-            $this->UploadImage->mainUpload('Category', $files);
+            $this->Images->mainUpload('Category', $files);
             /**
              * Guardamos la entidad en la BD
              */
-            $data['image'] = Configure::read('Fol.images') . $data['image']['name'];
+            $data['image'] = '\\' . Configure::read('Fol.images') . 'categories\\' . $data['image']['name'];
             $category = $this->Categories->patchEntity($category, $data);
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('La categoría ha sido creada correctamente.'));

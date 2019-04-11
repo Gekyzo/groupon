@@ -205,4 +205,4 @@ Type::build('timestamp')
 /**
  * Custom images routes
  */
-Configure::write('Fol.images', '/img/');
+Configure::write('Fol.images', 'img\\');
