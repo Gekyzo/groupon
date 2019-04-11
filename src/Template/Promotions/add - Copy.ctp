@@ -4,36 +4,47 @@
  * @var \App\Model\Entity\Promotion $promotion
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Promotions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Images'), ['controller' => 'Images', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Image'), ['controller' => 'Images', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="promotions form large-9 medium-8 columns content">
-    <?= $this->Form->create($promotion) ?>
+
+<div class="container">
+    <?= $this->Form->create($promotion, ['type' => 'file']) ?>
     <fieldset>
-        <legend><?= __('Add Promotion') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('slug');
-            echo $this->Form->control('price_old');
-            echo $this->Form->control('price_new');
-            echo $this->Form->control('state');
-            echo $this->Form->control('body');
-            echo $this->Form->control('available_since');
-            echo $this->Form->control('available_until');
-            echo $this->Form->control('deleted', ['empty' => true]);
-            echo $this->Form->control('categories._ids', ['options' => $categories]);
-            echo $this->Form->control('images._ids', ['options' => $images]);
-        ?>
+        <legend><?= __('Añadir promoción') ?></legend>
+        <div class="form-group row">
+            <div class="col">
+                <?= $this->Form->control('name', ['label' => false, 'placeholder' => 'Nombre', 'class' => 'form-control']); ?>
+            </div>
+            <div class="col">
+                <?= $this->Form->control('slug', ['label' => false, 'placeholder' => 'Slug', 'class' => 'form-control']); ?>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <?= $this->Form->control('price_old', ['label' => false, 'placeholder' => 'Precio original', 'class' => 'form-control']); ?>
+            </div>
+            <div class="col">
+                <?= $this->Form->control('price_new', ['label' => false, 'default' => 'Estado', 'placeholder' => 'Precio nuevo', 'class' => 'form-control']); ?>
+            </div>
+            <div class="col">
+                <?= $this->Form->control('state', ['label' => false, 'empty' => '- Estado', 'default' => 'active', 'options' => ['active' => 'Activo', 'inactive' => 'Inactivo'], 'class' => 'form-control']); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('body', ['label' => false, 'placeholder' => 'Descripción', 'class' => 'form-control']); ?>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <?= $this->Form->input('available_since', ['type' => 'datetime-local', 'class' => 'form-control']); ?>
+            </div>
+            <div class="col">
+                <?= $this->Form->control('available_until', ['type' => 'datetime-local', 'class' => 'form-control']); ?>
+            </div>
+        </div>
+        <?= $this->Form->control('categories._ids', ['options' => $categories, 'class' => 'form-control']); ?>
+        <?= $this->Form->control('images._ids', ['options' => $images]); ?>
+        <div class="btn-group col-sm-12" role="group">
+            <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary mr-2']) ?>
+            <?= $this->Form->button(__('Borrar'), ['class' => 'btn btn-secondary ml-2']) ?>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

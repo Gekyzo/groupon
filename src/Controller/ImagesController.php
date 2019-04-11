@@ -49,7 +49,10 @@ class ImagesController extends AppController
     {
         $image = $this->Images->newEntity();
         if ($this->request->is('post')) {
-            $image = $this->Images->patchEntity($image, $this->request->getData());
+            $data = $this->request->getData();
+            debug($data);
+            die;
+            $image = $this->Images->patchEntity($image, $data);
             if ($this->Images->save($image)) {
                 $this->Flash->success(__('The image has been saved.'));
 

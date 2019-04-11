@@ -78,12 +78,6 @@ class PromotionsTable extends Table
             ->allowEmptyString('name', false);
 
         $validator
-            ->scalar('slug')
-            ->maxLength('slug', 512)
-            ->requirePresence('slug', 'create')
-            ->allowEmptyString('slug', false);
-
-        $validator
             ->numeric('price_old')
             ->requirePresence('price_old', 'create')
             ->allowEmptyString('price_old', false);

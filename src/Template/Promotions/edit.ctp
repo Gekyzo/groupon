@@ -12,7 +12,7 @@
                 ['action' => 'delete', $promotion->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $promotion->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Promotions'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
@@ -27,17 +27,16 @@
     <fieldset>
         <legend><?= __('Edit Promotion') ?></legend>
         <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('slug');
-            echo $this->Form->control('price_old');
-            echo $this->Form->control('price_new');
-            echo $this->Form->control('state');
-            echo $this->Form->control('body');
-            echo $this->Form->control('available_since');
-            echo $this->Form->control('available_until');
-            echo $this->Form->control('deleted', ['empty' => true]);
-            echo $this->Form->control('categories._ids', ['options' => $categories]);
-            echo $this->Form->control('images._ids', ['options' => $images]);
+        echo $this->Form->control('name');
+        echo $this->Form->control('price_old');
+        echo $this->Form->control('price_new');
+        echo $this->Form->control('state');
+        echo $this->Form->control('body');
+        echo $this->Form->control('available_since');
+        echo $this->Form->control('available_until');
+        echo $this->Form->control('deleted', ['empty' => true]);
+        echo $this->Form->control('categories._ids', ['options' => $categories]);
+        echo $this->Form->control('images._ids', ['options' => $images]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

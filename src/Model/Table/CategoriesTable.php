@@ -63,12 +63,6 @@ class CategoriesTable extends Table
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->scalar('slug')
-            ->maxLength('slug', 255)
-            ->requirePresence('slug', 'create')
-            ->allowEmptyString('slug', false);
-
-        $validator
             ->scalar('state')
             ->maxLength('state', 24)
             ->allowEmptyString('state');
@@ -81,7 +75,7 @@ class CategoriesTable extends Table
             ->scalar('image')
             ->maxLength('image', 512)
             ->requirePresence('image', 'create')
-            ->allowEmptyFile('image', false);
+            ->allowEmptyFile('image', true);
 
         return $validator;
     }
