@@ -14,9 +14,15 @@ Listado de tareas pendientes.
 
 ## Promociones
 
+### Add
+
+- [ ] Slug automático
 
 ## Categorías
 
+### Add
+
+- [ ] Slug automático
 
 ## Usuarios
 
