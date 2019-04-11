@@ -4,9 +4,8 @@ Listado de tareas pendientes.
 
 ## General
 
-- [ ] Implementar subida de imágenes para Categorías y Promociones
 - [ ] Implementar Markdown en la descripción de Categorías y Promociones
-- [ ] Crear rutas user-friendly
+- [ ] Crear rutas user-friendly.
 
 ### Estilos
 

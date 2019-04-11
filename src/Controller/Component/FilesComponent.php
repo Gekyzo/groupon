@@ -19,6 +19,11 @@ class FilesComponent extends Component
     protected $_defaultConfig = [];
 
     /**
+     * Lista de componentes requeridos
+     */
+    public $components = ['Images'];
+
+    /**
      *   
      * Crea la carpeta o carpetas que reciba como parámetro.
      * @param string $folder El nombre de la carpeta donde mover el archivo.
@@ -27,7 +32,7 @@ class FilesComponent extends Component
     public function moveFile($folder, $files)
     {
         foreach ($files as $file) {
-            $fileAbsolutePath = $folder . $file['name'];
+            $fileAbsolutePath = $this->Images->getAbsolutePath($folder, $file['name']);
             $file['path'] = $fileAbsolutePath;
             $tempFile = new File($file['tmp_name']);
             try {

@@ -83,7 +83,7 @@ class AppController extends Controller
     /**
      * Creo la variable $currentUser para enviar a las vistas.
      */
-    public function beforeFilter($event)
+    public function beforeFilter(Event $event)
     {
         $user = $this->Auth->user();
 

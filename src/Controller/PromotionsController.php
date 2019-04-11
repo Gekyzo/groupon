@@ -52,15 +52,22 @@ class PromotionsController extends AppController
             /**
              * Intentamos subir las imágenes de la promoción
              */
-            $this->loadComponent('UploadImage');
+            $this->loadComponent('Images');
             $data = $this->request->getData();
             $files = $data['images'];
-            $this->UploadImage->mainUpload('Promotion', $files);
+            $this->Images->mainUpload('Promotion', $files);
             /**
              * Fix datetime-local format
              */
             $data['available_since'] = parent::convertDatetime($data['available_since']);
             $data['available_until'] = parent::convertDatetime($data['available_until']);
+            /**
+             * Asigno valor al atributo 'path' de las imágenes para que las pueda guardar en la BD.
+             * Paso la variable '$imagen' por referencia con el prefijo '&'
+             */
+            foreach ($data['images'] as &$imagen) {
+                $imagen['path'] = 'promotions/' . $imagen['name'];
+            }
             $promotion = $this->Promotions->patchEntity($promotion, $data);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));

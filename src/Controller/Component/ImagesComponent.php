@@ -7,9 +7,9 @@ use Cake\Controller\ComponentRegistry;
 use Cake\ORM\TableRegistry;
 
 /**
- * Uploadimage component
+ * Images component
  */
-class UploadimageComponent extends Component
+class ImagesComponent extends Component
 {
 
     /**
@@ -60,25 +60,14 @@ class UploadimageComponent extends Component
         } catch (Exception $e) {
             debug($e);
         }
-
-        /**
-         * Guardamos la imagen en la BD
-         */
-        self::saveToDatabase($data);
     }
 
     /**
-     * Almacena la imagen en la base de datos.
-     * @param array $data Datos de la imagen.
+     * Devuelve la ruta absoluta hasta un archivo.
+     * Utilizo esta función en ImagesController y en FilesComponent.
      */
-    public function saveToDatabase($data)
+    public function getAbsolutePath($folderName, $fileName)
     {
-        $this->Images = TableRegistry::get('Images');
-        $image = $this->Images->newEntity();
-        $image = $this->Images->patchEntity($image, $data);
-        debug($data);
-        debug($image);
-        die;
-        $this->Images->save($image);
+        return $folderName . $fileName;
     }
 }

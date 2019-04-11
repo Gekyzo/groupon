@@ -9,6 +9,10 @@ Listado de actualizaciones y cambios realizados en el proyecto.
 - [x] Implemento creación de carpetas - 10/04/2019
 - [x] Implemento subida de imágenes - 10/04/2019
 
+### Promociones
+
+- [x] Implemento subida de múltiples imágenes - 11/04/2019
+
 ## 0.5.0
 
 ### General
