@@ -4,25 +4,26 @@
  * @var \App\Model\Entity\Image $image
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Images'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Promotions'), ['controller' => 'Promotions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Promotion'), ['controller' => 'Promotions', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="images form large-9 medium-8 columns content">
+
+<div class="container">
     <?= $this->Form->create($image) ?>
     <fieldset>
-        <legend><?= __('Add Image') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('url');
-            echo $this->Form->control('deleted');
-            echo $this->Form->control('promotions._ids', ['options' => $promotions]);
-        ?>
+        <legend><?= __('Subir imagen') ?></legend>
+        <div class="form-group row">
+            <div class="col">
+                <?= $this->Form->control('name', ['class' => 'form-control']) ?>
+            </div>
+            <div class="col">
+                <?= $this->Form->control('url', ['type' => 'file', 'class' => 'form-control']) ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('promotions._ids', ['label' => 'Asignar a', 'options' => $promotions, 'class' => 'form-control']) ?>
+        </div>
+        <div class="btn-group col-sm-12 mt-2" role="group">
+            <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary mr-2']) ?>
+            <?= $this->Form->button(__('Borrar'), ['type' => 'reset', 'class' => 'btn btn-secondary ml-2']) ?>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

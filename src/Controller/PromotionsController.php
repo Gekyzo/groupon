@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\Core\Configure;
 use App\Controller\AppController;
 
 /**
@@ -19,7 +20,7 @@ class PromotionsController extends AppController
      */
     public function index()
     {
-        $promotions = $this->paginate($this->Promotions);
+        $promotions = $this->paginate($this->Promotions, ['contain' => ['Images']]);
 
         $this->set(compact('promotions'));
     }
@@ -49,16 +50,28 @@ class PromotionsController extends AppController
     {
         $promotion = $this->Promotions->newEntity();
         if ($this->request->is('post')) {
+            /**
+             * Intentamos subir las imágenes de la promoción
+             */
+            $this->loadComponent('Images');
             $data = $this->request->getData();
+            $files = $data['images'];
+            $this->Images->mainUpload('Promotion', $files);
             /**
              * Fix datetime-local format
              */
             $data['available_since'] = parent::convertDatetime($data['available_since']);
             $data['available_until'] = parent::convertDatetime($data['available_until']);
+            /**
+             * Asigno valor al atributo 'path' de las imágenes para que las pueda guardar en la BD.
+             * Paso la variable '$imagen' por referencia con el prefijo '&'
+             */
+            foreach ($data['images'] as &$imagen) {
+                $imagen['path'] = '\\' . Configure::read('Fol.images') . 'promotions\\' . $imagen['name'];
+            }
             $promotion = $this->Promotions->patchEntity($promotion, $data);
             if ($this->Promotions->save($promotion)) {
                 $this->Flash->success(__('The promotion has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The promotion could not be saved. Please, try again.'));

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\Core\Configure;
 use App\Controller\AppController;
 
 /**
@@ -48,15 +49,26 @@ class CategoriesController extends AppController
     {
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
-            $category = $this->Categories->patchEntity($category, $this->request->getData());
+            /**
+             * Intentamos subir la imagen de la categoría
+             */
+            $this->loadComponent('Images');
+            $data = $this->request->getData();
+            $files = [];
+            array_push($files, $data['image']);
+            $this->Images->mainUpload('Category', $files);
+            /**
+             * Guardamos la entidad en la BD
+             */
+            $data['image'] = '\\' . Configure::read('Fol.images') . 'categories\\' . $data['image']['name'];
+            $category = $this->Categories->patchEntity($category, $data);
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
-
+                $this->Flash->success(__('La categoría ha sido creada correctamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The category could not be saved. Please, try again.'));
+            $this->Flash->error(__('No ha sido posible crear la categoría.'));
         }
-        $promotions = $this->Categories->Promotions->find('list', ['limit' => 200]);
+        $promotions = $this->Categories->Promotions->find('list', ['order' => ['Promotions.name' => 'ASC'], 'limit' => 200]);
         $this->set(compact('category', 'promotions'));
     }
 

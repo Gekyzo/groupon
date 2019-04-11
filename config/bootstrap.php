@@ -205,5 +205,4 @@ Type::build('timestamp')
 /**
  * Custom images routes
  */
-Configure::write('Fol.images', WWW_ROOT . 'img\\');
- 
+Configure::write('Fol.images', 'img\\');

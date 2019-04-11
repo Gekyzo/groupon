@@ -65,6 +65,7 @@ class PagesController extends AppController
          * Opciones comunes para la query de promociones
          */
         $commonOptions = [
+            'contain' => ['Images'],
             'conditions' => ['Promotions.state' => 'active'],
             'order' => ['Promotions.id' => 'DESC', 'Promotions.available_since' => 'DESC'],
             'limit' => 5

@@ -2,31 +2,45 @@
 
 Listado de actualizaciones y cambios realizados en el proyecto.
 
+## 0.6.0
+
+### Categorías
+
+- [x] Corregir vista::INDEX para que muestre la imagen - 11/04/2019
+- [x] Implemento creación de carpetas - 10/04/2019
+- [x] Implemento subida de imágenes - 10/04/2019
+
+### Promociones
+
+- [x] Corregir vista::INDEX para que incluya la imagen de la promoción y la muestre - 11/04/2019
+- [x] Implemento subida de múltiples imágenes - 11/04/2019
+
 ## 0.5.0
 
-## General
+### General
+
 - [x] Muevo permisos para acciones específicas de usuario de la función isAuthorized a nivel de cada acción - 10/04/2019
 
-## Usuarios
+### Usuarios
 
 - [x] Corregir vista::VIEW - 10/04/2019
 - [x] Corregir permisos vista::VIEW. Un usuario sólo puede ver su ficha. - 10/04/2019
 
-## Pedidos
+### Pedidos
 
 - [x] Corregir vista::VIEW - 10/04/2019
 
 ## 0.4.1
 
-## Categorías
+### Categorías
 
 - [x] Corregir vista::ADD - 09/04/2019
 
-## Usuarios
+### Usuarios
 
 - [x] Corregir vista::INDEX - 09/04/2019
 
-## Pedidos
+### Pedidos
 
 - [x] Corregir vista::INDEX - 09/04/2019
 

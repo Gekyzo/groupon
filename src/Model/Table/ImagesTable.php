@@ -68,15 +68,14 @@ class ImagesTable extends Table
             ->allowEmptyString('name', false);
 
         $validator
-            ->scalar('url')
-            ->maxLength('url', 512)
-            ->requirePresence('url', 'create')
-            ->allowEmptyString('url', false);
+            ->scalar('path')
+            ->maxLength('path', 512)
+            ->requirePresence('path', 'create')
+            ->allowEmptyString('path', false);
 
         $validator
             ->dateTime('deleted')
-            ->requirePresence('deleted', 'create')
-            ->allowEmptyDateTime('deleted', false);
+            ->allowEmptyDateTime('deleted');
 
         return $validator;
     }

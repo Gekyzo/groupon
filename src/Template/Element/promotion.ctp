@@ -1,5 +1,5 @@
 <div class="card text-center">
-    <img class="card-img-top" src="https://via.placeholder.com/180x100/" alt="Card image cap">
+    <img class="card-img-top" src="<?= $promotion->images[0]->path ?>" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title"><?= $promotion->name ?></h5>
         <p class="card-text"><?= $promotion->body ?></p>
