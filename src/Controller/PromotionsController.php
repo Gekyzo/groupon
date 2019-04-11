@@ -41,7 +41,7 @@ class PromotionsController extends AppController
             'conditions' => [
                 'Promotions.id =' => $id
             ],
-            'contain' => ['Categories']
+            'contain' => ['Categories', 'Images']
         ])->first();
 
         $this->set('promotion', $promotion);
