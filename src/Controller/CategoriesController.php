@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\Utility\Text;
 use App\Controller\AppController;
 
 /**
@@ -53,17 +54,21 @@ class CategoriesController extends AppController
     {
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
-            /**
-             * Intentamos subir la imagen de la categoría
-             */
+
+            /* Recojo los datos */
             $this->loadComponent('Images');
             $data = $this->request->getData();
+
+            /* Cambio el nombre de la imagen para que sea el mismo que el de la categoría */
+            $fileExtension = substr($data['image']['type'], (strpos($data['image']['type'], '/') + 1));
+            $data['image']['name'] = strtolower(Text::slug($data['name'])) . '.' . $fileExtension;
             $files = [];
             array_push($files, $data['image']);
+
+            /* Guardo la imagen de la categoría */
             $this->Images->mainUpload('Category', $files);
-            /**
-             * Guardamos la entidad en la BD
-             */
+
+            /* Almaceno la entidad en la BD */
             $data['image'] = '\\' . Configure::read('Fol.images') . 'categories\\' . $data['image']['name'];
             $category = $this->Categories->patchEntity($category, $data);
             if ($this->Categories->save($category)) {

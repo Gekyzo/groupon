@@ -2,11 +2,16 @@
 
 Listado de actualizaciones y cambios realizados en el proyecto.
 
-## 0.7.3
+## 0.7.0
 
 ### General
 
 - [x] Rutas user-friendly - 11/04/2019
+- [x] Corrijo nombre de imagen upload. Toma el nombre de la categoría/promoción - 11/04/2019
+
+### Promociones
+
+- [x] Incluyo imagen principal y galería en vista::promotion - 11/04/2019
 
 ## 0.6.0
 
