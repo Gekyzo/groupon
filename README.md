@@ -7,4 +7,4 @@ Proyecto tercera evaluación de la asignatura Programación para DAW.
 
 ## Pendiente
 
-[Listado de tareas pendientes](TODO.md)
+[Listado de tareas pendientes](todo.md)
