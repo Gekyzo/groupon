@@ -19,8 +19,7 @@ class ImagesControllerTest extends TestCase
      */
     public $fixtures = [
         'app.Images',
-        'app.Promotions',
-        'app.ImagesPromotions'
+        'app.Promotions'
     ];
 
     /**

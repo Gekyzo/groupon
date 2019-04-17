@@ -1,14 +1,14 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\CategoriesPromotionsController;
+use App\Controller\ErrorController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\CategoriesPromotionsController Test Case
+ * App\Controller\ErrorController Test Case
  */
-class CategoriesPromotionsControllerTest extends TestCase
+class ErrorControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -18,57 +18,45 @@ class CategoriesPromotionsControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.CategoriesPromotions',
-        'app.Categories',
-        'app.Promotions'
+        'app.Error'
     ];
 
     /**
-     * Test index method
+     * Test initialize method
      *
      * @return void
      */
-    public function testIndex()
+    public function testInitialize()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
-     * Test view method
+     * Test beforeFilter method
      *
      * @return void
      */
-    public function testView()
+    public function testBeforeFilter()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
-     * Test add method
+     * Test beforeRender method
      *
      * @return void
      */
-    public function testAdd()
+    public function testBeforeRender()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
-     * Test edit method
+     * Test afterFilter method
      *
      * @return void
      */
-    public function testEdit()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test delete method
-     *
-     * @return void
-     */
-    public function testDelete()
+    public function testAfterFilter()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

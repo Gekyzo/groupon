@@ -19,8 +19,7 @@ class CategoriesControllerTest extends TestCase
      */
     public $fixtures = [
         'app.Categories',
-        'app.Promotions',
-        'app.CategoriesPromotions'
+        'app.Promotions'
     ];
 
     /**
@@ -69,6 +68,26 @@ class CategoriesControllerTest extends TestCase
      * @return void
      */
     public function testDelete()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test initialize method
+     *
+     * @return void
+     */
+    public function testInitialize()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test isAuthorized method
+     *
+     * @return void
+     */
+    public function testIsAuthorized()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

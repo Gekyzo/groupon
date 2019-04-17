@@ -54,6 +54,16 @@ class OrdersControllerTest extends TestCase
     }
 
     /**
+     * Test confirm method
+     *
+     * @return void
+     */
+    public function testConfirm()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
      * Test edit method
      *
      * @return void
@@ -69,6 +79,16 @@ class OrdersControllerTest extends TestCase
      * @return void
      */
     public function testDelete()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test isAuthorized method
+     *
+     * @return void
+     */
+    public function testIsAuthorized()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

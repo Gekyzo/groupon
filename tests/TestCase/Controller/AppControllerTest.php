@@ -1,14 +1,14 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\PagesController;
+use App\Controller\AppController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\PagesController Test Case
+ * App\Controller\AppController Test Case
  */
-class PagesControllerTest extends TestCase
+class AppControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -18,15 +18,25 @@ class PagesControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Pages'
+        'app.App'
     ];
 
     /**
-     * Test display method
+     * Test initialize method
      *
      * @return void
      */
-    public function testDisplay()
+    public function testInitialize()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test beforeFilter method
+     *
+     * @return void
+     */
+    public function testBeforeFilter()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
@@ -42,21 +52,21 @@ class PagesControllerTest extends TestCase
     }
 
     /**
-     * Test initialize method
+     * Test depure method
      *
      * @return void
      */
-    public function testInitialize()
+    public function testDepure()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
-     * Test tempOptions method
+     * Test convertDatetime method
      *
      * @return void
      */
-    public function testTempOptions()
+    public function testConvertDatetime()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

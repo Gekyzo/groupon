@@ -21,9 +21,7 @@ class PromotionsControllerTest extends TestCase
         'app.Promotions',
         'app.Orders',
         'app.Categories',
-        'app.Images',
-        'app.CategoriesPromotions',
-        'app.ImagesPromotions'
+        'app.Images'
     ];
 
     /**
@@ -72,6 +70,36 @@ class PromotionsControllerTest extends TestCase
      * @return void
      */
     public function testDelete()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test initialize method
+     *
+     * @return void
+     */
+    public function testInitialize()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test isAuthorized method
+     *
+     * @return void
+     */
+    public function testIsAuthorized()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test getIdFromUrl method
+     *
+     * @return void
+     */
+    public function testGetIdFromUrl()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
