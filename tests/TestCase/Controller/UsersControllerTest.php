@@ -23,102 +23,136 @@ class UsersControllerTest extends TestCase
     ];
 
     /**
+     * Creo Fixture manual de sesión iniciada como Admin
+     */
+    public $fixtAdminSession;
+    public $fixtUser;
+
+    /**
+     * Asigno valores a los fixtures manuales
+     */
+    public function setUp(): void
+    {
+        /**
+         * Asigno valor de sesión iniciada como Admin
+         */
+        $this->fixtAdminSession = [
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'name' => 'admin',
+                    'role' => 'admin'
+                ]
+            ]
+        ];
+
+        /**
+         * Asigno valor de nuevo usuario
+         */
+        $this->fixtUser = [
+            'name' => 'username',
+            'email' => 'email@gmail.com',
+            'password1' => 'pass',
+            'password2' => 'pass'
+        ];
+
+        parent::setUp();
+    }
+
+    /**
+     * Vacío las fixtures
+     */
+    public function tearDown(): void
+    {
+        $this->fixtAdminSession = [];
+        $this->fixtUser = [];
+
+        parent::tearDown();
+    }
+
+    /**
      * Test index method
      *
      * @return void
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session($this->fixtAdminSession);
+
+        $this->get('/users');
+
+        $this->assertResponseOk();
     }
 
     /**
-     * Test view method
-     *
+     * Unregistered user can visit create account
+     * 
      * @return void
      */
-    public function testView()
+    public function testAdd_view_unregistered()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users/add');
+
+        $this->assertResponseOk();
     }
 
     /**
-     * Test profile method
-     *
-     * @return void
+     * Unregistered user can create account with correct data     
+     * @depends testAdd_view_unregistered
      */
-    public function testProfile()
+    public function testAdd_correct_user_data()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableRetainFlashMessages();
+
+        $user = $this->fixtUser;
+        $this->post('/users/add', $user);
+
+        $this->assertResponseSuccess();
+        $this->assertFlashElement('Flash/success');
     }
 
     /**
-     * Test add method
-     *
-     * @return void
+     * Unregistered user gets error when passwords dont match     
+     * @depends testAdd_view_unregistered
      */
-    public function testAdd()
+    public function testAdd_incorrect_user_data()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableRetainFlashMessages();
+
+        $user = $this->fixtUser;
+        $user['password2'] = 'different';
+        $this->post('/users/add', $user);
+
+        $this->assertResponseSuccess();
+        $this->assertFlashElement('Flash/error');
     }
 
     /**
-     * Test edit method
-     *
-     * @return void
+     * Unregistered user can visit login
      */
-    public function testEdit()
+    public function testLogin_view()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users/login');
+
+        $this->assertResponseSuccess();
     }
 
     /**
-     * Test delete method
-     *
-     * @return void
+     * Unregistered user can login
+     * @depends testLogin_view
      */
-    public function testDelete()
+    public function testLogin_user()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
+        $this->enableCsrfToken();
+        $this->enableRetainFlashMessages();
 
-    /**
-     * Test login method
-     *
-     * @return void
-     */
-    public function testLogin()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
+        $user = $this->fixtUser;
+        $this->post('/users/login', $user);
 
-    /**
-     * Test initialize method
-     *
-     * @return void
-     */
-    public function testInitialize()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test logout method
-     *
-     * @return void
-     */
-    public function testLogout()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test isAuthorized method
-     *
-     * @return void
-     */
-    public function testIsAuthorized()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        // Da error porque $user no existe en la BD
+        $this->assertResponseSuccess();
+        $this->assertFlashElement('Flash/error');
     }
 }
