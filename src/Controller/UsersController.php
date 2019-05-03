@@ -89,6 +89,9 @@ class UsersController extends AppController
             $this->redirect(['controller' => 'users', 'action' => 'view', $this->Auth->user('id')]);
         }
 
+        /**
+         * Si el usuario es nuevo, lo registra en la BD
+         */
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
