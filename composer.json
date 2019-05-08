@@ -45,7 +45,7 @@
         ],
         "cs-check": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/",
         "cs-fix": "phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/",
-        "tests": "phpunit --colors=always --verbose tests/TestCase/Controller/UsersControllerTest.php"
+        "tests": "phpunit --colors=always --testdox --coverage-html ./tests/coverage"
     },
     "prefer-stable": true,
     "config": {
