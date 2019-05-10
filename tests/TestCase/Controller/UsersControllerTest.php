@@ -1,6 +1,7 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
+use Cake\ORM\TableRegistry;
 use App\Controller\UsersController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
@@ -23,21 +24,49 @@ class UsersControllerTest extends TestCase
     ];
 
     /**
-     * Creo Fixture manual de sesión iniciada como Admin
+     * Fixtures manuales
      */
-    public $fixtAdminSession;
-    public $fixtUser;
+    public $newUser;
 
     /**
-     * Asigno valores a los fixtures manuales
+     * Asigno valores a los fixtures manuales y cargo Fixtures Cake como TableRegistry
      */
     public function setUp(): void
     {
         parent::setUp();
-        /**
-         * Asigno valor de sesión iniciada como Admin
-         */
-        $this->fixtAdminSession = [
+
+        $this->Users = TableRegistry::get('Users');
+
+        $this->newUser = [
+            'id' => '59',
+            'name' => 'NewUser',
+            'email' => 'user59@gmail.com',
+            'password' => '$2y$10$lvBlqxyXJMGezk2GNrqK7.vdClrEqKcusx5sh1u0A/BbFIkyV0bJ.',
+            'role' => 'client',
+            'created' => '2019-01-01 08:59:00',
+            'last_active' => NULL,
+            'deleted' => NULL,
+        ];
+    }
+
+    /**
+     * Vacío los fixtures manuales
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        unset($this->sessionAdmin);
+        unset($this->newUser);
+    }
+
+    /**
+     * Sólo usuarios con 'role' = 'admin' pueden acceder a este método.
+     */
+    public function testIndex()
+    {
+        // Sólo usuario admin puede ver esta ruta
+        $data = [
             'Auth' => [
                 'User' => [
                     'id' => 1,
@@ -46,51 +75,22 @@ class UsersControllerTest extends TestCase
                 ]
             ]
         ];
+        $this->session($data);
 
-        /**
-         * Asigno valor de nuevo usuario
-         */
-        $this->fixtUser = [
-            'name' => 'username',
-            'email' => 'email@gmail.com',
-            'password1' => 'pass',
-            'password2' => 'pass'
-        ];
-    }
+        $this->get(['controller' => 'Users', 'action' => 'index']);
+        $this->assertResponseOk('No ha sido posible acceder a /users');
 
-    /**
-     * Vacío las fixtures
-     */
-    public function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->fixtAdminSession);
-        unset($this->fixtUser);
-    }
-
-    /**
-     * Test index method
-     *
-     * @return void
-     */
-    public function testIndex()
-    {
-        $this->session($this->fixtAdminSession);
-
-        $this->get('/users');
-
-        $this->assertResponseOk();
+        // Se carga la lista de usuarios, y existen tantos registros como en el fixture
+        $users = $this->Users->find('all')->toArray();
+        $this->assertEquals(2, count($users), 'El número de registros entre UsersFixture y la BD es distinto');
     }
 
     /**
      * Unregistered user can visit create account
-     * 
-     * @return void
      */
     public function testAdd_view_unregistered()
     {
-        $this->get('/users/add');
+        $this->get(['controller' => 'Users', 'action' => 'add']);
 
         $this->assertResponseOk();
     }
@@ -104,10 +104,13 @@ class UsersControllerTest extends TestCase
         $this->enableCsrfToken();
         $this->enableRetainFlashMessages();
 
-        $user = $this->fixtUser;
+        $user = $this->newUser;
+        $user['password1'] = $user['password'];
+        $user['password2'] = $user['password'];
+        unset($user['password']);
+
         $this->post('/users/add', $user);
 
-        $this->assertResponseSuccess();
         $this->assertFlashElement('Flash/success');
     }
 
@@ -120,11 +123,12 @@ class UsersControllerTest extends TestCase
         $this->enableCsrfToken();
         $this->enableRetainFlashMessages();
 
-        $user = $this->fixtUser;
+        $user = $this->newUser;
+        $user['password1'] = $user['password'];
         $user['password2'] = 'different';
+        unset($user['password']);
         $this->post('/users/add', $user);
 
-        $this->assertResponseSuccess();
         $this->assertFlashElement('Flash/error');
     }
 
@@ -139,7 +143,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Unregistered user can login
+     * Unregistered user can login     
      * @depends testLogin_view
      */
     public function testLogin_user()
@@ -147,9 +151,12 @@ class UsersControllerTest extends TestCase
         $this->enableCsrfToken();
         $this->enableRetainFlashMessages();
 
-        $user = $this->fixtUser;
-        $this->post('/users/login', $user);
+        // Envío datos de un cliente que existe en el fixture 'UsersFixture'
+        $loggingUser['email'] = 'user2@gmail.com';
+        $loggingUser['password'] = 'pass';
 
-        $this->assertResponseSuccess();
+        $this->post('/users/login', $loggingUser);
+
+        $this->assertFlashElement('Flash/success');
     }
 }
