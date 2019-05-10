@@ -58,6 +58,7 @@ class UsersControllerTest extends TestCase
 
         unset($this->sessionAdmin);
         unset($this->newUser);
+        TableRegistry::clear();
     }
 
     /**
