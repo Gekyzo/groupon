@@ -42,15 +42,25 @@ class UsersFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 1,
-                'name' => 'Lorem ipsum dolor sit amet',
-                'email' => 'Lorem ipsum dolor sit amet',
-                'password' => 'Lorem ipsum dolor sit amet',
-                'role' => 'client',
-                'created' => '2019-04-17 06:30:09',
-                'last_active' => '2019-04-17 06:30:09',
-                'deleted' => '2019-04-17 06:30:09'
+                'id' => '1',
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'password' => '$2y$10$ixbTImZkdjBlghpe4qTII.VBQZPRBCnbZb6D4Nhb6.cXvZ6Dku/Ge',
+                'role' => 'admin',
+                'created' => '2019-01-01 08:01:00',
+                'last_active' => NULL,
+                'deleted' => NULL,
             ],
+            [
+                'id' => '2',
+                'name' => 'User',
+                'email' => 'user2@gmail.com',
+                'password' => '$2y$10$lvBlqxyXJMGezk2GNrqK7.vdClrEqKcusx5sh1u0A/BbFIkyV0bJ.',
+                'role' => 'client',
+                'created' => '2019-01-01 08:02:00',
+                'last_active' => NULL,
+                'deleted' => NULL,
+            ]
         ];
         parent::init();
     }
