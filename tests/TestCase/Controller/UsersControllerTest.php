@@ -79,6 +79,7 @@ class UsersControllerTest extends TestCase
 
         $this->get(['controller' => 'Users', 'action' => 'index']);
         $this->assertResponseOk('No ha sido posible acceder a /users');
+        $this->assertNoRedirect();
 
         // Se carga la lista de usuarios, y existen tantos registros como en el fixture
         $users = $this->Users->find('all')->toArray();
@@ -93,6 +94,7 @@ class UsersControllerTest extends TestCase
         $this->get(['controller' => 'Users', 'action' => 'add']);
 
         $this->assertResponseOk();
+        $this->assertNoRedirect();
     }
 
     /**
@@ -140,7 +142,8 @@ class UsersControllerTest extends TestCase
     {
         $this->get(['controller' => 'Users', 'action' => 'login']);
 
-        $this->assertResponseSuccess();
+        $this->assertResponseOk();
+        $this->assertNoRedirect();
     }
 
     /**        
