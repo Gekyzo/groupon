@@ -61,11 +61,10 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Sólo usuarios con 'role' = 'admin' pueden acceder a este método.
+     * Sólo usuarios con 'role' = 'admin' puede visitar '/users/'    
      */
     public function testIndex()
     {
-        // Sólo usuario admin puede ver esta ruta
         $data = [
             'Auth' => [
                 'User' => [
@@ -86,7 +85,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Unregistered user can visit create account
+     * Usuario no registrado puede visitar '/users/add'
      */
     public function testAdd_view_unregistered()
     {
@@ -96,7 +95,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Unregistered user can create account with correct data     
+     * Usuario no registrado puede crear nueva cuenta
      * @depends testAdd_view_unregistered
      */
     public function testAdd_correct_user_data()
@@ -109,13 +108,13 @@ class UsersControllerTest extends TestCase
         $user['password2'] = $user['password'];
         unset($user['password']);
 
-        $this->post('/users/add', $user);
+        $this->post(['controller' => 'Users', 'action' => 'add'], $user);
 
         $this->assertFlashElement('Flash/success');
     }
 
     /**
-     * Unregistered user gets error when passwords dont match     
+     * Usuario no registrado recibe error cuando intenta registrarse con datos incorrectos 
      * @depends testAdd_view_unregistered
      */
     public function testAdd_incorrect_user_data()
@@ -127,23 +126,24 @@ class UsersControllerTest extends TestCase
         $user['password1'] = $user['password'];
         $user['password2'] = 'different';
         unset($user['password']);
-        $this->post('/users/add', $user);
+
+        $this->post(['controller' => 'Users', 'action' => 'add'], $user);
 
         $this->assertFlashElement('Flash/error');
     }
 
     /**
-     * Unregistered user can visit login
+     * Usuario no registrado puede acceder a '/users/login'
      */
     public function testLogin_view()
     {
-        $this->get('/users/login');
+        $this->get(['controller' => 'Users', 'action' => 'login']);
 
         $this->assertResponseSuccess();
     }
 
-    /**
-     * Unregistered user can login     
+    /**        
+     * Usuario no registrado puede hacer login
      * @depends testLogin_view
      */
     public function testLogin_user()
@@ -155,7 +155,7 @@ class UsersControllerTest extends TestCase
         $loggingUser['email'] = 'user2@gmail.com';
         $loggingUser['password'] = 'pass';
 
-        $this->post('/users/login', $loggingUser);
+        $this->post(['controller' => 'Users', 'action' => 'login'], $loggingUser);
 
         $this->assertFlashElement('Flash/success');
     }
