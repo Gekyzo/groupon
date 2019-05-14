@@ -27,6 +27,7 @@ class UsersControllerTest extends TestCase
      * Fixtures manuales
      */
     public $newUser;
+    public $Controller;
 
     /**
      * Asigno valores a los fixtures manuales y cargo Fixtures Cake como TableRegistry
@@ -35,8 +36,8 @@ class UsersControllerTest extends TestCase
     {
         parent::setUp();
 
+        $this->Controller = new UsersController();
         $this->Users = TableRegistry::get('Users');
-
         $this->newUser = [
             'id' => '59',
             'name' => 'NewUser',
@@ -50,13 +51,14 @@ class UsersControllerTest extends TestCase
     }
 
     /**
+     * Método de limpieza
      * Vacío los fixtures manuales
      */
     public function tearDown(): void
     {
         parent::tearDown();
 
-        unset($this->sessionAdmin);
+        unset($this->Controller);
         unset($this->newUser);
         TableRegistry::clear();
     }
@@ -162,5 +164,15 @@ class UsersControllerTest extends TestCase
         $this->post(['controller' => 'Users', 'action' => 'login'], $loggingUser);
 
         $this->assertFlashElement('Flash/success');
+    }
+
+    /**
+     * Permisos para usuarios NO LOGUEADOS
+     */
+    public function testInitialize()
+    {
+        $allowedActions = ['logout', 'add'];
+
+        $this->assertEquals($allowedActions, $this->Controller->Auth->allowedActions);
     }
 }
