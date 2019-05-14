@@ -13,15 +13,6 @@ class PagesControllerTest extends TestCase
     use IntegrationTestTrait;
 
     /**
-     * Fixtures
-     *
-     * @var array
-     */
-    // public $fixtures = [
-    //     'app.Pages'
-    // ];
-
-    /**
      * Fixtures manuales
      */
     public $Page;
@@ -31,7 +22,18 @@ class PagesControllerTest extends TestCase
      */
     public function setUp(): void
     {
+        parent::setUp();
         $this->Page = new PagesController;
+    }
+
+    /**
+     * Método de limpieza
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        unset($this->Page);
     }
 
     /**
@@ -43,17 +45,7 @@ class PagesControllerTest extends TestCase
     {
         $this->get(['controller' => 'Pages', 'action' => 'display', '/']);
 
-        $this->assertResponseSuccess();
-    }
-
-    /**
-     * Test isAuthorized method
-     *
-     * @return void
-     */
-    public function testIsAuthorized()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->assertResponseSuccess('No ha sido posible cargar la Home');
     }
 
     /**
