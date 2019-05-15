@@ -10,9 +10,9 @@
     <div class="container container-categories">
 
         <?php foreach ($categories as $category) : ?>
-            <div class="card-category">
-                <?= $this->Element('category', ['category' => $category]) ?>
-            </div>
+
+            <?= $this->Element('category', ['category' => $category]) ?>
+
         <?php endforeach; ?>
 
     </div>

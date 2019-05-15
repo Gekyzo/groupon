@@ -26,6 +26,12 @@ legend {
   padding-bottom: 0;
 }
 
+select,
+option {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 textarea {
   width: 100%;
   font-family: inherit;
@@ -89,28 +95,53 @@ button {
 }
 
 .input label {
-  flex-basis: 10%;
+  flex-basis: 20%;
 }
 .input input,
 .input textarea {
-  flex-basis: 90%;
+  flex-basis: 80%;
 }
-.input + .radio label:not(:first-child) {
+.input.radio label:not(:first-child) {
   background-color: #ffda88;
   flex-basis: auto;
   padding-left: 25px;
   padding-right: 25px;
 }
-.input + .radio label:not(:first-child):not(:last-child) {
+.input.radio label:not(:first-child):not(:last-child) {
   margin-right: 25px;
 }
-.input + .radio label:not(:first-child) input {
+.input.radio label:not(:first-child) input {
   width: auto;
   margin-right: 10px;
 }
 .input.required label::before {
   content: "* ";
   color: red;
+}
+
+.col {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.col div {
+  flex-basis: 50%;
+}
+.col .col-small {
+  flex-basis: 25%;
+  text-align: right;
+}
+.col .col-small label,
+.col .col-small input {
+  flex-basis: 50%;
+}
+.col .col-medium {
+  flex-basis: 33%;
+  text-align: right;
+}
+.col .col-medium label,
+.col .col-medium input {
+  flex-basis: 50%;
 }
 
 .form-actions {
@@ -265,7 +296,6 @@ main .container {
 .categories-carousel .card-category {
   border: 1px solid #ccc;
   padding: 25px 50px;
-  flex-basis: 20%;
   text-align: center;
   flex-basis: calc((100% - 40px) / 5);
   margin-bottom: 10px;
@@ -291,6 +321,74 @@ main .container {
   background-color: #ffca55;
   color: #fff;
   transition: all 1s;
+}
+
+.container-promotions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card-promotion {
+  text-align: center;
+  flex-basis: calc((100% - 30px) / 4);
+  margin-bottom: 20px;
+}
+.card-promotion h5 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.card-promotion h5 a {
+  text-decoration: none;
+  color: inherit;
+}
+.card-promotion img {
+  width: 100%;
+}
+.card-promotion:hover img {
+  transform: scale(1.5);
+  transition: all 0.8s;
+}
+.card-promotion .promotion-img-wrapper {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.card-promotion p {
+  font-size: 0.8rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  width: 80%;
+}
+.card-promotion p:last-of-type {
+  margin-bottom: 20px;
+}
+.card-promotion:not(:nth-child(4n)) {
+  margin-right: 10px;
+}
+
+.promotion-description {
+  text-align: justify;
+}
+
+.promotion-price {
+  text-align: center;
+}
+.promotion-price .price-new {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.promotion-price .price-original {
+  text-decoration: line-through;
+  color: #303030;
+}
+
+.button {
+  background-color: #ffca55;
+  padding: 10px;
+  color: inherit;
+  text-decoration: none;
 }
 
 .navbar-brand {

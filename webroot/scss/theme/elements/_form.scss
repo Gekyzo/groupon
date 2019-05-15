@@ -42,13 +42,13 @@ button {
 
 .input {
     label {
-        flex-basis: 10%;
+        flex-basis: 20%;
     }
     input,
     textarea {
-        flex-basis: 90%;
+        flex-basis: 80%;
     }
-    & + .radio {
+    &.radio {
         label:not(:first-child) {
             background-color: lighten(read($colors, "accent"), 10%);
             flex-basis: auto;
@@ -68,6 +68,31 @@ button {
         label::before {
             content: "* ";
             color: red;
+        }
+    }
+}
+
+.col {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    div {
+        flex-basis: 50%;
+    }
+    .col-small {
+        flex-basis: 25%;
+        text-align: right;
+        label,
+        input {
+            flex-basis: 50%;
+        }
+    }
+    .col-medium {
+        flex-basis: 33%;
+        text-align: right;
+        label,
+        input {
+            flex-basis: 50%;
         }
     }
 }

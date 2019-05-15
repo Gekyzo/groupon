@@ -25,6 +25,12 @@ legend {
     padding-bottom: 0;
 }
 
+select,
+option {
+    font-family: inherit;
+    font-size: inherit;
+}
+
 textarea {
     width: 100%;
     font-family: inherit;
