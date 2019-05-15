@@ -1,0 +1,15 @@
+.alert {
+    padding: read($measures, "l");
+    border-width: 1px;
+    border-style: solid;
+    &-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+}
+
+.hidden {
+    opacity: 0;
+    transition: all 2s;
+}

@@ -1,0 +1,79 @@
+#page-promotion {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    section:nth-child(1) {
+        flex-basis: calc(100% / 3);
+    }
+    section:nth-child(2) {
+        flex-basis: calc((100% / 3) * 2);
+        margin-top: 0;
+    }
+
+    h1 {
+        flex-basis: 100%;
+    }
+}
+
+.container-promotions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card-promotion {
+    text-align: center;
+    flex-basis: calc((100% - 30px) / 4);
+    margin-bottom: read($measures, "m") * 2;
+    h5 {
+        margin-top: read($measures, "m");
+        margin-bottom: read($measures, "s");
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+    img {
+        width: 100%;
+    }
+    &:hover {
+        img {
+            transform: scale(1.5);
+            transition: all 0.8s;
+        }
+    }
+    .promotion-img-wrapper {
+        overflow: hidden;
+        border: 1px solid read($colors, "medium");
+        padding: read($measures, "m");
+    }
+    p {
+        font-size: 0.8rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: read($measures, "s");
+        width: 80%;
+        &:last-of-type {
+            margin-bottom: read($measures, "m") * 2;
+        }
+    }
+    &:not(:nth-child(4n)) {
+        margin-right: read($measures, "m");
+    }
+}
+
+.promotion-description {
+    text-align: justify;
+}
+
+.promotion-price {
+    text-align: center;
+    .price-new {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    .price-original {
+        text-decoration: line-through;
+        color: read($colors, "secondary");
+    }
+}

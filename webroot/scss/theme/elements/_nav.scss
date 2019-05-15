@@ -1,0 +1,35 @@
+nav {
+    padding-left: read($measures, "m");
+    padding-right: read($measures, "m");
+    background-color: read($colors, "main");
+    color: #fff;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    li {
+        list-style-type: none;
+        text-transform: uppercase;
+        padding: read($measures, "m");
+    }
+    ul {
+        display: flex;
+        flex-direction: row;
+        &:not(#user-actions) {
+            flex-grow: 4;
+        }
+        &#user-actions {
+            background-color: read($colors, "accent");
+            li a {
+                color: #000;
+            }
+        }
+    }
+    .container {
+        max-width: read($layout, "max-width");
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+}

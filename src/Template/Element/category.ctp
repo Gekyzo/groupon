@@ -5,7 +5,8 @@
 $catLink = ['controller' => 'categories', 'action' => 'view', $category->slug];
 ?>
 
-<div class="card text-center">
+<div class="card-category">
+
     <?= $this->Html->link(
         $this->Html->image(
             'categories/' . $category->name . '.png',
@@ -14,7 +15,7 @@ $catLink = ['controller' => 'categories', 'action' => 'view', $category->slug];
         $catLink,
         ['escape' => false]
     ) ?>
-    <div class="card-body">
-        <h5 class="card-title"><?= $this->Html->link(h($category->name), $catLink) ?></h5>
-    </div>
+
+    <h5><?= $this->Html->link(h($category->name), $catLink) ?></h5>
+
 </div>

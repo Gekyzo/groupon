@@ -1,0 +1,29 @@
+h2 {
+    text-transform: uppercase;
+    border-bottom: 1px solid read($colors, "medium");
+    margin-bottom: read($measures, "m");
+    padding-bottom: read($measures, "m");
+    span {
+        padding: read($measures, "m");
+        background-color: read($colors, "accent");
+    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.heading-right {
+    align-self: flex-end;
+    text-transform: none;
+    background-color: inherit;
+    font-weight: initial;
+    &:hover {
+        background-color: read($colors, "accent");
+        transition: all 1s;
+    }
+    a {
+        color: inherit;
+        text-decoration-color: read($colors, "accent");
+        text-decoration-style: double;
+    }
+}

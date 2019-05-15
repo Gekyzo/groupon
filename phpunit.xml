@@ -5,6 +5,7 @@
     processIsolation="false"
     stopOnFailure="false"
     bootstrap="tests/bootstrap.php"   
+    printerFile="tests/print.php"
     >
     <php>
         <ini name="memory_limit" value="-1"/>

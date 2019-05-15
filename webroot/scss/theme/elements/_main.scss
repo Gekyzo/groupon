@@ -1,0 +1,4 @@
+main {
+    max-width: read($layout, "max-width");
+    margin: auto;
+}
