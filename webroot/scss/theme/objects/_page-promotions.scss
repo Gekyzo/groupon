@@ -1,4 +1,18 @@
-#page-promotions {
+#page-promotion {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    section:nth-child(1) {
+        flex-basis: calc(100% / 3);
+    }
+    section:nth-child(2) {
+        flex-basis: calc((100% / 3) * 2);
+        margin-top: 0;
+    }
+
+    h1 {
+        flex-basis: 100%;
+    }
 }
 
 .container-promotions {
