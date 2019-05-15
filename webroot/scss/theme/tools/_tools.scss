@@ -1,0 +1,3 @@
+@function read($map, $value) {
+    @return map-get($map, $value);
+}

@@ -1,0 +1,9 @@
+.container {
+    max-width: read($layout, "max-width");
+    margin: auto;
+}
+
+main .container {
+    background-color: #fff;
+    padding: read($measures, "m");
+}

@@ -1,0 +1,49 @@
+#page-categories {
+    margin-top: read($measures, "l");
+}
+
+.categories-carousel {
+    .container {
+        margin-top: read($measures, "l");
+    }
+
+    .container-categories {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .card-category {
+        border: 1px solid read($colors, "medium");
+        padding: read($measures, "l") read($measures, "xl");
+        flex-basis: 20%;
+        text-align: center;
+        flex-basis: calc((100% - 40px) / 5);
+        margin-bottom: read($measures, "m");
+        h5 {
+            text-align: center;
+            a {
+                text-decoration: none;
+                color: inherit;
+                font-weight: bold;
+                text-transform: uppercase;
+                padding: read($measures, "m");
+            }
+        }
+        &:not(:nth-child(5n)) {
+            margin-right: read($measures, "m");
+        }
+        // Estilo de las categorías para estado: HOVER
+        &:hover {
+            border-color: read($colors, "accent");
+            transition: all 1s;
+            h5 {
+                a {
+                    background-color: read($colors, "accent");
+                    color: #fff;
+                    transition: all 1s;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+$colors: (
+    main: #000,
+    secondary: #303030,
+    medium: #ccc,
+    light: #f3f3f3,
+    accent: #ffca55
+);
+
+@import url("https://fonts.googleapis.com/css?family=Merriweather+Sans");
+
+$fonts: (
+    main: "Merriweather Sans"
+);
+
+$layout: (
+    max-width: 1280px
+);
+
+$measures: (
+    s: 5px,
+    m: 10px,
+    l: 25px,
+    xl: 50px
+);

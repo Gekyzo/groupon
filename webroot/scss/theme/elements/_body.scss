@@ -1,0 +1,7 @@
+body {
+    font-family: read($fonts, main), sans-serif;
+    font-size: 14px;
+    background-color: read($colors, "light");
+    height: 100%;
+    cursor: default;
+}
