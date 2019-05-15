@@ -4,29 +4,27 @@
  * @var \App\Model\Entity\Category $category
  */
 ?>
-<div class="container">
-    <?= $this->Form->create($category, ['type' => 'file']) ?>
-    <fieldset>
-        <legend><?= __('Añadir categoría') ?></legend>
-        <div class="form-group row">
-            <div class="col">
-                <?= $this->Form->control('name', ['label' => false, 'placeholder' => 'Nombre', 'class' => 'form-control']); ?>
+
+<main>
+    <div class="container">
+
+        <?= $this->Form->create($category, ['type' => 'file']) ?>
+        <fieldset>
+            <legend><?= __('Añadir categoría') ?></legend>
+            <?= $this->Form->control('name', ['label' => _('Nombre')]); ?>
+            <?= $this->Form->control('body', ['label' => _('Descripción')]); ?>
+            <?= $this->Form->control('image', ['label' => _('Imagen'), 'type' => 'file']) ?>
+            <?php // Si existen promociones, se muestra el 'select' con la lista de todas las promociones para incluir en la categoría
+            if ($promotions->toArray()) : ?>
+                <?= $this->Form->control('promotions._ids', ['label' => _('Promociones'), 'Incluir promociones', 'options' => $promotions]) ?>
+            <?php endif; ?>
+            <?= $this->Form->control('state', ['label' => _('Estado'), 'default' => 'active', 'options' => ['active' => 'Activo', 'inactive' => 'Inactivo'], 'type' => 'radio']); ?>
+            <div class="form-actions">
+                <?= $this->Form->button(__('Crear')) ?>
+                <?= $this->Form->button(__('Borrar'), ['type' => 'reset']) ?>
             </div>
-        </div>
-        <div class="form-group">
-            <?= $this->Form->control('state', ['label' => false, 'empty' => '- Estado', 'default' => 'active', 'options' => ['active' => 'Activo', 'inactive' => 'Inactivo'], 'class' => 'form-control']); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->Form->control('body', ['label' => false, 'placeholder' => 'Descripción', 'class' => 'form-control']); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->Form->control('image', ['type' => 'file', 'class' => 'form-control']) ?>
-        </div>
-        <?= $this->Form->control('promotions._ids', ['label' => 'Incluir promociones', 'options' => $promotions, 'class' => 'form-control']) ?>
-        <div class="btn-group col-sm-12 mt-2" role="group">
-            <?= $this->Form->button(__('Crear'), ['class' => 'btn btn-primary mr-2']) ?>
-            <?= $this->Form->button(__('Borrar'), ['type' => 'reset', 'class' => 'btn btn-secondary ml-2']) ?>
-        </div>
-    </fieldset>
-    <?= $this->Form->end() ?>
-</div>
+        </fieldset>
+        <?= $this->Form->end() ?>
+
+    </div>
+</main>
