@@ -1,0 +1,36 @@
+// Contenedor de todas las categorías
+.categories-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: read($measures, "s");
+}
+
+// Cada una de las tarjetas con la información de una categoría
+.category-card {
+    border: 1px solid read($colors, "medium");
+    padding: read($measures, "l") read($measures, "xl");
+    text-align: center;
+    flex-basis: calc((100% - 40px) / 5);
+    margin: read($measures, "s");
+    h5 {
+        a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: read($measures, "m");
+        }
+    }
+    &:hover {
+        border-color: read($colors, "accent");
+        transition: all 1s;
+        h5 {
+            a {
+                background-color: read($colors, "accent");
+                color: #fff;
+                transition: all 1s;
+            }
+        }
+    }
+}
