@@ -37,7 +37,7 @@ $cakeDescription = 'Ciropon';
     <?= $this->fetch('meta') ?>
 </head>
 
-<body>
+<body id="layout-small">
 
     <?= $this->Element('Layout/navbar') ?>
 
