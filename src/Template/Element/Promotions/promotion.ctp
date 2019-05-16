@@ -5,7 +5,7 @@
 $promoLink = ['controller' => 'promotions', 'action' => 'view', $promotion->slug];
 ?>
 
-<div class="card-promotion">
+<article class="promotion-card">
 
     <div class="promotion-img-wrapper">
         <?= $this->Html->link(
@@ -19,11 +19,14 @@ $promoLink = ['controller' => 'promotions', 'action' => 'view', $promotion->slug
     </div>
 
     <h5><?= $this->Html->link($promotion->name, $promoLink) ?></h5>
+
     <p class="promotion-description"><?= $promotion->body ?></p>
+
     <p class="promotion-price">
         <span class="price-new"><?= $promotion->price_new ?>€</span>
         <span class="price-original"><?= $promotion->price_old ?>€</span>
     </p>
-    <?= $this->Html->link(__('Comprar ya'), $promoLink, ['class' => 'button']) ?>
 
-</div>
+    <button><?= $this->Html->link(__('Comprar ya'), $promoLink, ['class' => 'button']) ?></button>
+
+</article>

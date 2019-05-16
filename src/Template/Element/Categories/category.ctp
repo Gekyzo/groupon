@@ -5,12 +5,12 @@
 $catLink = ['controller' => 'categories', 'action' => 'view', $category->slug];
 ?>
 
-<div class="card-category">
+<article class="category-card">
 
     <?= $this->Html->link(
         $this->Html->image(
             'categories/' . $category->name . '.png',
-            ['alt' => __('Imagen categoría'), 'class' => 'card-img-top']
+            ['alt' => __('Imagen categoría')]
         ),
         $catLink,
         ['escape' => false]
@@ -18,4 +18,4 @@ $catLink = ['controller' => 'categories', 'action' => 'view', $category->slug];
 
     <h5><?= $this->Html->link(h($category->name), $catLink) ?></h5>
 
-</div>
+</article>

@@ -31,7 +31,7 @@
 
     <?php // Muestro acciones para admin
     if ($currentUser['role'] === 'admin') {
-        echo $this->Element('navbar-admin');
+        echo $this->Element('Layout/navbar-admin');
     } ?>
 
 </nav>
