@@ -2,21 +2,24 @@
 /**
  * @var \App\View\AppView $this
  */
+$this->layout = 'small';
 ?>
 
-<main id="page-login">
-    <div class="container">
-        <?= $this->Flash->render() ?>
-        <?php /*$this->Flash->render('auth')*/ ?>
-        <?= $this->Form->create('', ['class' => 'form-login']) ?>
+<main>
+
+    <section>
+
+        <?= $this->Form->create('', ['class' => 'user-form']) ?>
         <fieldset>
             <legend><?= __('Login') ?></legend>
-            <?= $this->Form->control('email', ['required' => 'required', 'class' => 'required']) ?>
-            <?= $this->Form->control('password', ['required' => 'required', 'class' => 'required']) ?>
+            <?= $this->Form->control('email', ['label' => __('Email'), 'required' => 'required']) ?>
+            <?= $this->Form->control('password', ['label' => __('Contraseña'), 'required' => 'required']) ?>
         </fieldset>
         <div class="form-actions">
             <?= $this->Form->button(__('Entrar')); ?>
         </div>
         <?= $this->Form->end() ?>
-    </div>
+
+    </section>
+
 </main>
