@@ -5,34 +5,28 @@
  */
 ?>
 <main>
+
     <h1>Proyecto Groupon</h1>
     <p>versión 0.7.0</p>
 
-    <div class="container categories-carousel">
-        <div class="container-categories">
-            <?php foreach ($categories as $category) : ?>
-                <div class="card-category">
-                    <?= $this->Element('category', ['category' => $category]) ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
+    <?= $this->Element('Categories/categories-container') ?>
 
-    <div class="container">
+    <section class="container">
         <h2><?= __('Últimas ofertas') ?></h2>
         <?php foreach ($lastPromotions as $promotion) : ?>
             <div class="col-md-3">
-                <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
+                <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
             </div>
         <?php endforeach; ?>
-    </div>
+    </section>
 
-    <div class="container">
+    <section class="container">
         <h2><?= __('Promociones destacadas') ?></h2>
         <?php foreach ($bestPromotions as $promotion) : ?>
             <div class="col-md-3">
-                <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
+                <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
             </div>
         <?php endforeach; ?>
-    </div>
+    </section>
+
 </main>

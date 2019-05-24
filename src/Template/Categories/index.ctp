@@ -5,16 +5,8 @@
  */
 ?>
 
-<main id="page-categories" class="categories-carousel">
+<main>
 
-    <div class="container container-categories">
-
-        <?php foreach ($categories as $category) : ?>
-
-            <?= $this->Element('category', ['category' => $category]) ?>
-
-        <?php endforeach; ?>
-
-    </div>
+    <?= $this->Element('Categories/categories-container') ?>
 
 </main>

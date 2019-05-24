@@ -15,13 +15,16 @@
 @import "elements/html";
 @import "elements/main";
 @import "elements/nav";
+@import "elements/text";
 
 // 5. Objects
 @import "objects/alert";
+@import "objects/breadcrumb";
+@import "objects/categories";
 @import "objects/container";
-@import "objects/page-login";
-@import "objects/page-categories";
-@import "objects/page-promotions";
+@import "objects/layouts";
+@import "objects/promotions";
+@import "objects/users";
 
 // 6. Components
 @import "components/button";

@@ -153,6 +153,21 @@ button {
   margin-right: 25px;
 }
 
+h1 {
+  text-transform: uppercase;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+h1 span {
+  padding: 10px;
+  background-color: #ffca55;
+}
+
 h2 {
   text-transform: uppercase;
   border-bottom: 1px solid #ccc;
@@ -161,6 +176,7 @@ h2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 1.25rem;
 }
 h2 span {
   padding: 10px;
@@ -191,6 +207,13 @@ html {
 main {
   max-width: 1280px;
   margin: auto;
+}
+
+section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  padding: 10px;
 }
 
 nav {
@@ -245,6 +268,44 @@ nav .container {
   transition: all 2s;
 }
 
+.breadcrumb {
+  flex-basis: 100%;
+  margin-top: 25px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5px;
+}
+
+.category-card {
+  border: 1px solid #ccc;
+  padding: 25px 50px;
+  text-align: center;
+  flex-basis: calc((100% - 40px) / 5);
+  margin: 5px;
+}
+.category-card h5 a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px;
+}
+.category-card:hover {
+  border-color: #ffca55;
+  transition: all 1s;
+}
+.category-card:hover h5 a {
+  background-color: #ffca55;
+  color: #fff;
+  transition: all 1s;
+}
+
 .container {
   max-width: 1280px;
   margin: auto;
@@ -255,149 +316,109 @@ main .container {
   padding: 10px;
 }
 
-#page-login {
-  max-width: 400px;
-  margin: 25px auto auto auto;
-  padding: 0;
-  padding: 25px;
-}
-#page-login .container {
-  background-color: #fff;
+#layout-small main {
+  max-width: 500px;
 }
 
-.form-login div {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-.form-login div:not(:last-of-type) {
-  margin-bottom: 10px;
-}
-.form-login label {
-  flex-basis: 30%;
-}
-.form-login [type=email],
-.form-login [type=password] {
-  flex-basis: 70%;
-}
-
-#page-categories {
-  margin-top: 25px;
-}
-
-.categories-carousel .container {
-  margin-top: 25px;
-}
-.categories-carousel .container-categories {
+.promotions-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 5px;
 }
-.categories-carousel .card-category {
-  border: 1px solid #ccc;
-  padding: 25px 50px;
-  text-align: center;
-  flex-basis: calc((100% - 40px) / 5);
-  margin-bottom: 10px;
-}
-.categories-carousel .card-category h5 {
-  text-align: center;
-}
-.categories-carousel .card-category h5 a {
-  text-decoration: none;
-  color: inherit;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 10px;
-}
-.categories-carousel .card-category:not(:nth-child(5n)) {
-  margin-right: 10px;
-}
-.categories-carousel .card-category:hover {
-  border-color: #ffca55;
-  transition: all 1s;
-}
-.categories-carousel .card-category:hover h5 a {
-  background-color: #ffca55;
-  color: #fff;
-  transition: all 1s;
-}
-
-#page-promotion {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-#page-promotion section:nth-child(1) {
-  flex-basis: calc(100% / 3);
-}
-#page-promotion section:nth-child(2) {
-  flex-basis: calc((100% / 3) * 2);
-  margin-top: 0;
-}
-#page-promotion h1 {
+.promotions-container h2 {
   flex-basis: 100%;
+  margin: 5px;
 }
 
-.container-promotions {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.card-promotion {
+.promotion-card {
   text-align: center;
-  flex-basis: calc((100% - 30px) / 4);
-  margin-bottom: 20px;
+  flex-basis: calc((100% - 40px) / 4);
+  margin: 5px;
 }
-.card-promotion h5 {
+.promotion-card h5 {
   margin-top: 10px;
   margin-bottom: 5px;
 }
-.card-promotion h5 a {
+.promotion-card h5 a {
   text-decoration: none;
   color: inherit;
 }
-.card-promotion img {
-  width: 100%;
-}
-.card-promotion:hover img {
+.promotion-card:hover img {
   transform: scale(1.5);
   transition: all 0.8s;
 }
-.card-promotion .promotion-img-wrapper {
+.promotion-card .promotion-img-wrapper {
   overflow: hidden;
   border: 1px solid #ccc;
   padding: 10px;
 }
-.card-promotion p {
+.promotion-card .promotion-img-wrapper img {
+  width: 100%;
+}
+.promotion-card p {
   font-size: 0.8rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 5px;
+  margin: 5px auto;
   width: 80%;
 }
-.card-promotion p:last-of-type {
-  margin-bottom: 20px;
-}
-.card-promotion:not(:nth-child(4n)) {
-  margin-right: 10px;
-}
-
-.promotion-description {
+.promotion-card .promotion-description {
   text-align: justify;
 }
-
-.promotion-price {
+.promotion-card .promotion-price {
   text-align: center;
+  margin-top: 10px;
 }
-.promotion-price .price-new {
+.promotion-card .promotion-price .price-new {
   font-weight: bold;
   font-size: 1.5rem;
 }
-.promotion-price .price-original {
+.promotion-card .promotion-price .price-original {
   text-decoration: line-through;
   color: #303030;
+}
+
+#promotion-detailed {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#promotion-detailed .promotion-gallery {
+  flex-basis: calc((100% - 10px) / 2);
+}
+#promotion-detailed .promotion-info {
+  flex-basis: calc((100% - 10px) / 2);
+  margin-left: 10px;
+}
+#promotion-detailed .promotion-info p {
+  font-size: 0.8rem;
+}
+#promotion-detailed .promotion-info h2 {
+  margin-top: 25px;
+}
+#promotion-detailed #promotion-price {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: fit-content;
+}
+#promotion-detailed #promotion-price p:nth-child(1) {
+  font-size: 2rem;
+  font-weight: 700;
+}
+#promotion-detailed .promotion-image-main {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.user-form label {
+  flex-basis: 30%;
+}
+.user-form input {
+  flex-basis: 70%;
 }
 
 .button {

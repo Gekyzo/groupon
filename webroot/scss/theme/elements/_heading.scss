@@ -1,15 +1,25 @@
-h2 {
+@mixin heading {
     text-transform: uppercase;
     border-bottom: 1px solid read($colors, "medium");
     margin-bottom: read($measures, "m");
     padding-bottom: read($measures, "m");
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     span {
         padding: read($measures, "m");
         background-color: read($colors, "accent");
     }
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+}
+
+h1 {
+    @include heading;
+    font-size: 1.5rem;
+}
+
+h2 {
+    @include heading;
+    font-size: 1.25rem;
 }
 
 .heading-right {

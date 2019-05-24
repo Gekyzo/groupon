@@ -2,3 +2,10 @@ main {
     max-width: read($layout, "max-width");
     margin: auto;
 }
+
+section {
+    margin-top: read($measures, "m");
+    margin-bottom: read($measures, "m");
+    background-color: #fff;
+    padding: read($measures, "m");
+}

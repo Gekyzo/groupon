@@ -5,13 +5,15 @@
  */
 ?>
 
-<main id="page-promotion">
+<main id="promotion-detailed">
 
-    <section class="container">
+    <section class="breadcrumb">Home / Categorías / Restaurantes / Cena en Kiro Sushi</section>
+
+    <section class="promotion-gallery">
 
         <?= $this->Html->image(
             'promotions/' . $promotion->images[0]->name,
-            ['alt' => __('Imagen promoción'), 'class' => 'promotion-image-main', 'style' => 'width: 100%']
+            ['alt' => __('Imagen promoción'), 'class' => 'promotion-image-main']
         ) ?>
 
         <?php
@@ -20,7 +22,7 @@
          */
         unset($promotion->images[0]);
 
-        /* Galería */
+        /* Muestro la galería */
         if (!empty($promotion->images)) : ?>
             <?php foreach ($promotion->images as $image) : ?>
                 <?= $this->Html->image(
@@ -32,33 +34,49 @@
 
     </section>
 
-    <section class="container">
+    <section class="promotion-info">
 
         <h1><?= h($promotion->name) ?></h1>
 
         <?= $this->Text->autoParagraph(h($promotion->body)); ?>
 
-        <?= $this->Html->link(__('Comprar'), ['controller' => 'orders', 'action' => 'confirm', $promotion->id], ['class' => 'btn btn-primary btn-block']) ?>
         <h2><?= __('Detalles') ?></h2>
         <p>
             <?= __('Disponible hasta') . ' ' . h($promotion->available_until) ?>
-        </p>
-        <p>
-            <b><?= __('Consíguelo por') . ' ' . h($promotion->price_new) . '€.' ?></b>
-            <?= __('Precio original') . ' ' . h($promotion->price_old) . '€.' ?>
         </p>
         <p><?= __('Categorías') ?>:
             <?php
             /**
              * Printeamos todas las categorías a las que pertenece la promo
              */
-            debug($promotion);
-            die;
-            foreach ($promotion->categories as $categories) {
-                echo h($categories->name) . ', ';
+            $promotionCategories = [];
+            foreach ($promotion->categories as $category) {
+                array_push($promotionCategories, $category->name);
             }
+
+            $lastInArr = end($promotionCategories);
+
+            // Imprimo la lista de categorías asociadas a la promoción
+            foreach ($promotionCategories as $cat) : ?>
+
+                <?= $this->Html->link(h($cat), ['controller' => 'categories', 'action' => 'view', strtolower($cat)]) ?>
+
+                <?php // Imprimir una coma entre los elementos
+                if ($cat !== $lastInArr) {
+                    echo ', ';
+                }
+
+            endforeach;
             ?>
         </p>
+
+        <div id="promotion-price">
+
+            <p><?= h($promotion->price_new) . '€' ?></p>
+            <p><i><?= __('Precio original') . ' ' . h($promotion->price_old) . '€.' ?></i></p>
+            <button><?= $this->Html->link(__('Comprar'), ['controller' => 'orders', 'action' => 'confirm', $promotion->id], ['class' => 'button']) ?> </button>
+
+        </div>
 
         <?php if (!empty($promotion->orders)) : ?>
             <h2><?= __('Ofertas relacionadas') ?></h2>
