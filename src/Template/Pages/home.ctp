@@ -4,32 +4,29 @@
  * @var \App\Model\Entity\Category[]|\Cake\Collection\CollectionInterface $categories
  */
 ?>
-<h1>Proyecto Groupon</h1>
-<p>versión 0.7.0</p>
+<main>
 
-<h2><?= __('Categorías') ?></h2>
-<div class="row justify-content-md-center">
-    <?php foreach ($categories as $category) : ?>
-        <div class="col-md-2">
-            <?= $this->Element('category', ['category' => $category]) ?>
-        </div>
-    <?php endforeach; ?>
-</div>
+    <h1>Proyecto Groupon</h1>
+    <p>versión 0.7.0</p>
 
-<h2><?= __('Últimas ofertas') ?></h2>
-<div class="row">
-    <?php foreach ($lastPromotions as $promotion) : ?>
-        <div class="col-md-3">
-            <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
-        </div>
-    <?php endforeach; ?>
-</div>
+    <?= $this->Element('Categories/categories-container') ?>
 
-<h2><?= __('Promociones destacadas') ?></h2>
-<div class="row">
-    <?php foreach ($bestPromotions as $promotion) : ?>
-        <div class="col-md-3">
-            <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
-        </div>
-    <?php endforeach; ?>
-</div>
+    <section class="container">
+        <h2><?= __('Últimas ofertas') ?></h2>
+        <?php foreach ($lastPromotions as $promotion) : ?>
+            <div class="col-md-3">
+                <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
+            </div>
+        <?php endforeach; ?>
+    </section>
+
+    <section class="container">
+        <h2><?= __('Promociones destacadas') ?></h2>
+        <?php foreach ($bestPromotions as $promotion) : ?>
+            <div class="col-md-3">
+                <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
+            </div>
+        <?php endforeach; ?>
+    </section>
+
+</main>

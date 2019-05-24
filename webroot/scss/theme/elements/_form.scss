@@ -1,0 +1,100 @@
+form {
+    .input {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin-bottom: read($measures, "m");
+        label {
+            padding: read($measures, "s");
+            margin-right: read($measures, "s");
+        }
+    }
+}
+
+fieldset {
+    padding: read($measures, "m");
+}
+
+legend {
+    text-transform: uppercase;
+    padding-bottom: read($measures, "s");
+    font-style: italic;
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid read($colors, "medium");
+}
+
+input,
+textarea {
+    border: 1px solid read($colors, "medium");
+    padding: read($measures, "s");
+}
+
+button {
+    padding: read($measures, "m");
+    background-color: read($colors, "accent");
+    margin-top: read($measures, "m");
+    padding-left: read($measures, "xl");
+    padding-right: read($measures, "xl");
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.input {
+    label {
+        flex-basis: 20%;
+    }
+    input,
+    textarea {
+        flex-basis: 80%;
+    }
+    &.radio {
+        label:not(:first-child) {
+            background-color: lighten(read($colors, "accent"), 10%);
+            flex-basis: auto;
+            padding-left: read($measures, "l");
+            padding-right: read($measures, "l");
+            &:not(:last-child) {
+                margin-right: read($measures, "l");
+            }
+            input {
+                width: auto;
+                margin-right: read($measures, "m");
+            }
+        }
+    }
+    // Regla para incluir símbolo en los campos requeridos del formulario
+    &.required {
+        label::before {
+            content: "* ";
+            color: red;
+        }
+    }
+}
+
+.col {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    div {
+        flex-basis: 50%;
+    }
+    .col-small {
+        flex-basis: 25%;
+        text-align: right;
+        label,
+        input {
+            flex-basis: 50%;
+        }
+    }
+    .col-medium {
+        flex-basis: 33%;
+        text-align: right;
+        label,
+        input {
+            flex-basis: 50%;
+        }
+    }
+}
+
+@import "../components/form-actions";

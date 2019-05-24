@@ -26,15 +26,11 @@ $cakeDescription = 'Ciropon';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('bootstrap/bootstrap') ?>
-    <?= $this->Html->css('bootstrap.extended') ?>
-    <?= $this->Html->css('fontawesome/fontawesome') ?>
-    <?= $this->Html->css('fontawesome/solid') ?>
-    <?= $this->Html->css('main') ?>
+    <?= $this->Html->css('theme/main') ?>
     <?= $this->fetch('css') ?>
 
-    <?= $this->Html->script('bootstrap/bootstrap') ?>
-    <?= $this->Html->script('fontawesome/fontawesome') ?>
+    <?php /* $this->Html->script('bootstrap/bootstrap')
+    $this->Html->script('fontawesome/fontawesome') */ ?>
     <?= $this->Html->script('jquery/jquery-3.3.1.min') ?>
     <?= $this->fetch('script') ?>
 
@@ -43,15 +39,11 @@ $cakeDescription = 'Ciropon';
 
 <body>
 
-    <div class="container">
+    <?= $this->Element('Layout/navbar') ?>
 
-        <?= $this->Element('navbar') ?>
+    <?= $this->Flash->render() ?>
 
-        <?= $this->Flash->render() ?>
-
-        <?= $this->fetch('content') ?>
-
-    </div>
+    <?= $this->fetch('content') ?>
 
 </body>
 

@@ -2,18 +2,24 @@
 /**
  * @var \App\View\AppView $this
  */
+$this->layout = 'small';
 ?>
 
-<?= $this->Flash->render('auth') ?>
-<?= $this->Form->create('', ['class' => 'form-signin']) ?>
-<fieldset>
-    <legend><?= __('Login') ?></legend>
-    <div class="form-group">
-        <?= $this->Form->control('email', ['label' => false, 'placeholder' => 'Email', 'class' => 'form-control']) ?>
-    </div>
-    <div class="form-group">
-        <?= $this->Form->control('password', ['label' => false, 'placeholder' => 'Contraseña', 'class' => 'form-control']) ?>
-    </div>
-</fieldset>
-<?= $this->Form->button(__('Entrar'), ['class' => 'btn btn-primary']); ?>
-<?= $this->Form->end() ?> 
+<main>
+
+    <section>
+
+        <?= $this->Form->create('', ['class' => 'user-form']) ?>
+        <fieldset>
+            <legend><?= __('Login') ?></legend>
+            <?= $this->Form->control('email', ['label' => __('Email'), 'required' => 'required']) ?>
+            <?= $this->Form->control('password', ['label' => __('Contraseña'), 'required' => 'required']) ?>
+        </fieldset>
+        <div class="form-actions">
+            <?= $this->Form->button(__('Entrar')); ?>
+        </div>
+        <?= $this->Form->end() ?>
+
+    </section>
+
+</main>

@@ -1,0 +1,39 @@
+@mixin heading {
+    text-transform: uppercase;
+    border-bottom: 1px solid read($colors, "medium");
+    margin-bottom: read($measures, "m");
+    padding-bottom: read($measures, "m");
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    span {
+        padding: read($measures, "m");
+        background-color: read($colors, "accent");
+    }
+}
+
+h1 {
+    @include heading;
+    font-size: 1.5rem;
+}
+
+h2 {
+    @include heading;
+    font-size: 1.25rem;
+}
+
+.heading-right {
+    align-self: flex-end;
+    text-transform: none;
+    background-color: inherit;
+    font-weight: initial;
+    &:hover {
+        background-color: read($colors, "accent");
+        transition: all 1s;
+    }
+    a {
+        color: inherit;
+        text-decoration-color: read($colors, "accent");
+        text-decoration-style: double;
+    }
+}

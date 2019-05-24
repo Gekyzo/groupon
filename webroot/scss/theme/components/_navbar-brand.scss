@@ -1,0 +1,9 @@
+.navbar-brand {
+    text-transform: uppercase;
+    background-color: read($colors, "accent");
+    color: #000;
+    font-weight: bold;
+    padding: read($measures, "m");
+    text-align: center;
+    flex-grow: 1;
+}
