@@ -7,7 +7,7 @@
 
 <main id="promotion-detailed">
 
-    <section class="breadcrumb">Home / Categorías / Restaurantes / Cena en Kiro Sushi</section>
+    <section class="breadcrumb">Home / <?= $promotion->categories[0]['name'] ?> / <?= $promotion->name ?></section>
 
     <section class="promotion-gallery">
 

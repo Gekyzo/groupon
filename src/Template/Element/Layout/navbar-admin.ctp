@@ -3,11 +3,11 @@
 $currentController = $this->request->getParam('controller');
 ?>
 
-<div style="position: absolute; bottom: 10px; left: 40%; color: black; background-color: #fff; border: 1px solid #ccc;">
+<div class="container" id="admin_panel">
     <ul>
         <li>Acciones admin:</li>
         <li><?= $this->Html->link(__('Listar'), ['controller' => $currentController, 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Crear'), ['controller' => $currentController, 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Editar'), ['controller' => $currentController, 'action' => 'edit']) ?></li>
+        <li><?= $this->Html->link(__('Editar'), ['controller' => $currentController, 'action' => 'edit', 3]) ?></li>
     </ul>
 </div>

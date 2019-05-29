@@ -7,14 +7,14 @@
 
 <main>
 
-    <div class="container container-promotions">
+    <section class="promotions-container">
 
         <?php foreach ($promotions as $promotion) : ?>
 
-            <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
+            <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
 
         <?php endforeach; ?>
 
-    </div>
+    </section>
 
 </main>

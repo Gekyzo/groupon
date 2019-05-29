@@ -3,7 +3,7 @@
 
         <?= $this->Html->link('Ciropon', ['controller' => 'pages', 'action' => 'display'], ['class' => 'navbar-brand']) ?>
 
-        <ul>
+        <ul id="menu">
             <li><?= $this->Html->link(__('Promociones'), ['controller' => 'promotions', 'action' => 'index']) ?></li>
             <li><?= $this->Html->link(__('Categorías'), ['controller' => 'categories', 'action' => 'index']) ?></li>
             <?php if (isset($currentUser) && $currentUser['role'] === 'admin') : ?>
