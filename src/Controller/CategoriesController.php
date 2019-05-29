@@ -69,7 +69,7 @@ class CategoriesController extends AppController
             $this->Images->mainUpload('Category', $files);
 
             /* Almaceno la entidad en la BD */
-            $data['image'] = '\\' . Configure::read('Fol.images') . 'categories\\' . $data['image']['name'];
+            $data['image'] = 'categories/' . $data['image']['name'];
             $category = $this->Categories->patchEntity($category, $data);
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('La categoría ha sido creada correctamente.'));

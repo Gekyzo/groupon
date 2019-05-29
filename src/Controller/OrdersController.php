@@ -27,6 +27,12 @@ class OrdersController extends AppController
         $this->set(compact('orders'));
     }
 
+    public function discard()
+    {
+        $this->Flash->error(__('Tu pedido ha sido cancelado.'));
+        $this->redirect(['controller' => 'pages', 'action' => 'home']);
+    }
+
     /**
      * Muestra la información del pedido que recoja como parámetro por URL.
      * Sólo permite ver la información de un pedido para el usuario que lo realiza.
@@ -92,7 +98,7 @@ class OrdersController extends AppController
             'fields' => ['id', 'name', 'price_old', 'price_new']
         ]);
         $promotion['saving'] = $promotion['price_old'] - $promotion['price_new'];
-        $promotion = $this->depure($promotion, ['id', 'name', 'saving']);
+        $promotion = $this->depure($promotion, ['id', 'name', 'price_old', 'price_new', 'saving']);
         $order = $this->Orders->newEntity();
         $this->set(compact('order', 'promotion'));
     }

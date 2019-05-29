@@ -81,11 +81,11 @@ class PromotionsController extends AppController
              * Paso la variable '$imagen' por referencia con el prefijo '&'
              */
             foreach ($data['images'] as &$imagen) {
-                $imagen['path'] = '\\' . Configure::read('Fol.images') . 'promotions\\' . $imagen['name'];
+                $imagen['path'] = 'promotions/' . $imagen['name'];
             }
             $promotion = $this->Promotions->patchEntity($promotion, $data);
             if ($this->Promotions->save($promotion)) {
-                $this->Flash->success(__('The promotion has been saved.'));
+                $this->Flash->success(__('La promoción ha sido añadida.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The promotion could not be saved. Please, try again.'));
@@ -110,7 +110,7 @@ class PromotionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $promotion = $this->Promotions->patchEntity($promotion, $this->request->getData());
             if ($this->Promotions->save($promotion)) {
-                $this->Flash->success(__('The promotion has been saved.'));
+                $this->Flash->success(__('La promoción ha sido actualizada.'));
 
                 return $this->redirect(['action' => 'index']);
             }
