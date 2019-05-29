@@ -184,7 +184,7 @@ class UsersController extends AppController
                 /**
                  * Redirect a Home y mostramos mensaje bienvenida
                  */
-                $this->Flash->success(__('Bienvenido ') . $user['name']);
+                $this->Flash->success(__('Bienvenid@ ') . $user['name']);
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('El nombre de usuario o contraseña son incorrectos.');

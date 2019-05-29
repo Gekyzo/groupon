@@ -26,6 +26,7 @@
                 <div class="col-medium">
                     <?= $this->Form->control('available_since', ['label' => __('Disponible desde'), 'type' => 'datetime-local']); ?>
                 </div>
+                <div class="col-medium">&nbsp;</div>
                 <div class="col-medium">
                     <?= $this->Form->control('available_until', ['label' => __('Disponible hasta'), 'type' => 'datetime-local']); ?>
                 </div>

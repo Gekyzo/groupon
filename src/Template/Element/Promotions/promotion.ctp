@@ -8,20 +8,22 @@ $promoLink = ['controller' => 'promotions', 'action' => 'view', $promotion->slug
 <article class="promotion-card">
 
     <div class="promotion-img-wrapper">
-        <?= $this->Html->link(
-            $this->Html->image(
-                'promotions/' . $promotion->images[0]->name,
-                ['alt' => __('Imagen promoción')]
-            ),
-            $promoLink,
-            ['escape' => false]
+        <?= $this->Html->image(
+            'promotions/' . $promotion->images[0]->name,
+            [
+                'alt' => __('Imagen promoción'),
+                'url' => $promoLink
+            ]
         ) ?>
     </div>
 
     <h5><?= $this->Html->link($promotion->name, $promoLink) ?></h5>
 
-    <p class="promotion-description"><?= $promotion->body ?></p>
-
+    <p class="promotion-description">
+        <?php
+        echo substr($promotion->body, 0, 45);
+        if (strlen($promotion->body) > 45) echo '...';
+        ?></p>
     <p class="promotion-price">
         <span class="price-new"><?= $promotion->price_new ?>€</span>
         <span class="price-original"><?= $promotion->price_old ?>€</span>

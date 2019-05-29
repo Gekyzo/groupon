@@ -88,8 +88,7 @@ button {
         }
     }
     .col-medium {
-        flex-basis: 33%;
-        text-align: right;
+        flex-basis: calc(100% / 3);
         label,
         input {
             flex-basis: 50%;

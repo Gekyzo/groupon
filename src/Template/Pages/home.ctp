@@ -4,29 +4,37 @@
  * @var \App\Model\Entity\Category[]|\Cake\Collection\CollectionInterface $categories
  */
 ?>
-<main>
+<main id="homepage">
 
-    <h1>Proyecto Groupon</h1>
-    <p>versión 0.7.0</p>
+    <section>
+        <h1>Proyecto Groupon</h1>
+        <p>versión 0.7.0</p>
+    </section>
 
     <?= $this->Element('Categories/categories-container') ?>
 
-    <section class="container">
+    <section class="promotions-container">
+
         <h2><?= __('Últimas ofertas') ?></h2>
+
         <?php foreach ($lastPromotions as $promotion) : ?>
-            <div class="col-md-3">
-                <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
-            </div>
+
+            <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
+
         <?php endforeach; ?>
+
     </section>
 
-    <section class="container">
+    <section class="promotions-container">
+
         <h2><?= __('Promociones destacadas') ?></h2>
+
         <?php foreach ($bestPromotions as $promotion) : ?>
-            <div class="col-md-3">
-                <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
-            </div>
+
+            <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
+
         <?php endforeach; ?>
+
     </section>
 
 </main>

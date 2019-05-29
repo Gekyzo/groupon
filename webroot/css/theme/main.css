@@ -136,8 +136,7 @@ button {
   flex-basis: 50%;
 }
 .col .col-medium {
-  flex-basis: 33%;
-  text-align: right;
+  flex-basis: calc(100% / 3);
 }
 .col .col-medium label,
 .col .col-medium input {
@@ -151,6 +150,12 @@ button {
 }
 .form-actions button:not(:last-of-type) {
   margin-right: 25px;
+}
+.form-actions .cancel {
+  margin-left: 10px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 10px;
 }
 
 h1 {
@@ -235,7 +240,7 @@ nav ul {
   display: flex;
   flex-direction: row;
 }
-nav ul:not(#user-actions) {
+nav ul#menu {
   flex-grow: 4;
 }
 nav ul#user-actions {
@@ -251,11 +256,61 @@ nav .container {
   flex-direction: row;
   flex-wrap: nowrap;
 }
+nav #admin_panel {
+  background-color: #ffda88;
+  color: black;
+}
+nav #admin_panel ul {
+  margin: auto;
+}
+
+table {
+  width: 100%;
+}
+table.vertical-table th,
+table.vertical-table td {
+  padding: 10px;
+}
+
+th {
+  text-align: left;
+  border-color: #ccc;
+}
+th a {
+  text-decoration: none;
+}
+
+th,
+td {
+  padding-bottom: 10px;
+  border-style: solid;
+  border-bottom-width: 1px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  padding-left: 10px;
+}
+
+td {
+  padding-top: 10px;
+  border-color: #f3f3f3;
+}
+
+a {
+  color: inherit;
+}
 
 .alert {
+  max-width: 1280px;
+  margin: 10px auto;
   padding: 25px;
   border-width: 1px;
   border-style: solid;
+}
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
 }
 .alert-danger {
   background-color: #f8d7da;
@@ -270,7 +325,7 @@ nav .container {
 
 .breadcrumb {
   flex-basis: 100%;
-  margin-top: 25px;
+  margin-top: 20px;
   text-align: center;
   font-size: 0.8rem;
 }
@@ -286,8 +341,12 @@ nav .container {
   border: 1px solid #ccc;
   padding: 25px 50px;
   text-align: center;
-  flex-basis: calc((100% - 40px) / 5);
+  flex-basis: calc((100% - 50px) / 5);
   margin: 5px;
+}
+.category-card > a {
+  display: block;
+  margin-bottom: 10px;
 }
 .category-card h5 a {
   text-decoration: none;
@@ -306,6 +365,22 @@ nav .container {
   transition: all 1s;
 }
 
+#category-view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#category-view .cat-image {
+  flex-basis: 10%;
+  text-align: center;
+}
+#category-view .cat-image img {
+  margin-top: 11px;
+}
+#category-view .cat-description {
+  flex-basis: 90%;
+}
+
 .container {
   max-width: 1280px;
   margin: auto;
@@ -314,6 +389,13 @@ nav .container {
 main .container {
   background-color: #fff;
   padding: 10px;
+}
+
+#homepage .promotion-card {
+  flex-basis: calc((100% - 30px) / 3);
+}
+#homepage .promotion-card .promotion-description {
+  text-align: center;
 }
 
 #layout-small main {
@@ -352,6 +434,9 @@ main .container {
   overflow: hidden;
   border: 1px solid #ccc;
   padding: 10px;
+  height: 200px;
+  display: flex;
+  align-items: center;
 }
 .promotion-card .promotion-img-wrapper img {
   width: 100%;
