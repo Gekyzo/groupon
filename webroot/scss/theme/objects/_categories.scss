@@ -11,8 +11,12 @@
     border: 1px solid read($colors, "medium");
     padding: read($measures, "l") read($measures, "xl");
     text-align: center;
-    flex-basis: calc((100% - 40px) / 5);
+    flex-basis: calc((100% - 50px) / 5);
     margin: read($measures, "s");
+    & > a {
+        display: block;
+        margin-bottom: read($measures, "m");
+    }
     h5 {
         a {
             text-decoration: none;
@@ -32,5 +36,21 @@
                 transition: all 1s;
             }
         }
+    }
+}
+
+#category-view {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .cat-image {
+        flex-basis: 10%;
+        text-align: center;
+        img {
+            margin-top: 11px;
+        }
+    }
+    .cat-description {
+        flex-basis: 90%;
     }
 }

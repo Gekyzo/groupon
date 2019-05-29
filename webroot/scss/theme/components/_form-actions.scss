@@ -5,4 +5,10 @@
     button:not(:last-of-type) {
         margin-right: read($measures, "l");
     }
+    .cancel {
+        margin-left: read($measures, "m");
+        height: 40px;
+        line-height: 40px;
+        margin-top: read($measures, "m");
+    }
 }

@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    &.vertical-table {
+        th,
+        td {
+            padding: 10px;
+        }
+    }
+}
+
+th {
+    text-align: left;
+    border-color: read($colors, "medium");
+    a {
+        text-decoration: none;
+    }
+}
+
+th,
+td {
+    padding-bottom: 10px;
+    border-style: solid;
+    border-bottom-width: 1px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    padding-left: 10px;
+}
+
+td {
+    padding-top: 10px;
+    border-color: read($colors, "light");
+}

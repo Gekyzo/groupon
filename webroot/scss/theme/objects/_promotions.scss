@@ -33,6 +33,9 @@
         overflow: hidden;
         border: 1px solid read($colors, "medium");
         padding: read($measures, "m");
+        height: 200px;
+        display: flex;
+        align-items: center;
         img {
             width: 100%;
         }

@@ -15,7 +15,7 @@ nav {
     ul {
         display: flex;
         flex-direction: row;
-        &:not(#user-actions) {
+        &#menu {
             flex-grow: 4;
         }
         &#user-actions {
@@ -31,5 +31,12 @@ nav {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
+    }
+    #admin_panel {
+        background-color: #ffda88;
+        color: black;
+        ul {
+            margin: auto;
+        }
     }
 }
