@@ -31,14 +31,24 @@ class UsersSeed extends AbstractSeed
             ],
             [
                 'id' => '2',
-                'name' => 'Client',
-                'email' => 'client@gmail.com',
+                'name' => 'Maria',
+                'email' => 'maria@gmail.com',
                 'password' => '$2y$10$lvBlqxyXJMGezk2GNrqK7.vdClrEqKcusx5sh1u0A/BbFIkyV0bJ.',
                 'role' => 'client',
                 'created' => '2019-01-01 08:01:00',
                 'last_active' => NULL,
                 'deleted' => NULL,
             ],
+            [
+                'id' => '3',
+                'name' => 'Daniel',
+                'email' => 'daniel@gmail.com',
+                'password' => '$2y$10$lvBlqxyXJMGezk2GNrqK7.vdClrEqKcusx5sh1u0A/BbFIkyV0bJ.',
+                'role' => 'client',
+                'created' => '2019-01-01 08:02:00',
+                'last_active' => NULL,
+                'deleted' => NULL,
+            ]
         ];
 
         $table = $this->table('users');
