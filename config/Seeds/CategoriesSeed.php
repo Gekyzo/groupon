@@ -6,6 +6,13 @@ use Migrations\AbstractSeed;
  */
 class CategoriesSeed extends AbstractSeed
 {
+    public function getDependencies()
+    {
+        return [
+            'UsersSeed'
+        ];
+    }
+
     /**
      * Run Method.
      *
