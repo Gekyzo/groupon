@@ -523,4 +523,33 @@ main .container {
   flex-grow: 1;
 }
 
+.paginator {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 10px;
+}
+.paginator ul {
+  margin: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.paginator ul li {
+  list-style-type: none;
+}
+.paginator ul li.prev, .paginator ul li.next {
+  background-color: #000;
+  color: #f3f3f3;
+  font-size: 1.2rem;
+}
+.paginator ul li a {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+.paginator #paginator-counter {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 /*# sourceMappingURL=main.css.map */
