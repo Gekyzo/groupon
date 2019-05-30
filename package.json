@@ -1,11 +1,16 @@
 {
-    "name": "groupon",
-    "version": "0.0.1",
-    "description": "Proyecto tercera evaluación de la asignatura Programación para DAW.",
-    "scripts": {
-        "sass": "sass --watch webroot/scss:webroot/css/"
-    },
-    "dependencies": {
-        "gulp": "^4.0.2"
-    }
+   "name": "groupon",
+   "version": "0.0.1",
+   "description": "Proyecto tercera evaluación de la asignatura Programación para DAW.",
+   "scripts": {
+      "sass": "sass --watch webroot/scss:webroot/css/"
+   },
+   "dependencies": {
+      "gulp": "^4.0.2"
+   },
+   "prettier": {
+      "trailingComma": "es5",
+      "tabWidth": 2,
+      "singleQuote": true
+   }
 }
