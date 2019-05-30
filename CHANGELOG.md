@@ -2,6 +2,15 @@
 
 Listado de actualizaciones y cambios realizados en el proyecto.
 
+## 1.0.0
+
+### General
+
+- [x] Defino switch accesor para order->state - 30/05/2019
+- [x] Actualizo vista Users::index, Orders::index, Images::index - 30/05/2019
+- [x] Actualizo paginadores - 30/05/2019
+- [x] Incluyo migrations y seeds para clonar el proyecto - 29/05/2019
+
 ## 0.7.0
 
 ### General

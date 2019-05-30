@@ -38,15 +38,7 @@
                             <th class="actions"><?= __('Actions') ?></th>
                         <?php endif; ?>
                     </tr>
-                    <?php
-                    foreach ($user->orders as $orders) :
-                        switch ($orders['state']) {
-                            case 'completed':
-                                $oders['state'] = 'Completado';
-                            default:
-                                $orders['state'] = 'Pendiente';
-                                break;
-                        } ?>
+                    <?php foreach ($user->orders as $orders) : ?>
                         <tr>
                             <?php if ($currentUser['role'] === 'admin') : ?>
                                 <td><?= h($orders->id) ?></td>

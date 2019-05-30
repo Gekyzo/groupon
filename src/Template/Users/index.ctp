@@ -6,17 +6,19 @@
 ?>
 
 <main>
+
     <div class="container">
+
         <h1><?= __('Usuarios') ?></h1>
         <table>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('last_active') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                <th><?= $this->Paginator->sort('id') ?></th>
+                <th><?= $this->Paginator->sort('name', __('Nombre')) ?></th>
+                <th><?= $this->Paginator->sort('email', __('Email')) ?></th>
+                <th><?= $this->Paginator->sort('role', __('Rol')) ?></th>
+                <th><?= $this->Paginator->sort('last_active', __('Última actividad')) ?></th>
+                <th><?= $this->Paginator->sort('created', __('Creado el')) ?></th>
+                <th class="actions"><?= __('Acciones') ?></th>
             </tr>
             <?php foreach ($users as $user) : ?>
                 <tr>
@@ -36,14 +38,15 @@
         </table>
 
         <div class="paginator">
-            <ul class="pagination">
-                <?= $this->Paginator->first('<< ' . __('first')) ?>
-                <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                <?= $this->Paginator->numbers() ?>
-                <?= $this->Paginator->next(__('next') . ' >') ?>
-                <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <ul>
+                <?= $this->Paginator->first('<< ') ?>
+                <?= $this->Paginator->prev('< ') ?>
+                <li id="paginator-counter"><?= $this->Paginator->counter(['format' => __('Mostrando {{current}} de {{count}}')]) ?></li>
+                <?= $this->Paginator->next(' >') ?>
+                <?= $this->Paginator->last(' >>') ?>
             </ul>
-            <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
         </div>
+
     </div>
+
 </main>
