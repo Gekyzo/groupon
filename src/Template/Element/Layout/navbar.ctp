@@ -1,8 +1,6 @@
 <nav>
     <div class="container">
 
-    <?= $this->Html->image('ciropon-logo.png'); ?>
-
         <?= $this->Html->link('Ciropon', ['controller' => 'pages', 'action' => 'display'], ['class' => 'navbar-brand']) ?>
 
         <ul id="menu">

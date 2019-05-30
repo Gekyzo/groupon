@@ -6,6 +6,15 @@ use Migrations\AbstractSeed;
  */
 class PromotionsSeed extends AbstractSeed
 {
+    public function getDependencies()
+    {
+        return [
+            'UsersSeed',
+            'CategoriesSeed',
+            'ImagesSeed'
+        ];
+    }
+
     /**
      * Run Method.
      *
@@ -154,8 +163,8 @@ también podrás combinar Catas de Vino y Paseos a caballo entre viñedos, visit
                 'price_old' => '119',
                 'price_new' => '96',
                 'state' => 'active',
-                'body' => 'Disfruta de esta espectacular escapada para los amantes del vino y de la naturaleza en pleno Valle de Ezcaray 
-Este apartamento para 2 adultos cuenta con cocina totalmente equipada y dispuesta para cualquier receta culinaria. 
+                'body' => 'Disfruta de esta espectacular escapada para los amantes del vino y de la naturaleza en pleno Valle de Ezcaray
+Este apartamento para 2 adultos cuenta con cocina totalmente equipada y dispuesta para cualquier receta culinaria.
 Pásalo en grande con la visita a la bodega que tenemos preparada para ti. ¡Te encantará!',
                 'available_since' => '2019-01-01 00:00:00',
                 'available_until' => '2020-01-01 00:00:00',

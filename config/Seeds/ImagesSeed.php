@@ -6,6 +6,14 @@ use Migrations\AbstractSeed;
  */
 class ImagesSeed extends AbstractSeed
 {
+    public function getDependencies()
+    {
+        return [
+            'UsersSeed',
+            'CategoriesSeed'
+        ];
+    }
+
     /**
      * Run Method.
      *
