@@ -2,9 +2,9 @@
 ##########################
 /config/app.php
 /config/.env
-/logs/*
-/tmp/*
-/vendor/*
+/logs/
+/tmp/
+/vendor/
 /node_modules/
 
 # OS generated files #

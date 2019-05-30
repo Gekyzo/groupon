@@ -32,7 +32,6 @@ $cakeDescription = 'Ciropon';
     <?php /* $this->Html->script('bootstrap/bootstrap')
     $this->Html->script('fontawesome/fontawesome') */ ?>
     <?= $this->Html->script('jquery/jquery-3.3.1.min') ?>
-    <?= $this->Html->script('ckeditor/ckeditor') ?>
     <?= $this->Html->script('main') ?>
     <?= $this->fetch('script') ?>
 
