@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// [ FORMS ]
+input {
+    width: 100%;
+    vertical-align: middle;
+    font-family: inherit;
+    font-size: inherit;
+}
+fieldset {
+    border: 0;
+    padding-top: 0;
+}
+
+button {
+    border: 0;
+}
+
+legend {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+select,
+option {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+// [ HEADINGS ]
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-size: inherit;
+}

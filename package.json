@@ -1,29 +1,16 @@
 {
-  "name": "groupon",
-  "version": "0.0.1",
-  "description": "Proyecto tercera evaluación de la asignatura Programación para DAW.",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.1",
-    "bootstrap-scss": "^4.3.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "twbs": "sass --watch node_modules/bootstrap-scss/:webroot/css/",
-    "sass": "sass --watch webroot/scss:webroot/css/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Gekyzo/groupon.git"
-  },
-  "author": "Ciro Mora",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Gekyzo/groupon/issues"
-  },
-  "homepage": "https://github.com/Gekyzo/groupon#readme"
+   "name": "groupon",
+   "version": "0.0.1",
+   "description": "Proyecto tercera evaluación de la asignatura Programación para DAW.",
+   "scripts": {
+      "sass": "sass --watch webroot/scss:webroot/css/"
+   },
+   "dependencies": {
+      "gulp": "^4.0.2"
+   },
+   "prettier": {
+      "trailingComma": "es5",
+      "tabWidth": 2,
+      "singleQuote": true
+   }
 }

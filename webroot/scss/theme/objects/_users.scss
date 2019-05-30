@@ -1,0 +1,9 @@
+.user-form {
+    // Reparto anchura entre los campos del formulario
+    label {
+        flex-basis: 30%;
+    }
+    input {
+        flex-basis: 70%;
+    }
+}

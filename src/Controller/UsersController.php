@@ -89,6 +89,9 @@ class UsersController extends AppController
             $this->redirect(['controller' => 'users', 'action' => 'view', $this->Auth->user('id')]);
         }
 
+        /**
+         * Si el usuario es nuevo, lo registra en la BD
+         */
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
@@ -181,16 +184,16 @@ class UsersController extends AppController
                 /**
                  * Redirect a Home y mostramos mensaje bienvenida
                  */
-                $this->Flash->success(__('Bienvenido ') . $user['name']);
+                $this->Flash->success(__('Bienvenid@ ') . $user['name']);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error('Your username or password is incorrect.');
+            $this->Flash->error('El nombre de usuario o contraseña son incorrectos.');
         }
     }
 
     /**
      * Defino permisos para cualquier visitante.
-     * Incluye los UNLOGGED.
+     * Incluye los NO LOGUEADOS.
      */
     public function initialize()
     {

@@ -1,0 +1,109 @@
+// Contenedor de todas las promociones
+.promotions-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: read($measures, "s");
+    h2 {
+        flex-basis: 100%;
+        margin: read($measures, "s");
+    }
+}
+
+// Cada una de las tarjetas con la información de una promoción
+.promotion-card {
+    text-align: center;
+    flex-basis: calc((100% - 40px) / 4);
+    margin: read($measures, "s");
+    h5 {
+        margin-top: read($measures, "m");
+        margin-bottom: read($measures, "s");
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+    &:hover {
+        img {
+            transform: scale(1.5);
+            transition: all 0.8s;
+        }
+    }
+    .promotion-img-wrapper {
+        overflow: hidden;
+        border: 1px solid read($colors, "medium");
+        padding: read($measures, "m");
+        height: 200px;
+        display: flex;
+        align-items: center;
+        img {
+            width: 100%;
+        }
+    }
+    p {
+        font-size: 0.8rem;
+        margin: read($measures, "s") auto;
+        width: 80%;
+    }
+    .promotion-description {
+        text-align: justify;
+    }
+    .promotion-price {
+        text-align: center;
+        margin-top: read($measures, "m");
+        .price-new {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .price-original {
+            text-decoration: line-through;
+            color: read($colors, "secondary");
+        }
+    }
+}
+
+// Vista detallada de las promociones
+#promotion-detailed {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    // Contenedor de la Galería de imágenes de la promo
+    .promotion-gallery {
+        flex-basis: calc((100% - #{read($measures, "m")}) / 2);
+    }
+
+    // Contenedor de la información detallada de la promo
+    .promotion-info {
+        flex-basis: calc((100% - #{read($measures, "m")}) / 2);
+        margin-left: read($measures, "m");
+        p {
+            font-size: 0.8rem;
+        }
+        h2 {
+            margin-top: read($measures, "l");
+        }
+    }
+
+    // Selector para el nuevo precio de la promo
+    #promotion-price {
+        border: 1px solid read($colors, "medium");
+        padding: read($measures, "m");
+        margin-top: read($measures, "l");
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        width: fit-content;
+        p:nth-child(1) {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+    }
+
+    // Selector de la imagen principal de la promo
+    .promotion-image-main {
+        width: 100%;
+        border: 1px solid read($colors, "medium");
+        padding: read($measures, "m");
+    }
+}

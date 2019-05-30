@@ -5,17 +5,18 @@
  */
 ?>
 
-<div class="container">
-    <h1><?= h($category->name) ?></h1>
-    <?= $this->Text->autoParagraph(h($category->body)); ?>
-    <h4><?= __('Todas las ofertas') ?></h4>
-    <?php if (!empty($category->promotions)) : ?>
-        <div class="row">
-            <?php foreach ($category->promotions as $promotion) : ?>
-                <div class="col-md-auto">
-                    <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
-                </div>
-            <?php endforeach; ?>
+<main>
+
+    <section id="category-view">
+        <div class="cat-image">
+            <?= $this->Html->Image($category->image) ?>
         </div>
-    <?php endif; ?>
-</div>
+        <div class="cat-description">
+            <h1><?= h($category->name) ?></h1>
+            <?= $this->Text->autoParagraph(h($category->body)); ?>
+        </div>
+    </section>
+
+    <?= $this->Element('Promotions/promotions-container'); ?>
+
+</main>

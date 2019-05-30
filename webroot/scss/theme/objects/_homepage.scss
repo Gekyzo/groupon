@@ -1,0 +1,8 @@
+#homepage {
+    .promotion-card {
+        flex-basis: calc((100% - 30px) / 3);
+        .promotion-description {
+            text-align: center;
+        }
+    }
+}

@@ -23,11 +23,32 @@ class UsersSeed extends AbstractSeed
                 'id' => '1',
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
-                'password' => '$2y$10$wOvAPESVSFGzPwRj2PeH/ecBdvkYgsUreMDYxgD/glkcCStXH7e0y',
+                'password' => '$2y$10$ixbTImZkdjBlghpe4qTII.VBQZPRBCnbZb6D4Nhb6.cXvZ6Dku/Ge',
                 'role' => 'admin',
-                'created' => '2019-04-16 11:05:27',
+                'created' => '2019-01-01 08:00:00',
+                'last_active' => NULL,
                 'deleted' => NULL,
             ],
+            [
+                'id' => '2',
+                'name' => 'Maria',
+                'email' => 'maria@gmail.com',
+                'password' => '$2y$10$lvBlqxyXJMGezk2GNrqK7.vdClrEqKcusx5sh1u0A/BbFIkyV0bJ.',
+                'role' => 'client',
+                'created' => '2019-01-01 08:01:00',
+                'last_active' => NULL,
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '3',
+                'name' => 'Daniel',
+                'email' => 'daniel@gmail.com',
+                'password' => '$2y$10$lvBlqxyXJMGezk2GNrqK7.vdClrEqKcusx5sh1u0A/BbFIkyV0bJ.',
+                'role' => 'client',
+                'created' => '2019-01-01 08:02:00',
+                'last_active' => NULL,
+                'deleted' => NULL,
+            ]
         ];
 
         $table = $this->table('users');

@@ -1,8 +1,20 @@
-<h2><?= __('Todas las ofertas') ?></h2>
-<div class="row">
-    <?php foreach ($promotions as $promotion) : ?>
-        <div class="col-md-3">
-            <?= $this->Element('promotion', ['promotion' => $promotion]) ?>
-        </div>
-    <?php endforeach; ?>
-</div>
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Promotions[]|\Cake\Collection\CollectionInterface $promotions
+ */
+?>
+
+<main>
+
+    <section class="promotions-container">
+
+        <?php foreach ($promotions as $promotion) : ?>
+
+            <?= $this->Element('Promotions/promotion', ['promotion' => $promotion]) ?>
+
+        <?php endforeach; ?>
+
+    </section>
+
+</main>

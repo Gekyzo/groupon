@@ -5,20 +5,18 @@
  */
 ?>
 
-<div class="container">
-    <h3><?= __('Pedidos') ?></h3>
-    <table class="table">
-        <thead>
+<main>
+    <div class="container">
+        <h1><?= __('Pedidos') ?></h1>
+        <table>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('promotion_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('state') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('promotion_id', __('Promoción')) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id', __('Usuario')) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('state', __('Estado')) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created', __('Realizado el')) ?></th>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
-        </thead>
-        <tbody>
             <?php foreach ($orders as $order) : ?>
                 <tr>
                     <td><?= $this->Number->format($order->id) ?></td>
@@ -33,16 +31,17 @@
                     </td>
                 </tr>
             <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        </table>
+
+        <div class="paginator">
+            <ul>
+                <?= $this->Paginator->first('<< ') ?>
+                <?= $this->Paginator->prev('< ') ?>
+                <li id="paginator-counter"><?= $this->Paginator->counter(['format' => __('Mostrando {{current}} de {{count}}')]) ?></li>
+                <?= $this->Paginator->next(' >') ?>
+                <?= $this->Paginator->last(' >>') ?>
+            </ul>
+        </div>
+
     </div>
-</div>
+</main>

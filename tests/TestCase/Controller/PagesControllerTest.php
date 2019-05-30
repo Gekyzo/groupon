@@ -1,97 +1,87 @@
 <?php
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         1.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\PagesController;
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
-use Cake\TestSuite\IntegrationTestCase;
-use Cake\View\Exception\MissingTemplateException;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
- * PagesControllerTest class
+ * App\Controller\PagesController Test Case
  */
-class PagesControllerTest extends IntegrationTestCase
+class PagesControllerTest extends TestCase
 {
+    use IntegrationTestTrait;
+
     /**
-     * testMultipleGet method
-     *
-     * @return void
+     * Fixtures manuales
      */
-    public function testMultipleGet()
+    public $Page;
+
+    /**
+     * Asigno valores a los fixtures manuales
+     */
+    public function setUp(): void
     {
-        $this->get('/');
-        $this->assertResponseOk();
-        $this->get('/');
-        $this->assertResponseOk();
+        parent::setUp();
+        $this->Page = new PagesController;
     }
 
     /**
-     * testDisplay method
+     * Método de limpieza
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        unset($this->Page);
+    }
+
+    /**
+     * Carga la page 'home' (su ruta es: '/')
      *
      * @return void
      */
     public function testDisplay()
     {
-        $this->get('/pages/home');
-        $this->assertResponseOk();
+        $this->get(['controller' => 'Pages', 'action' => 'display', '/']);
 
-        $this->assertResponseContains('<html>');
+        $this->assertResponseSuccess('No ha sido posible cargar la Home');
     }
 
     /**
-     * Test that missing template renders 404 page in production
+     * El método 'display' está siempre permitido
      *
      * @return void
      */
-    public function testMissingTemplate()
+    public function testInitialize()
     {
-        Configure::write('debug', false);
-        $this->get('/pages/not_existing');
+        $allowedActions = $this->Page->Auth->allowedActions;
 
-        $this->assertResponseError();
-        $this->assertResponseContains('Error');
+        $this->assertContains('display', $allowedActions, 'Display no aparece entre los métodos permitidos');
     }
 
     /**
-     * Test that missing template in debug mode renders missing_template error page
+     * Test tempOptions method  
      *
      * @return void
      */
-    public function testMissingTemplateInDebug()
+    public function testTempOptions()
     {
-        Configure::write('debug', true);
-        $this->get('/pages/not_existing');
+        $firstArr = [
+            'key' => ['firstVal' => 1]
+        ];
+        $secondArr = [
+            'key' => ['secondVal' => 2]
+        ];
+        $expected = [
+            'key' => [
+                'firstVal' => 1,
+                'secondVal' => 2
+            ]
+        ];
 
-        $this->assertResponseFailure();
-        $this->assertResponseContains('Missing Template');
-        $this->assertResponseContains('Stacktrace');
-        $this->assertResponseContains('not_existing.ctp');
-    }
+        $res = $this->Page->tempOptions($firstArr, $secondArr);
 
-    /**
-     * Test directory traversal protection
-     *
-     * @return void
-     */
-    public function testDirectoryTraversalProtection()
-    {
-        $this->get('/pages/../Layout/ajax');
-        $this->assertResponseCode(403);
-        $this->assertResponseContains('Forbidden');
+        $this->assertEquals($expected, $res);
     }
 }

@@ -1,0 +1,6 @@
+.button {
+    background-color: read($colors, "accent");
+    padding: read($measures, "m");
+    color: inherit;
+    text-decoration: none;
+}
