@@ -41,7 +41,7 @@ class PagesControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDisplay()
+    public function test_Display_muestra_homepage()
     {
         $this->get(['controller' => 'Pages', 'action' => 'display', '/']);
 
@@ -53,7 +53,7 @@ class PagesControllerTest extends TestCase
      *
      * @return void
      */
-    public function testInitialize()
+    public function test_Initialize_allowed_actions()
     {
         $allowedActions = $this->Page->Auth->allowedActions;
 
@@ -61,11 +61,11 @@ class PagesControllerTest extends TestCase
     }
 
     /**
-     * Test tempOptions method  
+     * Test tempOptions method
      *
      * @return void
      */
-    public function testTempOptions()
+    public function test_TempOptions_returns_expected_array()
     {
         $firstArr = [
             'key' => ['firstVal' => 1]
