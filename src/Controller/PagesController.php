@@ -67,14 +67,14 @@ class PagesController extends AppController
         $commonOptions = [
             'contain' => ['Images'],
             'conditions' => ['Promotions.state' => 'active'],
-            'order' => ['Promotions.id' => 'DESC', 'Promotions.available_since' => 'DESC'],
-            'limit' => 5
+            'limit' => 6
         ];
         /**
          * Query de Últimas promociones
          */
-        $customOptions = [];
+        $customOptions = ['order' => ['Promotions.id' => 'DESC', 'Promotions.available_since' => 'DESC']];
         $lastPromotions = $this->Promotions->find('all', $this->tempOptions($commonOptions, $customOptions))->toArray();
+
         /**
          * Query de Promociones destacadas
          */

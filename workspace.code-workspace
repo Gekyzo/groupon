@@ -1,8 +1,8 @@
 {
-	"folders": [
-		{
-			"path": "C:\\LocalServer\\php\\groupon"
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {}
 }
