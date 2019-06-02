@@ -34,4 +34,18 @@ class Order extends Entity
         'promotion' => true,
         'user' => true
     ];
+
+    /**
+     * Switch accesor para el campo '$state'
+     */
+    protected function _getState($state)
+    {
+        switch ($state) {
+            case 'completed':
+                return 'Completado';
+            default:
+                return 'Pendiente';
+                break;
+        }
+    }
 }

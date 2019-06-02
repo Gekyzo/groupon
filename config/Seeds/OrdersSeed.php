@@ -6,6 +6,18 @@ use Migrations\AbstractSeed;
  */
 class OrdersSeed extends AbstractSeed
 {
+    public function getDependencies()
+    {
+        return [
+            'UsersSeed',
+            'CategoriesSeed',
+            'ImagesSeed',
+            'PromotionsSeed',
+            'CategoriesPromotionsSeed',
+            'ImagesPromotionsSeed'
+        ];
+    }
+
     /**
      * Run Method.
      *

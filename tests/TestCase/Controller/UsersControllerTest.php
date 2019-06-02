@@ -1,10 +1,10 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use Cake\ORM\TableRegistry;
 use App\Controller\UsersController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Cake\ORM\TableRegistry;
 
 /**
  * App\Controller\UsersController Test Case
@@ -19,8 +19,7 @@ class UsersControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Users',
-        'app.Orders'
+        'app.Users'
     ];
 
     /**
@@ -64,34 +63,9 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Sólo usuarios con 'role' = 'admin' puede visitar '/users/'    
+     * Usuario no registrado puede acceder a '/users/add'
      */
-    public function testIndex()
-    {
-        $data = [
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'name' => 'admin',
-                    'role' => 'admin'
-                ]
-            ]
-        ];
-        $this->session($data);
-
-        $this->get(['controller' => 'Users', 'action' => 'index']);
-        $this->assertResponseOk('No ha sido posible acceder a /users');
-        $this->assertNoRedirect();
-
-        // Se carga la lista de usuarios, y existen tantos registros como en el fixture
-        $users = $this->Users->find('all')->toArray();
-        $this->assertEquals(2, count($users), 'El número de registros entre UsersFixture y la BD es distinto');
-    }
-
-    /**
-     * Usuario no registrado puede visitar '/users/add'
-     */
-    public function testAdd_view_unregistered()
+    public function test_Unregistered_user_can_access_add()
     {
         $this->get(['controller' => 'Users', 'action' => 'add']);
 
@@ -100,10 +74,40 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Usuario no registrado puede crear nueva cuenta
-     * @depends testAdd_view_unregistered
+     * Usuario no registrado puede acceder a '/users/login'
      */
-    public function testAdd_correct_user_data()
+    public function test_Unregistered_user_can_access_login()
+    {
+        $this->get(['controller' => 'Users', 'action' => 'login']);
+
+        $this->assertResponseOk();
+        $this->assertNoRedirect();
+    }
+
+
+    /**
+     * Usuario no registrado puede hacer login
+     * @depends test_Unregistered_user_can_access_login
+     */
+    public function test_User_can_login()
+    {
+        $this->enableCsrfToken();
+        $this->enableRetainFlashMessages();
+
+        // Envío datos de un cliente que existe en el fixture 'UsersFixture'
+        $loggingUser['email'] = 'user2@gmail.com';
+        $loggingUser['password'] = 'pass';
+
+        $this->post(['controller' => 'Users', 'action' => 'login'], $loggingUser);
+
+        $this->assertFlashElement('Flash/success');
+    }
+
+    /**
+     * Usuario no registrado puede crear nueva cuenta
+     * @depends test_Unregistered_user_can_access_add
+     */
+    public function test_User_add_new_account_correct_password()
     {
         $this->enableCsrfToken();
         $this->enableRetainFlashMessages();
@@ -119,10 +123,10 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Usuario no registrado recibe error cuando intenta registrarse con datos incorrectos 
-     * @depends testAdd_view_unregistered
+     * Usuario no registrado recibe error cuando intenta registrarse con datos incorrectos
+     * @depends test_Unregistered_user_can_access_add
      */
-    public function testAdd_incorrect_user_data()
+    public function test_User_add_new_account_wrong_password()
     {
         $this->enableCsrfToken();
         $this->enableRetainFlashMessages();
@@ -138,38 +142,42 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Usuario no registrado puede acceder a '/users/login'
+     * Sólo usuarios con 'role' = 'admin' puede visitar '/users/'
      */
-    public function testLogin_view()
+    public function test_Only_admin_can_access_index()
     {
-        $this->get(['controller' => 'Users', 'action' => 'login']);
+        $data = [
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'name' => 'admin',
+                    'role' => 'admin'
+                ]
+            ]
+        ];
+        $this->session($data);
 
-        $this->assertResponseOk();
+        $this->get(['controller' => 'Users', 'action' => 'index']);
+        $this->assertResponseOk('No ha sido posible acceder a /users');
         $this->assertNoRedirect();
     }
 
-    /**        
-     * Usuario no registrado puede hacer login
-     * @depends testLogin_view
+    /**
+     * Users::index devuelve tantos registros como usuarios existen en la BD
      */
-    public function testLogin_user()
+    public function test_Index_returns_all_database_records()
     {
-        $this->enableCsrfToken();
-        $this->enableRetainFlashMessages();
+        // Se carga la lista de usuarios, y existen tantos registros como en el fixture
+        $users = $this->Users->find('all')->toArray();
+        debug($users);
 
-        // Envío datos de un cliente que existe en el fixture 'UsersFixture'
-        $loggingUser['email'] = 'user2@gmail.com';
-        $loggingUser['password'] = 'pass';
-
-        $this->post(['controller' => 'Users', 'action' => 'login'], $loggingUser);
-
-        $this->assertFlashElement('Flash/success');
+        $this->assertEquals(2, count($users), 'El número de registros entre UsersFixture y la BD es distinto');
     }
 
     /**
      * Permisos para usuarios NO LOGUEADOS
      */
-    public function testInitialize()
+    public function test_Initialize_allowed_actions()
     {
         $allowedActions = ['logout', 'add'];
 

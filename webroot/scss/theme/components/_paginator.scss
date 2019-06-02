@@ -1,0 +1,29 @@
+.paginator {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: read($measures, "m");
+    ul {
+        margin: auto;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        li {
+            list-style-type: none;
+            &.prev,
+            &.next {
+                background-color: read($colors, main);
+                color: read($colors, light);
+                font-size: 1.2rem;
+            }
+            a {
+                display: block;
+                padding: read($measures, s) read($measures, m);
+                text-decoration: none;
+            }
+        }
+    }
+    #paginator-counter {
+        margin-left: read($measures, m);
+        margin-right: read($measures, m);
+    }
+}

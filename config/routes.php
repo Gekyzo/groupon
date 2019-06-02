@@ -75,21 +75,28 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     /* Promociones */
     $routes->connect('/promociones/', ['controller' => 'promotions', 'action' => 'index']);
-    $routes->connect('/promociones/crear', ['controller' => 'promotions', 'action' => 'add']);
     $routes->connect('/promocion/*', ['controller' => 'promotions', 'action' => 'view']);
+    $routes->connect('/promociones/crear', ['controller' => 'promotions', 'action' => 'add']);
+    $routes->connect('/promociones/editar/*', ['controller' => 'promotions', 'action' => 'edit']);
 
     /* Categorías */
     $routes->connect('/categorias/', ['controller' => 'categories', 'action' => 'index']);
-    $routes->connect('/categorias/crear', ['controller' => 'categories', 'action' => 'add']);
     $routes->connect('/categoria/*', ['controller' => 'categories', 'action' => 'view']);
+    $routes->connect('/categorias/crear', ['controller' => 'categories', 'action' => 'add']);
+    $routes->connect('/categorias/editar/*', ['controller' => 'categories', 'action' => 'edit']);
 
     /* Usuarios */
     $routes->connect('/usuarios/', ['controller' => 'users', 'action' => 'index']);
     $routes->connect('/usuario/perfil', ['controller' => 'users', 'action' => 'profile']);
+    $routes->connect('/usuarios/registrar', ['controller' => 'users', 'action' => 'add']);
+    $routes->connect('/usuarios/editar/*', ['controller' => 'users', 'action' => 'edit']);
+    $routes->connect('/usuarios/login', ['controller' => 'users', 'action' => 'login']);
 
     /* Pedidos */
     $routes->connect('/pedidos/', ['controller' => 'orders', 'action' => 'index']);
+    $routes->connect('/pedido/*', ['controller' => 'orders', 'action' => 'view']);
     $routes->connect('/pedidos/crear', ['controller' => 'orders', 'action' => 'add']);
+    $routes->connect('/pedidos/editar/*', ['controller' => 'orders', 'action' => 'edit']);
     $routes->connect('/pedidos/confirmar/*', ['controller' => 'orders', 'action' => 'confirm']);
     /**
      * Connect catchall routes for all controllers.

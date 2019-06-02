@@ -54,7 +54,7 @@ class UsersController extends AppController
     }
 
     /**
-     * Muestra la información de perfil para el usuario conectado.     
+     * Muestra la información de perfil para el usuario conectado.
      */
     public function profile()
     {
@@ -155,7 +155,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id);
         $user['state'] = 'deleted';
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Usuario borrado con éxito.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }

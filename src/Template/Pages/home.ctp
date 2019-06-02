@@ -8,7 +8,7 @@
 
     <section>
         <h1>Proyecto Groupon</h1>
-        <p>versión 0.7.0</p>
+        <p>versión 1.0.0</p>
     </section>
 
     <?= $this->Element('Categories/categories-container') ?>
